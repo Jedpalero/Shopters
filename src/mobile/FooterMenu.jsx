@@ -39,10 +39,10 @@ const FooterMenu = () => {
         <FaHome />
         <h3 className="text-[10px]">HOME</h3>
       </NavLink>
-      <a className=" flex flex-col items-center">
+      <NavLink to="/shop" className=" flex flex-col items-center">
         <FaShoppingBag />
         <h3 className="text-[10px]">SHOP</h3>
-      </a>
+      </NavLink>
       <a className="flex flex-col items-center">
         <FaShoppingCart />
         <h3 className="text-[10px]">ORDER</h3>

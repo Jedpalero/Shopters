@@ -35,15 +35,18 @@ const Navigation = ({ sidebar, setSidebar }) => {
     <div className={`md:h-screen flex ${sidebar ? "" : ""}`}>
       <div className="flex flex-col justify-between text-white m-5 space-y-10">
         <div className="flex flex-col gap-y-10">
-          <FaBars className="text-white" onClick={() => setSidebar(!sidebar)} />
+          <FaBars
+            className="text-white cursor-pointer"
+            onClick={() => setSidebar(!sidebar)}
+          />
           <NavLink to="/home" className={`${sidebar ? "flex gap-10" : ""}`}>
             <FaHome />
             {sidebar && <h3>HOME</h3>}
           </NavLink>
-          <a className={`${sidebar ? "flex gap-10" : "mt-2"}`}>
+          <NavLink to="/shop" className={`${sidebar ? "flex gap-10" : "mt-2"}`}>
             <FaShoppingBag />
             {sidebar && <h3>SHOP</h3>}
-          </a>
+          </NavLink>
           <a className={`${sidebar ? "flex gap-10" : "mt-2"}`}>
             <FaShoppingCart />
             {sidebar && <h3>ORDER</h3>}
