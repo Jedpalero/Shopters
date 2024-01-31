@@ -1,13 +1,19 @@
-import React, { useContext } from "react";
+import React, { useContext, useState } from "react";
 import { NavLink } from "react-router-dom";
 import { MyContext } from "../MyContext";
+// import Loader from "../components/Loader";
 
 const Login = () => {
   const { handleSignin, handleCredentials, error } = useContext(MyContext);
+  // const [loading, setLoading] = useState(true);
+
+  // if (loading) {
+  //   return <Loader />;
+  // }
 
   return (
     <div className="bg-gradient-to-r from-blue-700 h-full flex flex-col justify-center items-center">
-      <form className="w-[500px]">
+      <form className="md:w-[500px] w-[300px]">
         <h1 className="font-bold">SIGN IN</h1>
         <div className="mt-10 flex flex-col">
           <label htmlFor="email" className="font-semibold">

@@ -8,14 +8,18 @@ import {
 import { auth } from "./firebase-config";
 import { MyContext } from "./MyContext";
 import { useNavigate } from "react-router-dom";
+import Loader from "./components/Loader";
+import FooterMenu from "./mobile/FooterMenu";
 
 function App() {
   const [sidebar, setSidebar] = useState(false);
   const [userCredentials, setUserCredentials] = useState({});
   const [error, setError] = useState("");
   const navigate = useNavigate();
+  const [loading, setLoading] = useState(false);
 
   //ccc@gmail.cm 123456
+  //uninstall redux toolkit
 
   const handleCredentials = (e) => {
     setUserCredentials({ ...userCredentials, [e.target.name]: e.target.value });
@@ -41,6 +45,7 @@ function App() {
 
   const handleSignin = (e) => {
     e.preventDefault();
+    setLoading(true);
     setError("");
 
     signInWithEmailAndPassword(
@@ -51,21 +56,28 @@ function App() {
       .then((userCredential) => {
         // Signed in
         const user = userCredential.user;
+        setLoading(false);
         console.log(user);
         navigate("/");
-
         // ...
       })
       .catch((error) => {
         setError(error.message);
         navigate("/login");
+        setLoading(false);
       });
   };
 
+  if (loading) {
+    return <Loader />;
+  }
+
   return (
     <div
-      className={`main overflow-hidden ${
-        sidebar ? "grid-cols-[300px_1fr]" : "grid-cols-[70px_1fr]"
+      className={`main overflow-hidden grid-rows-[70px_1fr] ${
+        sidebar
+          ? "grid-cols-[300px_1fr]"
+          : "md:grid-cols-[70px_1fr] grid-cols-[0px_1fr]"
       }`}
     >
       <div className={`sidebar flex`}>
@@ -87,6 +99,9 @@ function App() {
           <Outlet />
         </MyContext.Provider>
       </main>
+      <div className="md:hidden block h-[50px] bg-[#0f0f0f] bg-opacity-60 w-full absolute bottom-0">
+        <FooterMenu />
+      </div>
     </div>
   );
 }

@@ -7,8 +7,8 @@ const Register = () => {
   const { handleCredentials, handleRegister, error } = useContext(MyContext);
 
   return (
-    <div className="bg-gradient-to-r from-blue-700 h-full flex flex-col justify-center items-center">
-      <form className="w-[500px]">
+    <div className="bg-gradient-to-r from-blue-900 h-full flex flex-col justify-center items-center">
+      <form className="md:w-[500px] w-[300px]">
         <h1 className="font-bold">REGISTER</h1>
         {/* <div className="mt-10 flex flex-col">
           <label htmlFor="username" className="font-semibold">
@@ -24,7 +24,9 @@ const Register = () => {
           />
         </div> */}
         <div className="mt-10 flex flex-col">
-          <label className="font-semibold">Email Address</label>
+          <label htmlFor="email" className="font-semibold">
+            Email Address
+          </label>
           <input
             type="email"
             name="email"
@@ -35,7 +37,9 @@ const Register = () => {
           />
         </div>
         <div className="mt-10 flex flex-col">
-          <label className="font-semibold">Password</label>
+          <label htmlFor="password" className="font-semibold">
+            Password
+          </label>
           <input
             type="password"
             name="password"

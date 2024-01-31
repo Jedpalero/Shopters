@@ -11,26 +11,35 @@ import { auth } from "../firebase-config";
 import { useAuthState } from "react-firebase-hooks/auth";
 import { signOut } from "firebase/auth";
 import { useNavigate } from "react-router-dom";
+import Loader from "./Loader";
+import { useState } from "react";
 
 const Navigation = ({ sidebar, setSidebar }) => {
   const [user] = useAuthState(auth);
   const navigate = useNavigate();
+  const [loading, setLoading] = useState(false);
 
   const handleSignOut = async () => {
+    setLoading(true);
     await signOut(auth);
     navigate("/login");
     console.log("Logout Successfully");
+    setLoading(false);
   };
 
+  if (loading) {
+    return <Loader />;
+  }
+
   return (
-    <div className={`h-screen flex ${sidebar ? "" : ""}`}>
+    <div className={`md:h-screen flex ${sidebar ? "" : ""}`}>
       <div className="flex flex-col justify-between text-white m-5 space-y-10">
         <div className="flex flex-col gap-y-10">
           <FaBars className="text-white" onClick={() => setSidebar(!sidebar)} />
-          <a className={`${sidebar ? "flex gap-10" : ""}`}>
+          <NavLink to="/home" className={`${sidebar ? "flex gap-10" : ""}`}>
             <FaHome />
             {sidebar && <h3>HOME</h3>}
-          </a>
+          </NavLink>
           <a className={`${sidebar ? "flex gap-10" : "mt-2"}`}>
             <FaShoppingBag />
             {sidebar && <h3>SHOP</h3>}
