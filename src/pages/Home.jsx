@@ -58,7 +58,7 @@ const Home = () => {
             Sneakers
           </h1>
           <img
-            src="https://m.media-amazon.com/images/I/719gdz8lsTS._AC_UX575_.jpg"
+            src="https://m.media-amazon.com/images/I/71VaQ+V6XnL._AC_UY695_.jpg"
             alt="shoe"
             className="md:h-[210px] md:w-[300px] h-[100px] w-[160px] rounded-lg"
           />
@@ -71,7 +71,7 @@ const Home = () => {
             Heels
           </h1>
           <img
-            src="https://m.media-amazon.com/images/I/61uw5RDxKQL._AC_UY625_.jpg"
+            src="https://m.media-amazon.com/images/I/717Dg-ADWeL._AC_SY500_.jpg"
             alt="shoe"
             className="md:h-[210px] md:w-[300px] h-[100px] w-[160px] rounded-lg"
           />
@@ -84,7 +84,7 @@ const Home = () => {
             Sandals
           </h1>
           <img
-            src="https://m.media-amazon.com/images/I/71gpFHJlnoL._AC_UX575_.jpg"
+            src="https://m.media-amazon.com/images/I/71ixBxFytiL._AC_SX395_.jpg"
             alt="shoe"
             className="md:h-[210px] md:w-[300px] h-[100px] w-[160px] rounded-lg"
           />
