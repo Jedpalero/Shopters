@@ -52,7 +52,7 @@ const Shop = () => {
       );
     }
     return filteredProducts.map(
-      ({ img, title, star, reviews, newPrice, sold, prevPrice }) => (
+      ({ img, title, star, reviews, newPrice, sold, prevPrice, id }) => (
         <Card
           key={Math.random()}
           img={img}
@@ -62,6 +62,7 @@ const Shop = () => {
           prevPrice={prevPrice}
           newPrice={newPrice}
           sold={sold}
+          id={id}
         />
       )
     );
@@ -117,19 +118,19 @@ const Shop = () => {
                 <div className="text-center space-y-2 mt-4">
                   <Input
                     handleChange={handleChange}
-                    value={100}
+                    value="$100.00"
                     title="Price: $0 to $100"
                     name="test2"
                   />
                   <Input
                     handleChange={handleChange}
-                    value={150}
+                    value="$150.00"
                     title="Price: $100 to $150"
                     name="test2"
                   />
                   <Input
                     handleChange={handleChange}
-                    value={200}
+                    value="$200.00"
                     title="Price: Over $200"
                     name="test2"
                   />

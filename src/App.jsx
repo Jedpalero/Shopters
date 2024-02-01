@@ -10,6 +10,8 @@ import { MyContext } from "./MyContext";
 import { useNavigate } from "react-router-dom";
 import Loader from "./components/Loader";
 import FooterMenu from "./mobile/FooterMenu";
+import { ToastContainer, toast } from "react-toastify";
+import "react-toastify/dist/ReactToastify.css";
 
 function App() {
   const [sidebar, setSidebar] = useState(false);
@@ -37,9 +39,11 @@ function App() {
       .then((userCredential) => {
         // Signed up
         const user = userCredential.user;
+        toast.success("User successfully registered");
       })
       .catch((error) => {
         setError(error.message);
+        toast.error(error.message);
       });
   };
 
@@ -57,9 +61,7 @@ function App() {
         // Signed in
         const user = userCredential.user;
         setLoading(false);
-        console.log(user);
         navigate("/");
-        // ...
       })
       .catch((error) => {
         setError(error.message);
@@ -73,36 +75,39 @@ function App() {
   }
 
   return (
-    <div
-      className={`main overflow-hidden grid-rows-[70px_1fr] ${
-        sidebar
-          ? "grid-cols-[300px_1fr]"
-          : "md:grid-cols-[70px_1fr] grid-cols-[0px_1fr]"
-      }`}
-    >
-      <div className={`sidebar flex`}>
-        <Navigation sidebar={sidebar} setSidebar={setSidebar} />
+    <>
+      <ToastContainer />
+      <div
+        className={`main overflow-hidden grid-rows-[70px_1fr] ${
+          sidebar
+            ? "grid-cols-[300px_1fr]"
+            : "md:grid-cols-[70px_1fr] grid-cols-[0px_1fr]"
+        }`}
+      >
+        <div className={`sidebar flex`}>
+          <Navigation sidebar={sidebar} setSidebar={setSidebar} />
+        </div>
+        <main className="content">
+          <MyContext.Provider
+            value={{
+              // register,
+              // setRegisterEmail,
+              // setRegisterPassword,
+              // users,
+              handleCredentials,
+              handleRegister,
+              error,
+              handleSignin,
+            }}
+          >
+            <Outlet />
+          </MyContext.Provider>
+        </main>
+        <div className="md:hidden block h-[50px] bg-[#0f0f0f] bg-opacity-60 w-full absolute bottom-0">
+          <FooterMenu />
+        </div>
       </div>
-      <main className="content">
-        <MyContext.Provider
-          value={{
-            // register,
-            // setRegisterEmail,
-            // setRegisterPassword,
-            // users,
-            handleCredentials,
-            handleRegister,
-            error,
-            handleSignin,
-          }}
-        >
-          <Outlet />
-        </MyContext.Provider>
-      </main>
-      <div className="md:hidden block h-[50px] bg-[#0f0f0f] bg-opacity-60 w-full absolute bottom-0">
-        <FooterMenu />
-      </div>
-    </div>
+    </>
   );
 }
 

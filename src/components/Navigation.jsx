@@ -13,6 +13,7 @@ import { signOut } from "firebase/auth";
 import { useNavigate } from "react-router-dom";
 import Loader from "./Loader";
 import { useState } from "react";
+import { toast } from "react-toastify";
 
 const Navigation = ({ sidebar, setSidebar }) => {
   const [user] = useAuthState(auth);
@@ -23,7 +24,7 @@ const Navigation = ({ sidebar, setSidebar }) => {
     setLoading(true);
     await signOut(auth);
     navigate("/login");
-    console.log("Logout Successfully");
+    toast.success("Logout Successfully");
     setLoading(false);
   };
 
