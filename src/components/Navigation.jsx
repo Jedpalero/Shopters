@@ -12,13 +12,15 @@ import { useAuthState } from "react-firebase-hooks/auth";
 import { signOut } from "firebase/auth";
 import { useNavigate } from "react-router-dom";
 import Loader from "./Loader";
-import { useState } from "react";
+import { useContext, useState } from "react";
 import { toast } from "react-toastify";
+import { ShopContext } from "../Context/ShopContext";
 
 const Navigation = ({ sidebar, setSidebar }) => {
   const [user] = useAuthState(auth);
   const navigate = useNavigate();
   const [loading, setLoading] = useState(false);
+  const { getTotalCartItems } = useContext(ShopContext);
 
   const handleSignOut = async () => {
     setLoading(true);
@@ -49,30 +51,35 @@ const Navigation = ({ sidebar, setSidebar }) => {
               fontWeight: isActive ? "bold" : "",
             })}
           >
-            <FaHome />
+            <FaHome className="w-6 h-6" />
             {sidebar && <h3>HOME</h3>}
           </NavLink>
           <NavLink
             to="/shop"
-            className={`${sidebar ? "flex gap-10" : "mt-2"}`}
+            className={`${sidebar ? "flex gap-10" : ""}`}
             style={({ isActive }) => ({
               color: isActive ? "white" : "gray",
               textDecoration: isActive ? "underline" : "",
               fontWeight: isActive ? "bold" : "",
             })}
           >
-            <FaShoppingBag />
+            <FaShoppingBag className="w-6 h-6" />
             {sidebar && <h3>SHOP</h3>}
           </NavLink>
           <NavLink
             to="/order"
-            className={`${sidebar ? "flex gap-10" : "mt-2"}`}
+            className={` ${sidebar ? "flex gap-10" : ""}`}
             style={({ isActive }) => ({
               color: isActive ? "white" : "gray",
               fontWeight: isActive ? "bold" : "",
             })}
           >
-            <FaShoppingCart />
+            <div className="">
+              <p className="bg-red-500 absolute mt-5 text-white ml-4 w-6 h-6 text-center rounded-full">
+                {getTotalCartItems()}
+              </p>
+              <FaShoppingCart className="w-6 h-6" />
+            </div>
             {sidebar && <h3>ORDER</h3>}
           </NavLink>
         </div>

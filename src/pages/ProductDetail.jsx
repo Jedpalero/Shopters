@@ -22,8 +22,8 @@ const ProductDetail = () => {
           <h1 className="font-bold text-lg">Go Back</h1>
         </Link>
         <NavLink to="/order" className="flex">
-          <FaShoppingCart className="text-3xl"></FaShoppingCart>
-          <p className="bg-black text-white p-1 w-8 text-center rounded-full">
+          <FaShoppingCart className="text-3xl relative mt-4 mr-5" />
+          <p className="bg-red-500 text-white ml-5 absolute w-6 text-center rounded-full">
             {getTotalCartItems()}
           </p>
         </NavLink>
