@@ -74,7 +74,7 @@ const Shop = () => {
 
   return (
     <div className="grid h-screen grid-rows-[70px_1fr]">
-      <div className="bg-gradient-to-r from-black flex justify-between items-center p-8">
+      <div className="bg-gradient-to-r from-black flex items-center p-8">
         <div className="relative flex gap-2">
           <input
             type="text"
@@ -89,8 +89,6 @@ const Shop = () => {
             <FaSearch />
           </div>
         </div>
-
-        <FaShoppingCart className="text-xl" />
       </div>
       <div className="scrollbar bg-gradient-to-r from-black overflow-y-scroll text-white">
         <div className="flex justify-between p-3 overflow-hidden">
@@ -120,19 +118,19 @@ const Shop = () => {
                 <div className="text-center space-y-2 mt-4">
                   <Input
                     handleChange={handleChange}
-                    value="$100.00"
+                    value="100"
                     title="Price: $0 to $100"
                     name="test2"
                   />
                   <Input
                     handleChange={handleChange}
-                    value="$150.00"
+                    value="150"
                     title="Price: $100 to $150"
                     name="test2"
                   />
                   <Input
                     handleChange={handleChange}
-                    value="$200.00"
+                    value="200"
                     title="Price: Over $200"
                     name="test2"
                   />

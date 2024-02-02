@@ -1,18 +1,15 @@
 // import products from "../db/data";
-// import { useDispatch } from "react-redux";
 import { useContext, useState } from "react";
 import { useParams } from "react-router";
 import { ShopContext } from "../Context/ShopContext";
-import { Link } from "react-router-dom";
+import { Link, NavLink } from "react-router-dom";
 import { FaArrowCircleLeft, FaShoppingCart } from "react-icons/fa";
 
 const ProductDetail = () => {
-  const { data } = useContext(ShopContext);
+  const { data, addToCart, getTotalCartItems } = useContext(ShopContext);
   const { id: productId } = useParams();
   const product = data.find((e) => e.id === Number(productId));
   const [image, setImage] = useState(product.img);
-
-  // put scroll to top for mobile version
 
   return (
     <div className=" h-full overflow-y-scroll md:overflow-y-hidden ">
@@ -24,7 +21,12 @@ const ProductDetail = () => {
           <FaArrowCircleLeft className="text-3xl" />
           <h1 className="font-bold text-lg">Go Back</h1>
         </Link>
-        <FaShoppingCart className="text-3xl" />
+        <NavLink to="/order" className="flex">
+          <FaShoppingCart className="text-3xl"></FaShoppingCart>
+          <p className="bg-black text-white p-1 w-8 text-center rounded-full">
+            {getTotalCartItems()}
+          </p>
+        </NavLink>
       </div>
       <div className="scrollbar md:flex md:justify-center md:gap-10 mb-[60px] ">
         <img
@@ -48,7 +50,7 @@ const ProductDetail = () => {
           </div>
           <div className="flex gap-5 font-bold text-blue-700 text-xl md:justify-start justify-center">
             <del>{product.prevPrice}</del>
-            <h1>{product.newPrice}</h1>
+            <h1>{`$${product.newPrice}.00`}</h1>
           </div>
           <h1 className="font-semibold md:text-start text-center">
             Select Size
@@ -91,9 +93,14 @@ const ProductDetail = () => {
               onClick={() => setImage(product.img2)}
             />
           </div>
-          <div className="uppercase font-bold bg-neutral-800 w-[200px] text-center text-white md:p-5 p-2 rounded-lg m-auto md:m-0">
+          <button
+            onClick={() => {
+              addToCart(product.id);
+            }}
+            className="uppercase font-bold bg-neutral-800 w-[200px] text-center text-white md:p-5 p-2 rounded-lg m-auto md:m-0 cursor-pointer"
+          >
             Add To Cart
-          </div>
+          </button>
         </div>
       </div>
     </div>

@@ -18,7 +18,7 @@ const Card = ({ img, title, star, reviews, sold, newPrice, id }) => {
             <h1 className="font-bold md:text-[15px] text-[10px]">{title}</h1>
           </div>
           <div className="flex justify-between m-5 md:mt-10 mt-3 md:text-[15px] text-[10px]">
-            <h1>{newPrice}</h1>
+            <h1>{`$${newPrice}.00`}</h1>
             <p>{sold}</p>
           </div>
         </Link>

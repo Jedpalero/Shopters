@@ -65,9 +65,10 @@ const Navigation = ({ sidebar, setSidebar }) => {
             {sidebar && <h3>SHOP</h3>}
           </NavLink>
           <NavLink
+            to="/order"
             className={`${sidebar ? "flex gap-10" : "mt-2"}`}
             style={({ isActive }) => ({
-              color: isActive ? "gray" : "white",
+              color: isActive ? "white" : "gray",
               fontWeight: isActive ? "bold" : "",
             })}
           >

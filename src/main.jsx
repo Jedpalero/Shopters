@@ -15,6 +15,7 @@ import Home from "./pages/Home.jsx";
 import Shop from "./pages/Shop.jsx";
 import ProductDetail from "./pages/ProductDetail.jsx";
 import ShopContextProvider from "./Context/ShopContext.jsx";
+import Order from "./pages/Order.jsx";
 
 const router = createBrowserRouter(
   createRoutesFromElements(
@@ -24,6 +25,7 @@ const router = createBrowserRouter(
       <Route path="/home" element={<Home />} />
       <Route path="/shop" element={<Shop />} />
       <Route path="/detail/:id" element={<ProductDetail />} />
+      <Route path="/order" element={<Order />} />
     </Route>
   )
 );
