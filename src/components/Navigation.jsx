@@ -40,18 +40,40 @@ const Navigation = ({ sidebar, setSidebar }) => {
             className="text-white cursor-pointer"
             onClick={() => setSidebar(!sidebar)}
           />
-          <NavLink to="/home" className={`${sidebar ? "flex gap-10" : ""}`}>
+          <NavLink
+            to="/home"
+            className={`${sidebar ? "flex gap-10 " : ""}`}
+            style={({ isActive }) => ({
+              color: isActive ? "white" : "gray",
+              textDecoration: isActive ? "underline" : "",
+              fontWeight: isActive ? "bold" : "",
+            })}
+          >
             <FaHome />
             {sidebar && <h3>HOME</h3>}
           </NavLink>
-          <NavLink to="/shop" className={`${sidebar ? "flex gap-10" : "mt-2"}`}>
+          <NavLink
+            to="/shop"
+            className={`${sidebar ? "flex gap-10" : "mt-2"}`}
+            style={({ isActive }) => ({
+              color: isActive ? "white" : "gray",
+              textDecoration: isActive ? "underline" : "",
+              fontWeight: isActive ? "bold" : "",
+            })}
+          >
             <FaShoppingBag />
             {sidebar && <h3>SHOP</h3>}
           </NavLink>
-          <a className={`${sidebar ? "flex gap-10" : "mt-2"}`}>
+          <NavLink
+            className={`${sidebar ? "flex gap-10" : "mt-2"}`}
+            style={({ isActive }) => ({
+              color: isActive ? "gray" : "white",
+              fontWeight: isActive ? "bold" : "",
+            })}
+          >
             <FaShoppingCart />
             {sidebar && <h3>ORDER</h3>}
-          </a>
+          </NavLink>
         </div>
         {user ? (
           <>
@@ -66,11 +88,27 @@ const Navigation = ({ sidebar, setSidebar }) => {
         ) : (
           <>
             <div className="space-y-4">
-              <NavLink to="/login" className="flex gap-10">
+              <NavLink
+                to="/login"
+                className="flex gap-10"
+                style={({ isActive }) => ({
+                  color: isActive ? "white" : "gray",
+                  textDecoration: isActive ? "underline" : "",
+                  fontWeight: isActive ? "bold" : "",
+                })}
+              >
                 <RiLoginCircleLine className="mt-2" />
                 {sidebar && <h3>LOGIN</h3>}
               </NavLink>
-              <NavLink to="/register" className="flex gap-10">
+              <NavLink
+                to="/register"
+                className="flex gap-10"
+                style={({ isActive }) => ({
+                  color: isActive ? "white" : "gray",
+                  textDecoration: isActive ? "underline" : "",
+                  fontWeight: isActive ? "bold" : "",
+                })}
+              >
                 <FaUser className="mt-2" />
                 {sidebar && <h3>REGISTER</h3>}
               </NavLink>

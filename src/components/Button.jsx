@@ -5,7 +5,7 @@ const Button = ({ onClickHandler, value, title }) => {
     <button
       onClick={onClickHandler}
       value={value}
-      className="bg-neutral-800 hover:bg-neutral-600 transition hover:translate-x-1 ease-in-out w-[80px] p-2 text-center rounded-full cursor-pointer"
+      className="bg-neutral-800 hover:bg-neutral-600 transition hover:translate-x-1 ease-in-out w-[80px] md:p-2 text-center rounded-full cursor-pointer md:text-sm text-xs font-semibold"
     >
       {title}
     </button>

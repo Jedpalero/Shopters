@@ -41,7 +41,6 @@ code {
   .scrollbar::-webkit-scrollbar-thumb:hover {
     background: #c0a0b9;
   }
-
   .main {
     display: grid;
     height: 100vh;

@@ -70,6 +70,8 @@ const Shop = () => {
 
   const result = filteredData(products, selectedCategory, query);
 
+  // put scroll to top for mobile version
+
   return (
     <div className="grid h-screen grid-rows-[70px_1fr]">
       <div className="bg-gradient-to-r from-black flex justify-between items-center p-8">
@@ -77,7 +79,7 @@ const Shop = () => {
           <input
             type="text"
             id="text"
-            className="block w-full p-4 ps-10 text-sm text-[gray-900] border border-gray-300 rounded-lg  dark:bg-neutral-800 dark:border-gray-600  dark:text-white "
+            className="block w-full md:p-4 p-1 md:ps-10 ps-10 text-sm text-[gray-900] border border-gray-300 rounded-lg  dark:bg-neutral-800 dark:border-gray-600  dark:text-white "
             placeholder="Search"
             required
             value={query}
@@ -107,14 +109,14 @@ const Shop = () => {
         <div>
           <div className="text-black flex justify-end mr-2 relative">
             <div
-              className="flex gap-3 items-center justify-between w-[180px] bg-neutral-800 p-1 rounded-md pl-3 pr-2 cursor-pointer text-white "
+              className="flex gap-3 items-center justify-between md:w-[180px] bg-neutral-800 p-1 rounded-md pl-3 pr-2 cursor-pointer text-white "
               onClick={() => setDropMenu(!dropMenu)}
             >
-              <h1>Sort by: Featured</h1>
+              <h1 className="md:text-[15px] text-xs">Sort by: Featured</h1>
               {dropMenu ? <IoMdArrowDropup /> : <IoMdArrowDropdown />}
             </div>
             {dropMenu && (
-              <div className="bg-neutral-800 text-white border mt-8 absolute w-[300px] h-[250px] z-10">
+              <div className="bg-neutral-800 text-white border md:mt-8 mt-6 absolute w-[300px] h-[250px] z-10">
                 <div className="text-center space-y-2 mt-4">
                   <Input
                     handleChange={handleChange}
@@ -164,7 +166,7 @@ const Shop = () => {
             )}
           </div>
 
-          <div className="flex flex-wrap justify-center m-auto md:gap-[60px] md:mb-12 mb-[60px]">
+          <div className="flex flex-wrap justify-center m-auto md:gap-[60px] gap-4 md:mb-12 mb-[60px]">
             {result}
           </div>
         </div>

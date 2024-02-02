@@ -84,7 +84,7 @@ function App() {
             : "md:grid-cols-[70px_1fr] grid-cols-[0px_1fr]"
         }`}
       >
-        <div className={`sidebar flex`}>
+        <div className={`sidebar md:flex hidden`}>
           <Navigation sidebar={sidebar} setSidebar={setSidebar} />
         </div>
         <main className="content">

@@ -35,20 +35,42 @@ const FooterMenu = () => {
   return (
     <div className="text-white flex justify-between m-3">
       {/* <div className="flex"> */}
-      <NavLink to="/home" className="flex flex-col items-center">
+      <NavLink
+        to="/home"
+        className="flex flex-col items-center"
+        style={({ isActive }) => ({
+          color: isActive ? "white" : "gray",
+        })}
+      >
         <FaHome />
         <h3 className="text-[10px]">HOME</h3>
       </NavLink>
-      <NavLink to="/shop" className=" flex flex-col items-center">
+      <NavLink
+        to="/shop"
+        className=" flex flex-col items-center"
+        style={({ isActive }) => ({
+          color: isActive ? "white" : "gray",
+        })}
+      >
         <FaShoppingBag />
         <h3 className="text-[10px]">SHOP</h3>
       </NavLink>
-      <a className="flex flex-col items-center">
+      <NavLink
+        className="flex flex-col items-center"
+        style={({ isActive }) => ({
+          color: isActive ? "gray" : "white",
+        })}
+      >
         <FaShoppingCart />
         <h3 className="text-[10px]">ORDER</h3>
-      </a>
+      </NavLink>
       <a className="mt-1">
-        <FaBars onClick={() => setDropMenu(!dropMenu)} />
+        <FaBars
+          onClick={() => setDropMenu(!dropMenu)}
+          style={({ isActive }) => ({
+            color: isActive ? "white" : "gray",
+          })}
+        />
       </a>
       {/* </div> */}
       {dropMenu ? (

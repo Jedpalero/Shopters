@@ -12,8 +12,10 @@ const ProductDetail = () => {
   const product = data.find((e) => e.id === Number(productId));
   const [image, setImage] = useState(product.img);
 
+  // put scroll to top for mobile version
+
   return (
-    <div>
+    <div className=" h-full overflow-y-scroll md:overflow-y-hidden ">
       <div className="flex items-center justify-between m-6">
         <Link
           to="/shop"
@@ -24,34 +26,52 @@ const ProductDetail = () => {
         </Link>
         <FaShoppingCart className="text-3xl" />
       </div>
-      <div className="flex justify-center gap-10">
-        <img src={image} alt="picture" className="block h-[500px] w-[800px]" />
-        <div className="space-y-10">
-          <h1 className="font-bold text-4xl">{product.title}</h1>
-          <p className="w-[600px]">{product.details}</p>
-          <div className="flex items-center gap-1">
+      <div className="scrollbar md:flex md:justify-center md:gap-10 mb-[60px] ">
+        <img
+          src={image}
+          alt="picture"
+          className="block md:h-[500px] md:w-[800px] h-[200px] w-[300px] m-auto md:m-0 object-contain"
+        />
+        <div className="md:space-y-10 space-y-5 md:block flex flex-col items-center">
+          <h1 className="font-bold md:text-4xl text-xl md:text-start text-center">
+            {product.title}
+          </h1>
+          <p className="md:w-[600px] w-[370px] md:text-start text-center">
+            {product.details}
+          </p>
+          <div className="flex items-center md:justify-start justify-center gap-1">
             {product.star}
             {product.star}
             {product.star}
             {product.star}
             {product.reviews}
           </div>
-          <div className="flex gap-5 font-bold text-blue-700 text-xl">
+          <div className="flex gap-5 font-bold text-blue-700 text-xl md:justify-start justify-center">
             <del>{product.prevPrice}</del>
             <h1>{product.newPrice}</h1>
           </div>
-          <h1 className="font-semibold">Select Size</h1>
-          <div className="flex gap-3">
-            <div className="border w-[70px] text-center p-2 rounded-lg">SM</div>
-            <div className="border w-[70px] text-center p-2 rounded-lg">MD</div>
-            <div className="border w-[70px] text-center p-2 rounded-lg">LG</div>
-            <div className="border w-[70px] text-center p-2 rounded-lg">XL</div>
-            <div className="border w-[70px] text-center p-2 rounded-lg">
+          <h1 className="font-semibold md:text-start text-center">
+            Select Size
+          </h1>
+          <div className="flex gap-3 md:justify-start justify-center">
+            <div className="border md:w-[70px] w-12 text-center md:p-2 rounded-lg">
+              SM
+            </div>
+            <div className="border md:w-[70px] w-12 text-center md:p-2 rounded-lg">
+              MD
+            </div>
+            <div className="border md:w-[70px] w-12 text-center md:p-2 rounded-lg">
+              LG
+            </div>
+            <div className="border md:w-[70px] w-12 text-center md:p-2 rounded-lg">
+              XL
+            </div>
+            <div className="border md:w-[70px] w-12 text-center md:p-2 rounded-lg">
               XLL
             </div>
           </div>
-          <h1>Color: White/Black</h1>
-          <div className="flex gap-2">
+          <h1 className="md:text-start text-center">Color: White/Black</h1>
+          <div className="flex gap-2 md:justify-start justify-center">
             <img
               src={product.img}
               alt="img"
@@ -71,7 +91,7 @@ const ProductDetail = () => {
               onClick={() => setImage(product.img2)}
             />
           </div>
-          <div className="uppercase font-bold bg-neutral-800 w-[200px] text-center text-white p-5 rounded-lg">
+          <div className="uppercase font-bold bg-neutral-800 w-[200px] text-center text-white md:p-5 p-2 rounded-lg m-auto md:m-0">
             Add To Cart
           </div>
         </div>

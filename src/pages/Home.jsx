@@ -39,7 +39,7 @@ const Home = () => {
       <div className="md:flex md:gap-[3rem] gap-2 grid grid-cols-2">
         <NavLink
           to="/shop"
-          className="md:h-[300px] md:w-[350px] bg-white flex flex-col justify-center items-center rounded-xl drop-shadow-2xl transition hover:translate-y-5 ease-in-out duration-300 md:mb-0 mb-10"
+          className="md:h-[300px] md:w-[350px] bg-white flex flex-col justify-center items-center rounded-xl drop-shadow-2xl transition hover:-translate-y-5 ease-in-out duration-300 md:mb-0 mb-10"
         >
           <h1 className=" text-black z-10 font-semibold m-2 md:text-xl text-sm italic">
             Shoes
@@ -52,7 +52,7 @@ const Home = () => {
         </NavLink>
         <NavLink
           to="/shop"
-          className="md:h-[300px] md:w-[350px] bg-white flex flex-col justify-center items-center rounded-xl drop-shadow-2xl transition hover:translate-y-5 ease-in-out md:duration-300 md:mb-0 mb-10"
+          className="md:h-[300px] md:w-[350px] bg-white flex flex-col justify-center items-center rounded-xl drop-shadow-2xl transition hover:-translate-y-5 ease-in-out md:duration-300 md:mb-0 mb-10"
         >
           <h1 className=" text-black z-10 font-semibold m-2 md:text-xl text-sm italic">
             Sneakers
@@ -65,7 +65,7 @@ const Home = () => {
         </NavLink>
         <NavLink
           to="/shop"
-          className="md:max-h-[300px] md:w-[350px] max-h-[135px] bg-white flex flex-col justify-center items-center rounded-xl drop-shadow-2xl transition hover:translate-y-5 ease-in-out md:duration-300 md:mb-0 mb-10"
+          className="md:max-h-[300px] md:w-[350px] max-h-[135px] bg-white flex flex-col justify-center items-center rounded-xl drop-shadow-2xl transition hover:-translate-y-5 ease-in-out md:duration-300 md:mb-0 mb-10"
         >
           <h1 className=" text-black z-10 font-semibold m-2 md:text-xl text-sm italic">
             Heels
@@ -78,7 +78,7 @@ const Home = () => {
         </NavLink>
         <NavLink
           to="/shop"
-          className="md:h-[300px] md:w-[350px] bg-white flex flex-col justify-center items-center rounded-xl drop-shadow-2xl transition hover:translate-y-5 ease-in-out md:duration-300 md:mb-0 mb-10"
+          className="md:h-[300px] md:w-[350px] bg-white flex flex-col justify-center items-center rounded-xl drop-shadow-2xl transition hover:-translate-y-5 ease-in-out md:duration-300 md:mb-0 mb-10"
         >
           <h1 className=" text-black z-10 font-semibold m-2 md:text-xl text-sm italic">
             Sandals
