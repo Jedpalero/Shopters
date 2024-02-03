@@ -16,12 +16,12 @@ const ProductDetail = () => {
       <div className="flex items-center justify-between m-6">
         <Link
           to="/shop"
-          className="flex items-center gap-3  transition hover:-translate-x-2 delay-100"
+          className="flex items-center gap-3 ml-[120px] transition hover:-translate-x-2 delay-100"
         >
           <FaArrowCircleLeft className="text-3xl" />
           <h1 className="font-bold text-lg">Go Back</h1>
         </Link>
-        <NavLink to="/order" className="flex">
+        <NavLink to="/order" className="flex mr-[130px]">
           <FaShoppingCart className="text-3xl relative mt-4 mr-5" />
           <p className="bg-red-500 text-white ml-5 absolute w-6 text-center rounded-full">
             {getTotalCartItems()}
@@ -38,7 +38,7 @@ const ProductDetail = () => {
           <h1 className="font-bold md:text-4xl text-xl md:text-start text-center">
             {product.title}
           </h1>
-          <p className="md:w-[600px] w-[370px] md:text-start text-center">
+          <p className="md:w-[690px] w-[370px] md:text-start text-center">
             {product.details}
           </p>
           <div className="flex items-center md:justify-start justify-center gap-1">
