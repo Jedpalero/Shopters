@@ -8,7 +8,7 @@ import {
 import { auth } from "./firebase-config";
 import { MyContext } from "./MyContext";
 import { useNavigate } from "react-router-dom";
-import Loader from "./components/Loader";
+// import Loader from "./components/Loader";
 import FooterMenu from "./mobile/FooterMenu";
 import { ToastContainer, toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
@@ -18,7 +18,7 @@ function App() {
   const [userCredentials, setUserCredentials] = useState({});
   const [error, setError] = useState("");
   const navigate = useNavigate();
-  const [loading, setLoading] = useState(false);
+  // const [loading, setLoading] = useState(false);
 
   //ccc@gmail.cm 123456
   //uninstall redux toolkit
@@ -49,7 +49,7 @@ function App() {
 
   const handleSignin = (e) => {
     e.preventDefault();
-    setLoading(true);
+    // setLoading(true);
     setError("");
 
     signInWithEmailAndPassword(
@@ -60,19 +60,21 @@ function App() {
       .then((userCredential) => {
         // Signed in
         const user = userCredential.user;
-        setLoading(false);
+        toast.success("Login successfully");
+        // setLoading(false);
         navigate("/home");
       })
       .catch((error) => {
         setError(error.message);
+        toast.error(error.message);
         navigate("/login");
-        setLoading(false);
+        // setLoading(false);
       });
   };
 
-  if (loading) {
-    return <Loader />;
-  }
+  // if (loading) {
+  //   return <Loader />;
+  // }
 
   return (
     <>
