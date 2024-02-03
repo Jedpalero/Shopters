@@ -5,7 +5,7 @@ const Card = ({ img, title, star, reviews, sold, newPrice, id }) => {
     <div className="md:w-auto">
       {/* {products.map((product) => ( */}
       <div
-        className="md:h-[280px] h-[180px] md:w-[260px] w-[150px] md:border border-neutral-800  md:flex md:flex-col grid grid-col-2 md:items-center bg-neutral-800 rounded-lg mt-4 drop-shadow-lg overflow-hidden"
+        className="md:h-[280px] h-[180px] md:w-[260px] w-[150px]  border-neutral-800  md:flex md:flex-col grid grid-col-2 md:items-center bg-gradient-to-t from-black rounded-lg mt-4 drop-shadow-xl overflow-hidden transition ease-in-out hover:translate-y-3 duration-150"
         key={title}
       >
         <Link to={`/detail/${id}`}>

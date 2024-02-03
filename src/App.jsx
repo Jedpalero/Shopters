@@ -61,7 +61,7 @@ function App() {
         // Signed in
         const user = userCredential.user;
         setLoading(false);
-        navigate("/");
+        navigate("/home");
       })
       .catch((error) => {
         setError(error.message);

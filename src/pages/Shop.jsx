@@ -5,6 +5,8 @@ import { useState } from "react";
 import products from "../db/data";
 import Button from "../components/Button";
 import Input from "../components/Input";
+import NewsLetter from "../components/NewsLetter/NewsLetter";
+import Footer from "../components/Footer";
 
 const Shop = () => {
   const [dropMenu, setDropMenu] = useState(false);
@@ -73,12 +75,12 @@ const Shop = () => {
   // put scroll to top for mobile version
 
   return (
-    <div className="grid h-screen grid-rows-[70px_1fr]">
-      <div className="bg-gradient-to-r from-black flex items-center p-8">
+    <div className="grid h-screen grid-rows-[70px_1fr] bg-[#f5f5f5]">
+      <div className=" flex items-center p-8">
         <div className="relative flex gap-2">
           <input
-            type="text"
-            id="text"
+            type="text1"
+            id="text1"
             className="block w-full md:p-4 p-1 md:ps-10 ps-10 text-sm text-[gray-900] border border-gray-300 rounded-lg  dark:bg-neutral-800 dark:border-gray-600  dark:text-white "
             placeholder="Search"
             required
@@ -90,7 +92,7 @@ const Shop = () => {
           </div>
         </div>
       </div>
-      <div className="scrollbar bg-gradient-to-r from-black overflow-y-scroll text-white">
+      <div className="scrollbar overflow-y-scroll text-white">
         <div className="flex justify-between p-3 overflow-hidden">
           <div className="flex items-center gap-3">
             <Button onClickHandler={handleClick} value="" title="All" />
@@ -102,6 +104,16 @@ const Shop = () => {
             />
             <Button onClickHandler={handleClick} value="Puma" title="Puma" />
             <Button onClickHandler={handleClick} value="Vans" title="Vans" />
+            <Button
+              onClickHandler={handleClick}
+              value="Genshuo"
+              title="Genshuo"
+            />
+            <Button
+              onClickHandler={handleClick}
+              value="Dream Pairs"
+              title="Dream"
+            />
           </div>
         </div>
         <div>
@@ -114,7 +126,7 @@ const Shop = () => {
               {dropMenu ? <IoMdArrowDropup /> : <IoMdArrowDropdown />}
             </div>
             {dropMenu && (
-              <div className="bg-neutral-800 text-white border md:mt-8 mt-6 absolute w-[300px] h-[250px] z-10">
+              <div className="bg-neutral-800 text-white border md:mt-6 mt-6 absolute w-[300px] h-[250px] z-10">
                 <div className="text-center space-y-2 mt-4">
                   <Input
                     handleChange={handleChange}
@@ -168,6 +180,9 @@ const Shop = () => {
             {result}
           </div>
         </div>
+
+        <NewsLetter />
+        <Footer />
       </div>
     </div>
   );

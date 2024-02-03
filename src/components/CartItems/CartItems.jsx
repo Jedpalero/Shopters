@@ -73,7 +73,7 @@ const CartItems = () => {
           <p className="font-bold text-2xl">Cart Totals</p>
           <div>
             <p>If you have a promo code. Enter here</p>
-            <div className="">
+            <div>
               <input
                 type="text"
                 id="text"
