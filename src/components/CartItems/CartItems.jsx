@@ -37,16 +37,16 @@ const CartItems = () => {
                 <p>{e.title}</p>
                 <p>{`$${e.newPrice}`}</p>
                 <div className="flex items-center">
-                  <div className=" border p-1 hover:bg-neutral-300 items-center  flex">
+                  <div className=" border p-1 hover:bg-neutral-300  active:bg-neutral-600 items-center  flex">
                     <FaMinus
-                      className="cursor-pointer text-center"
+                      className="cursor-pointer text-center "
                       onClick={() => {
                         removeFromCart(e.id);
                       }}
                     />
                   </div>
                   <p className="border w-10 text-center">{cartItems[e.id]}</p>
-                  <div className=" border p-1 hover:bg-neutral-300 items-center text-center flex">
+                  <div className=" border p-1 hover:bg-neutral-300 active:bg-neutral-600 items-center text-center flex">
                     <FaPlus
                       className="cursor-pointer"
                       onClick={() => {
@@ -72,7 +72,7 @@ const CartItems = () => {
                 <div className="space-y-1 relative mb-3">
                   <p>{e.title}</p>
                   <div className="flex items-center">
-                    <div className=" border p-1 hover:bg-neutral-300 items-center  flex">
+                    <div className=" border p-1 hover:bg-neutral-300 active:bg-neutral-600 items-center  flex">
                       <FaMinus
                         className="cursor-pointer text-center"
                         onClick={() => {
@@ -81,7 +81,7 @@ const CartItems = () => {
                       />
                     </div>
                     <p className="border w-10 text-center">{cartItems[e.id]}</p>
-                    <div className=" border p-1 hover:bg-neutral-300 items-center text-center flex">
+                    <div className=" border p-1 hover:bg-neutral-300 active:bg-neutral-600 items-center text-center flex">
                       <FaPlus
                         className="cursor-pointer"
                         onClick={() => {

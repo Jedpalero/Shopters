@@ -97,7 +97,7 @@ const ProductDetail = () => {
             onClick={() => {
               addToCart(product.id);
             }}
-            className="uppercase font-bold bg-neutral-800 w-[200px] text-center text-white md:p-5 p-2 rounded-lg m-auto md:m-0 cursor-pointer"
+            className="uppercase font-bold bg-neutral-800 w-[200px] text-center text-white md:p-5 p-2 rounded-lg m-auto md:m-0 cursor-pointer active:bg-neutral-600"
           >
             Add To Cart
           </button>

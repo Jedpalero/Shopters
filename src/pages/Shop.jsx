@@ -3,7 +3,6 @@ import { IoMdArrowDropdown, IoMdArrowDropup } from "react-icons/io";
 import Card from "../components/Card";
 import { useState } from "react";
 import products from "../db/data";
-import Button from "../components/Button";
 import Input from "../components/Input";
 import NewsLetter from "../components/NewsLetter/NewsLetter";
 import Footer from "../components/Footer";
@@ -13,6 +12,7 @@ const Shop = () => {
   const [selectedCategory, setSelectedCategory] = useState(null);
   const [showInput, setShowInput] = useState(false);
   const [query, setQuery] = useState("");
+  const [active, setActive] = useState("b1");
 
   // input filter
   const handleInputChange = (event) => {
@@ -27,11 +27,6 @@ const Shop = () => {
 
   // radio filter
   const handleChange = (event) => {
-    setSelectedCategory(event.target.value);
-  };
-
-  // button filter
-  const handleClick = (event) => {
     setSelectedCategory(event.target.value);
   };
 
@@ -112,25 +107,104 @@ const Shop = () => {
       <div className="md:scrollbar overflow-y-scroll text-white">
         <div className="flex justify-between p-3 overflow-hidden md:ml-[140px]">
           <div className="flex items-center gap-3">
-            <Button onClickHandler={handleClick} value="" title="All" />
-            <Button onClickHandler={handleClick} value="Nike" title="Nike" />
-            <Button
-              onClickHandler={handleClick}
+            <button
+              onClick={(event) => {
+                setSelectedCategory(event.target.value);
+                setActive("b1");
+              }}
+              value=""
+              className={`hover:bg-neutral-600 transition hover:translate-x-1 ease-in-out w-[80px] p-2 text-center rounded-full cursor-pointer md:text-sm text-xs font-semibold  ${
+                active === "b1"
+                  ? "bg-white text-black border drop-shadow-md"
+                  : "bg-neutral-800"
+              }`}
+            >
+              All
+            </button>
+            <button
+              onClick={(event) => {
+                setSelectedCategory(event.target.value);
+                setActive("b2");
+              }}
+              value="Nike"
+              className={`hover:bg-neutral-600 transition hover:translate-x-1 ease-in-out w-[80px] p-2 text-center rounded-full cursor-pointer md:text-sm text-xs font-semibold bg-neutral-800 ${
+                active === "b2"
+                  ? "bg-white text-black border drop-shadow-md"
+                  : "bg-neutral-800"
+              }`}
+            >
+              Nike
+            </button>
+            <button
+              onClick={(event) => {
+                setSelectedCategory(event.target.value);
+                setActive("b3");
+              }}
               value="Adidas"
-              title="Adidas"
-            />
-            <Button onClickHandler={handleClick} value="Puma" title="Puma" />
-            <Button onClickHandler={handleClick} value="Vans" title="Vans" />
-            <Button
-              onClickHandler={handleClick}
+              className={`hover:bg-neutral-600 transition hover:translate-x-1 ease-in-out w-[80px] p-2 text-center rounded-full cursor-pointer md:text-sm text-xs font-semibold bg-neutral-800 ${
+                active === "b3"
+                  ? "bg-white text-black border drop-shadow-md"
+                  : "bg-neutral-800"
+              }`}
+            >
+              Adidas
+            </button>
+            <button
+              onClick={(event) => {
+                setSelectedCategory(event.target.value);
+                setActive("b4");
+              }}
+              value="Puma"
+              className={`hover:bg-neutral-600 transition hover:translate-x-1 ease-in-out w-[80px] p-2 text-center rounded-full cursor-pointer md:text-sm text-xs font-semibold bg-neutral-800 ${
+                active === "b4"
+                  ? "bg-white text-black border drop-shadow-md"
+                  : "bg-neutral-800"
+              }`}
+            >
+              Puma
+            </button>
+            <button
+              onClick={(event) => {
+                setSelectedCategory(event.target.value);
+                setActive("b5");
+              }}
+              value="Vans"
+              className={`hover:bg-neutral-600 transition hover:translate-x-1 ease-in-out w-[80px] p-2 text-center rounded-full cursor-pointer md:text-sm text-xs font-semibold bg-neutral-800 ${
+                active === "b5"
+                  ? "bg-white text-black border drop-shadow-md"
+                  : "bg-neutral-800"
+              }`}
+            >
+              Vans
+            </button>
+            <button
+              onClick={(event) => {
+                setSelectedCategory(event.target.value);
+                setActive("b6");
+              }}
               value="Genshuo"
-              title="Genshuo"
-            />
-            <Button
-              onClickHandler={handleClick}
+              className={`hover:bg-neutral-600 transition hover:translate-x-1 ease-in-out w-[80px] p-2 text-center rounded-full cursor-pointer md:text-sm text-xs font-semibold bg-neutral-800 ${
+                active === "b6"
+                  ? "bg-white text-black border drop-shadow-md"
+                  : "bg-neutral-800"
+              }`}
+            >
+              Genshuo
+            </button>
+            <button
+              onClick={(event) => {
+                setSelectedCategory(event.target.value);
+                setActive("b7");
+              }}
               value="Dream Pairs"
-              title="Dream"
-            />
+              className={`hover:bg-neutral-600 transition hover:translate-x-1 ease-in-out w-[80px] p-2 text-center rounded-full cursor-pointer md:text-sm text-xs font-semibold bg-neutral-800 ${
+                active === "b7"
+                  ? "bg-white text-black border drop-shadow-md"
+                  : "bg-neutral-800"
+              }`}
+            >
+              Dream
+            </button>
           </div>
         </div>
         <div>

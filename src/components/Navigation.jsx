@@ -72,6 +72,7 @@ const Navigation = ({ sidebar, setSidebar }) => {
             style={({ isActive }) => ({
               color: isActive ? "white" : "gray",
               fontWeight: isActive ? "bold" : "",
+              textDecoration: isActive ? "underline" : "",
             })}
           >
             <div className="">
