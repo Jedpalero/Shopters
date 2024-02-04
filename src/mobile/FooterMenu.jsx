@@ -56,9 +56,10 @@ const FooterMenu = () => {
         <h3 className="text-[10px]">SHOP</h3>
       </NavLink>
       <NavLink
+        to="/order"
         className="flex flex-col items-center"
         style={({ isActive }) => ({
-          color: isActive ? "gray" : "white",
+          color: isActive ? "white" : "gray",
         })}
       >
         <FaShoppingCart />

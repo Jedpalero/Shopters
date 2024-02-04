@@ -109,7 +109,7 @@ const Shop = () => {
           <h1 className="md:text-xl text-black font-bold">ShopTers</h1>
         </div>
       </div>
-      <div className="scrollbar overflow-y-scroll text-white">
+      <div className="md:scrollbar overflow-y-scroll text-white">
         <div className="flex justify-between p-3 overflow-hidden md:ml-[140px]">
           <div className="flex items-center gap-3">
             <Button onClickHandler={handleClick} value="" title="All" />

@@ -4,7 +4,7 @@ import Footer from "../components/Footer";
 
 const Order = () => {
   return (
-    <div className="scrollbar h-screen overflow-y-scroll bg-[#f5f5f5]">
+    <div className="md:scrollbar h-screen overflow-y-scroll bg-[#f5f5f5]">
       <CartItems />
       <Footer />
     </div>

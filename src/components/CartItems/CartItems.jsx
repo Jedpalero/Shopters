@@ -14,7 +14,7 @@ const CartItems = () => {
   } = useContext(ShopContext);
 
   return (
-    <div className="md:w-[100rem] w-full m-auto space-y-5">
+    <div className="md:w-[96rem] w-full m-auto space-y-5">
       <div className="md:grid hidden grid-cols-6 m-8 font-semibold">
         <h1>Products</h1>
         <h1>Title</h1>
