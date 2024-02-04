@@ -1,5 +1,6 @@
 import { createContext, useState } from "react";
 import data from "../db/data";
+import { toast } from "react-toastify";
 
 export const ShopContext = createContext(null);
 
@@ -23,6 +24,7 @@ const ShopContextProvider = (props) => {
 
   const deleteFromCart = (itemId) => {
     setCartItems((prev) => ({ ...prev, [itemId]: (prev[itemId] = 0) }));
+    toast.success("Deleted successfully");
   };
 
   const getTotalCartAmount = () => {

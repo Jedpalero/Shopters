@@ -1,6 +1,6 @@
 import { Outlet } from "react-router-dom";
 import Navigation from "./components/Navigation";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import {
   createUserWithEmailAndPassword,
   signInWithEmailAndPassword,
@@ -8,7 +8,6 @@ import {
 import { auth } from "./firebase-config";
 import { MyContext } from "./MyContext";
 import { useNavigate } from "react-router-dom";
-// import Loader from "./components/Loader";
 import FooterMenu from "./mobile/FooterMenu";
 import { ToastContainer, toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
@@ -18,10 +17,26 @@ function App() {
   const [userCredentials, setUserCredentials] = useState({});
   const [error, setError] = useState("");
   const navigate = useNavigate();
-  // const [loading, setLoading] = useState(false);
+  const [isMobile, setIsMobile] = useState(() => window.innerWidth < 720);
 
   //ccc@gmail.cm 123456
   //uninstall redux toolkit
+
+  const handleResize = () => {
+    if (window.innerWidth < 720) {
+      setIsMobile(true);
+    } else {
+      setIsMobile(false);
+    }
+  };
+
+  // create an event listener
+  useEffect(() => {
+    window.addEventListener("resize", handleResize);
+    return () => {
+      window.removeEventListener("resize", handleResize);
+    };
+  });
 
   const handleCredentials = (e) => {
     setUserCredentials({ ...userCredentials, [e.target.name]: e.target.value });
@@ -100,6 +115,7 @@ function App() {
               handleRegister,
               error,
               handleSignin,
+              isMobile,
             }}
           >
             <Outlet />

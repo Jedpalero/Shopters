@@ -1,11 +1,13 @@
 import { FaSearch, FaShoppingCart } from "react-icons/fa";
 import { IoMdArrowDropdown, IoMdArrowDropup } from "react-icons/io";
 import Card from "../components/Card";
-import { useState } from "react";
+import { useContext, useRef, useState } from "react";
 import products from "../db/data";
 import Input from "../components/Input";
 import NewsLetter from "../components/NewsLetter/NewsLetter";
 import Footer from "../components/Footer";
+import { motion } from "framer-motion";
+import { MyContext } from "../MyContext";
 
 const Shop = () => {
   const [dropMenu, setDropMenu] = useState(false);
@@ -13,6 +15,8 @@ const Shop = () => {
   const [showInput, setShowInput] = useState(false);
   const [query, setQuery] = useState("");
   const [active, setActive] = useState("b1");
+  const carousel = useRef(null);
+  const { isMobile } = useContext(MyContext);
 
   // input filter
   const handleInputChange = (event) => {
@@ -105,8 +109,16 @@ const Shop = () => {
         </div>
       </div>
       <div className="md:scrollbar overflow-y-scroll text-white">
-        <div className="flex justify-between p-3 overflow-hidden md:ml-[140px]">
-          <div className="flex items-center gap-3">
+        <motion.div
+          ref={carousel}
+          whileTap={{ cursor: "grabbing" }}
+          className="flex justify-between p-3 overflow-hidden md:ml-[140px]"
+        >
+          <motion.div
+            drag={isMobile ? "x" : ""}
+            dragConstraints={carousel}
+            className="flex items-center gap-3"
+          >
             <button
               onClick={(event) => {
                 setSelectedCategory(event.target.value);
@@ -205,8 +217,8 @@ const Shop = () => {
             >
               Dream
             </button>
-          </div>
-        </div>
+          </motion.div>
+        </motion.div>
         <div>
           <div className="text-black flex justify-end mr-2 relative">
             <div
