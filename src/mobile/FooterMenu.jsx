@@ -12,31 +12,23 @@ import { auth } from "../firebase-config";
 import { useAuthState } from "react-firebase-hooks/auth";
 import { signOut } from "firebase/auth";
 import { useNavigate } from "react-router-dom";
-import Loader from "../components/Loader";
 
 const FooterMenu = () => {
   const [dropMenu, setDropMenu] = useState(false);
   const [user] = useAuthState(auth);
   const navigate = useNavigate();
-  const [loading, setLoading] = useState(false);
 
   const handleSignOut = async () => {
-    setLoading(true);
     await signOut(auth);
-    navigate("/login");
-    console.log("Logout Successfully");
-    setLoading(false);
+    navigate("/auth");
+    toast.success("Logout Successfully");
   };
-
-  if (loading) {
-    return <Loader />;
-  }
 
   return (
     <div className="text-white flex justify-between m-3">
       {/* <div className="flex"> */}
       <NavLink
-        to="/home"
+        to="/"
         className="flex flex-col items-center"
         style={({ isActive }) => ({
           color: isActive ? "white" : "gray",
@@ -79,7 +71,10 @@ const FooterMenu = () => {
           <div className="h-[100px] w-[150px] flex flex-col justify-center items-center">
             {user ? (
               <>
-                <p>{user?.email}</p>
+                <div className="flex gap-2 items-center">
+                  <FaUser />
+                  <p>{user?.displayName}</p>
+                </div>
                 <button
                   className="flex items-center gap-2"
                   onClick={handleSignOut}
@@ -90,13 +85,9 @@ const FooterMenu = () => {
               </>
             ) : (
               <>
-                <NavLink to="/login" className="flex items-center gap-2">
+                <NavLink to="/auth" className="flex items-center gap-2">
                   <RiLoginCircleLine />
                   <h3>LOGIN</h3>
-                </NavLink>
-                <NavLink to="/register" className="flex items-center gap-2">
-                  <FaUser />
-                  <h3>REGISTER</h3>
                 </NavLink>
               </>
             )}

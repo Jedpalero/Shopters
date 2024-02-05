@@ -1,4 +1,4 @@
-import { createContext, useState } from "react";
+import { createContext, useEffect, useState } from "react";
 import data from "../db/data";
 import { toast } from "react-toastify";
 
@@ -14,6 +14,7 @@ const getDefaultCart = () => {
 
 const ShopContextProvider = (props) => {
   const [cartItems, setCartItems] = useState(getDefaultCart);
+  const [isMobile, setIsMobile] = useState(() => window.innerWidth < 720);
 
   const addToCart = (itemId) => {
     setCartItems((prev) => ({ ...prev, [itemId]: prev[itemId] + 1 }));
@@ -48,6 +49,29 @@ const ShopContextProvider = (props) => {
     return totalItem;
   };
 
+  const handleResize = () => {
+    if (window.innerWidth < 720) {
+      setIsMobile(true);
+    } else {
+      setIsMobile(false);
+    }
+  };
+
+  // create an event listener
+  useEffect(() => {
+    window.addEventListener("resize", handleResize);
+    return () => {
+      window.removeEventListener("resize", handleResize);
+    };
+  });
+
+  useEffect(() => {
+    window.addEventListener("resize", handleResize);
+    return () => {
+      window.removeEventListener("resize", handleResize);
+    };
+  });
+
   const contextValue = {
     data,
     cartItems,
@@ -56,6 +80,8 @@ const ShopContextProvider = (props) => {
     getTotalCartAmount,
     getTotalCartItems,
     deleteFromCart,
+    handleResize,
+    isMobile,
   };
 
   return (

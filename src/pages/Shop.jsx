@@ -7,7 +7,7 @@ import Input from "../components/Input";
 import NewsLetter from "../components/NewsLetter/NewsLetter";
 import Footer from "../components/Footer";
 import { motion } from "framer-motion";
-import { MyContext } from "../MyContext";
+import { ShopContext } from "../Context/ShopContext";
 
 const Shop = () => {
   const [dropMenu, setDropMenu] = useState(false);
@@ -16,7 +16,7 @@ const Shop = () => {
   const [query, setQuery] = useState("");
   const [active, setActive] = useState("b1");
   const carousel = useRef(null);
-  const { isMobile } = useContext(MyContext);
+  const { isMobile } = useContext(ShopContext);
 
   // input filter
   const handleInputChange = (event) => {

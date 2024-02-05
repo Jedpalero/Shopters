@@ -11,7 +11,6 @@ import { auth } from "../firebase-config";
 import { useAuthState } from "react-firebase-hooks/auth";
 import { signOut } from "firebase/auth";
 import { useNavigate } from "react-router-dom";
-import Loader from "./Loader";
 import { useContext, useState } from "react";
 import { toast } from "react-toastify";
 import { ShopContext } from "../Context/ShopContext";
@@ -19,20 +18,13 @@ import { ShopContext } from "../Context/ShopContext";
 const Navigation = ({ sidebar, setSidebar }) => {
   const [user] = useAuthState(auth);
   const navigate = useNavigate();
-  const [loading, setLoading] = useState(false);
   const { getTotalCartItems } = useContext(ShopContext);
 
   const handleSignOut = async () => {
-    setLoading(true);
     await signOut(auth);
-    navigate("/login");
+    navigate("/auth");
     toast.success("Logout Successfully");
-    setLoading(false);
   };
-
-  if (loading) {
-    return <Loader />;
-  }
 
   return (
     <div className={`md:h-screen flex ${sidebar ? "" : ""}`}>
@@ -43,7 +35,7 @@ const Navigation = ({ sidebar, setSidebar }) => {
             onClick={() => setSidebar(!sidebar)}
           />
           <NavLink
-            to="/home"
+            to="/"
             className={`${sidebar ? "flex gap-10 " : ""}`}
             style={({ isActive }) => ({
               color: isActive ? "white" : "gray",
@@ -87,7 +79,10 @@ const Navigation = ({ sidebar, setSidebar }) => {
         {user ? (
           <>
             <div className="space-y-4">
-              {sidebar && <p>{user?.email}</p>}
+              <div className="flex gap-10 items-center">
+                <FaUser className="mt-2" />
+                {sidebar && <p>{user?.displayName}</p>}
+              </div>
               <button className="flex gap-10" onClick={handleSignOut}>
                 <RiLogoutCircleLine className="mt-2" />
                 {sidebar && <h3>LOGOUT</h3>}
@@ -98,7 +93,7 @@ const Navigation = ({ sidebar, setSidebar }) => {
           <>
             <div className="space-y-4">
               <NavLink
-                to="auth"
+                to="/auth"
                 className="flex gap-10"
                 style={({ isActive }) => ({
                   color: isActive ? "white" : "gray",
@@ -108,18 +103,6 @@ const Navigation = ({ sidebar, setSidebar }) => {
               >
                 <RiLoginCircleLine className="mt-2" />
                 {sidebar && <h3>LOGIN</h3>}
-              </NavLink>
-              <NavLink
-                to="/register"
-                className="flex gap-10"
-                style={({ isActive }) => ({
-                  color: isActive ? "white" : "gray",
-                  textDecoration: isActive ? "underline" : "",
-                  fontWeight: isActive ? "bold" : "",
-                })}
-              >
-                <FaUser className="mt-2" />
-                {sidebar && <h3>REGISTER</h3>}
               </NavLink>
             </div>
           </>
