@@ -98,7 +98,7 @@ const Navigation = ({ sidebar, setSidebar }) => {
           <>
             <div className="space-y-4">
               <NavLink
-                to="/login"
+                to="auth"
                 className="flex gap-10"
                 style={({ isActive }) => ({
                   color: isActive ? "white" : "gray",
