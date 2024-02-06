@@ -3,8 +3,8 @@ import { FaSquareXTwitter } from "react-icons/fa6";
 
 const Footer = () => {
   return (
-    <div className="flex flex-col justify-center m-auto items-center bg-[#f5f5f5] text-black w-full space-y-5 md:mb-5 mb-[70px] bottom-0 right-0">
-      <div className="flex items-center gap-6">
+    <div className="flex flex-col justify-center m-auto items-center bg-[#f5f5f5] text-black w-full space-y-5 bottom-0 right-0 mt-10">
+      <div className="flex items-center gap-6 mt-5">
         <img
           src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTxqlNk5NyNFgk6GT-5bGk2Wrl635pp-0hn9w&usqp=CAU"
           alt="shopping logo"
@@ -35,7 +35,7 @@ const Footer = () => {
         <FaWhatsapp className="h-6 w-6 hover:translate-y-2 transition cursor-pointer" />
         <FaPinterest className="h-6 w-6 hover:translate-y-2 transition cursor-pointer" />
       </div>
-      <p className="md:text-sm text-xs">
+      <p className="md:text-sm text-xs p-5">
         Copyright @ 2024 - All Right Reserved.
       </p>
     </div>

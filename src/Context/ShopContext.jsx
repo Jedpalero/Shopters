@@ -25,7 +25,7 @@ const ShopContextProvider = (props) => {
 
   const deleteFromCart = (itemId) => {
     setCartItems((prev) => ({ ...prev, [itemId]: (prev[itemId] = 0) }));
-    toast.success("Deleted successfully");
+    toast.success("Removed From Cart");
   };
 
   const getTotalCartAmount = () => {
@@ -57,6 +57,10 @@ const ShopContextProvider = (props) => {
     }
   };
 
+  const resetCart = () => {
+    setCartItems(getDefaultCart());
+  };
+
   // create an event listener
   useEffect(() => {
     window.addEventListener("resize", handleResize);
@@ -75,6 +79,7 @@ const ShopContextProvider = (props) => {
   const contextValue = {
     data,
     cartItems,
+    resetCart,
     addToCart,
     removeFromCart,
     getTotalCartAmount,

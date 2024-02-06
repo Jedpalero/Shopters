@@ -18,11 +18,12 @@ const Checkout = () => {
 
   let { homeAddress, phoneNumber } = form;
 
-  let { getTotalCartAmount, getTotalCartItems } = useContext(ShopContext);
+  let { getTotalCartAmount, getTotalCartItems, resetCart } =
+    useContext(ShopContext);
 
-  console.log("form", form);
-  console.log(getTotalCartItems());
-  console.log(user);
+  // console.log("form", form);
+  // console.log(getTotalCartItems());
+  // console.log(user);
 
   const handleChange = (e) => {
     setForm({ ...form, [e.target.name]: e.target.value });
@@ -46,6 +47,7 @@ const Checkout = () => {
     }
     navigate("/");
     toast.success("Thank you for shopping in our store.");
+    resetCart();
   };
 
   return (
@@ -147,7 +149,7 @@ const Checkout = () => {
             className="flex m-auto mt-10 w-[20rem] p-4  justify-center rounded-lg bg-blue-700 text-white"
             type="submit"
           >
-            Submit
+            Checkout
           </button>
         </form>
       </div>

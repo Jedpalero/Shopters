@@ -5,6 +5,7 @@ import { FaMinus, FaPlus } from "react-icons/fa";
 import { NavLink } from "react-router-dom";
 import { useAuthState } from "react-firebase-hooks/auth";
 import { auth } from "../../firebase-config";
+import { toast } from "react-toastify";
 
 const CartItems = () => {
   const {
@@ -148,26 +149,13 @@ const CartItems = () => {
             <p>{`$${getTotalCartAmount()}.00`}</p>
           </div>
         </div>
-        {/* bug */}
-        {user ? (
-          <>
-            <NavLink
-              to="/checkout"
-              className="w-[15rem] border p-3 text-center uppercase bg-black text-white mt-5 mb-10 justify-center m-auto md:m-0"
-            >
-              Proceed to Checkout
-            </NavLink>
-          </>
-        ) : (
-          <>
-            <NavLink
-              to="/auth"
-              className="w-[15rem] border p-3 text-center uppercase bg-black text-white mt-5 mb-10 justify-center m-auto md:m-0"
-            >
-              Proceed to Checkout
-            </NavLink>
-          </>
-        )}
+
+        <NavLink
+          to={`${user ? "/checkout" : "/auth"}`}
+          className="w-[15rem] border p-3 text-center flex m-auto justify-center uppercase bg-black text-white mt-5 mb-10  md:m-0"
+        >
+          Proceed to Checkout
+        </NavLink>
       </div>
     </div>
   );
