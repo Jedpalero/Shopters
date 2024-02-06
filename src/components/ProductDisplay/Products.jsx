@@ -2,13 +2,14 @@ import { Link, NavLink } from "react-router-dom";
 import { FaArrowCircleLeft, FaShoppingCart } from "react-icons/fa";
 import { ShopContext } from "../../Context/ShopContext";
 import { useContext } from "react";
+import { toast } from "react-toastify";
 
 const Products = ({ product, image, setImage }) => {
   const { addToCart, getTotalCartItems } = useContext(ShopContext);
   // const [image, setImage] = useState(product.img);
 
   return (
-    <div className=" h-full overflow-y-scroll md:overflow-y-hidden ">
+    <div>
       <div className="flex items-center justify-between m-6">
         <Link
           to="/shop"
@@ -92,6 +93,7 @@ const Products = ({ product, image, setImage }) => {
           <button
             onClick={() => {
               addToCart(product.id);
+              toast.success(`${product.title} Added To Cart`);
             }}
             className="uppercase font-bold bg-neutral-800 w-[200px] text-center text-white md:p-5 p-2 rounded-lg m-auto md:m-0 cursor-pointer active:bg-neutral-600"
           >
