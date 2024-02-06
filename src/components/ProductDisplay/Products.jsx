@@ -4,13 +4,16 @@ import { ShopContext } from "../../Context/ShopContext";
 import { useContext } from "react";
 import { toast } from "react-toastify";
 
-const Products = ({ product, image, setImage }) => {
+const Products = ({ product, image, setImage, sidebar }) => {
   const { addToCart, getTotalCartItems } = useContext(ShopContext);
-  // const [image, setImage] = useState(product.img);
 
   return (
     <div>
-      <div className="flex items-center justify-between m-6 md:ml-[120px] md:mr-[130px]">
+      <div
+        className={`flex items-center justify-between m-6  ${
+          sidebar ? "" : "md:ml-[120px] md:mr-[130px]"
+        }`}
+      >
         <Link
           to="/shop"
           className="flex items-center gap-3  transition hover:-translate-x-2 delay-100"
