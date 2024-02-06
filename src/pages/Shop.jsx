@@ -71,8 +71,7 @@ const Shop = () => {
   }
 
   const result = filteredData(products, selectedCategory, query);
-
-  // put scroll to top for mobile version
+  const numberOfProducts = result.length;
 
   return (
     <div className="grid h-screen grid-rows-[70px_1fr] bg-[#f5f5f5]">
@@ -112,7 +111,7 @@ const Shop = () => {
         <motion.div
           ref={carousel}
           whileTap={{ cursor: "grabbing" }}
-          className="flex justify-between p-3 overflow-hidden md:ml-[140px]"
+          className="flex justify-between p-3 overflow-hidden md:ml-[140px] ml-4 mr-2"
         >
           <motion.div
             drag={isMobile ? "x" : ""}
@@ -125,7 +124,7 @@ const Shop = () => {
                 setActive("b1");
               }}
               value=""
-              className={`hover:bg-neutral-600 transition hover:translate-x-1 ease-in-out w-[80px] p-2 text-center rounded-full cursor-pointer md:text-sm text-xs font-semibold  ${
+              className={`md:hover:bg-neutral-600 transition hover:translate-x-1 ease-in-out w-[80px] p-2 text-center rounded-full cursor-pointer md:text-sm text-xs font-semibold  ${
                 active === "b1"
                   ? "bg-white text-black border drop-shadow-md"
                   : "bg-neutral-800"
@@ -139,7 +138,7 @@ const Shop = () => {
                 setActive("b2");
               }}
               value="Nike"
-              className={`hover:bg-neutral-600 transition hover:translate-x-1 ease-in-out w-[80px] p-2 text-center rounded-full cursor-pointer md:text-sm text-xs font-semibold bg-neutral-800 ${
+              className={`md:hover:bg-neutral-600 transition hover:translate-x-1 ease-in-out w-[80px] p-2 text-center rounded-full cursor-pointer md:text-sm text-xs font-semibold bg-neutral-800 ${
                 active === "b2"
                   ? "bg-white text-black border drop-shadow-md"
                   : "bg-neutral-800"
@@ -153,7 +152,7 @@ const Shop = () => {
                 setActive("b3");
               }}
               value="Adidas"
-              className={`hover:bg-neutral-600 transition hover:translate-x-1 ease-in-out w-[80px] p-2 text-center rounded-full cursor-pointer md:text-sm text-xs font-semibold bg-neutral-800 ${
+              className={`md:hover:bg-neutral-600 transition hover:translate-x-1 ease-in-out w-[80px] p-2 text-center rounded-full cursor-pointer md:text-sm text-xs font-semibold bg-neutral-800 ${
                 active === "b3"
                   ? "bg-white text-black border drop-shadow-md"
                   : "bg-neutral-800"
@@ -167,7 +166,7 @@ const Shop = () => {
                 setActive("b4");
               }}
               value="Puma"
-              className={`hover:bg-neutral-600 transition hover:translate-x-1 ease-in-out w-[80px] p-2 text-center rounded-full cursor-pointer md:text-sm text-xs font-semibold bg-neutral-800 ${
+              className={`md:hover:bg-neutral-600 transition hover:translate-x-1 ease-in-out w-[80px] p-2 text-center rounded-full cursor-pointer md:text-sm text-xs font-semibold bg-neutral-800 ${
                 active === "b4"
                   ? "bg-white text-black border drop-shadow-md"
                   : "bg-neutral-800"
@@ -181,7 +180,7 @@ const Shop = () => {
                 setActive("b5");
               }}
               value="Vans"
-              className={`hover:bg-neutral-600 transition hover:translate-x-1 ease-in-out w-[80px] p-2 text-center rounded-full cursor-pointer md:text-sm text-xs font-semibold bg-neutral-800 ${
+              className={`md:hover:bg-neutral-600 transition hover:translate-x-1 ease-in-out w-[80px] p-2 text-center rounded-full cursor-pointer md:text-sm text-xs font-semibold bg-neutral-800 ${
                 active === "b5"
                   ? "bg-white text-black border drop-shadow-md"
                   : "bg-neutral-800"
@@ -195,7 +194,7 @@ const Shop = () => {
                 setActive("b6");
               }}
               value="Genshuo"
-              className={`hover:bg-neutral-600 transition hover:translate-x-1 ease-in-out w-[80px] p-2 text-center rounded-full cursor-pointer md:text-sm text-xs font-semibold bg-neutral-800 ${
+              className={`md:hover:bg-neutral-600 transition hover:translate-x-1 ease-in-out w-[80px] p-2 text-center rounded-full cursor-pointer md:text-sm text-xs font-semibold bg-neutral-800 ${
                 active === "b6"
                   ? "bg-white text-black border drop-shadow-md"
                   : "bg-neutral-800"
@@ -209,7 +208,7 @@ const Shop = () => {
                 setActive("b7");
               }}
               value="Dream Pairs"
-              className={`hover:bg-neutral-600 transition hover:translate-x-1 ease-in-out w-[80px] p-2 text-center rounded-full cursor-pointer md:text-sm text-xs font-semibold bg-neutral-800 ${
+              className={`md:hover:bg-neutral-600 transition hover:translate-x-1 ease-in-out w-[80px] p-2 text-center rounded-full cursor-pointer md:text-sm text-xs font-semibold bg-neutral-800 ${
                 active === "b7"
                   ? "bg-white text-black border drop-shadow-md"
                   : "bg-neutral-800"
@@ -220,7 +219,11 @@ const Shop = () => {
           </motion.div>
         </motion.div>
         <div>
-          <div className="text-black flex justify-end mr-2 relative">
+          <div className="text-black flex justify-end md:ml-[150px] mr-2 relative">
+            {/* <p className="ml-3 text-xs">
+              <b>{`Showing ${numberOfProducts}`}</b> out of 31 Products
+            </p> */}
+
             <div
               className="flex gap-3 items-center justify-between md:w-[180px] bg-neutral-800 p-1 rounded-sm pl-3 pr-2 cursor-pointer text-white md:mr-[140px]"
               onClick={() => setDropMenu(!dropMenu)}
@@ -229,7 +232,7 @@ const Shop = () => {
               {dropMenu ? <IoMdArrowDropup /> : <IoMdArrowDropdown />}
             </div>
             {dropMenu && (
-              <div className="bg-neutral-800 text-white border md:mt-6 mt-6 absolute md:w-[300px] w-[200px] h-[250px] z-10 md:mr-[140px]">
+              <div className="bg-neutral-800 text-white border md:mt-6 mt-6 absolute md:w-[300px] w-[200px] h-[250px] z-10 md:ml-[77.7rem] ml-[10.5rem]">
                 <div className="text-center space-y-2 mt-4">
                   <Input
                     handleChange={handleChange}
@@ -278,6 +281,9 @@ const Shop = () => {
               </div>
             )}
           </div>
+          <p className="ml-4 text-xs text-black md:ml-[150px]">
+            <b>{`Showing ${numberOfProducts}`}</b> out of 31 Products
+          </p>
 
           <div className="flex flex-wrap justify-center m-auto md:gap-[60px] gap-4 md:mb-10 mb-[10px]">
             {result}

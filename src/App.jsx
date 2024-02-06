@@ -9,6 +9,7 @@ import Shop from "./pages/Shop";
 import ProductDetail from "./pages/ProductDetail";
 import Order from "./pages/Order";
 import Auth from "./pages/Auth";
+import Checkout from "./pages/Checkout";
 
 function App() {
   const [sidebar, setSidebar] = useState(false);
@@ -37,6 +38,7 @@ function App() {
             <Route path="/shop" element={<Shop />} />
             <Route path="/detail/:id" element={<ProductDetail />} />
             <Route path="/order" element={<Order />} />
+            <Route path="/checkout" element={<Checkout />} />
           </Routes>
         </main>
         <div className="md:hidden block h-[50px] bg-[#0f0f0f] bg-opacity-60 w-full absolute bottom-0">
