@@ -33,7 +33,7 @@ const CartItems = () => {
         <h1>Products</h1>
         <h1>Details</h1>
       </div>
-      <hr className="bg-gray-400 rounded md:my-10 dark:bg-gray-700 md:block" />
+      <hr className="rounded md:my-10 dark:bg-gray-700 md:block" />
       {data.map((e) => {
         if (cartItems[e.id] > 0) {
           return (

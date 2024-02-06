@@ -18,7 +18,7 @@ const Home = () => {
   };
 
   return (
-    <div className="md:scrollbar bg-white h-full overflow-hidden flex flex-col items-center gap-y-10 overflow-y-scroll">
+    <div className=" bg-white h-full overflow-hidden flex flex-col items-center gap-y-10 overflow-y-scroll">
       <div className="flex items-center justify-center bg-white p-10 md:w-[96rem] md:h-[30rem]  mt-8">
         <Slider
           {...settings}

@@ -59,6 +59,7 @@ const Auth = ({ setActive }) => {
         await updateProfile(user, { displayName: `${firstName} ${lastName}` });
         setActive("home");
       } else {
+        setLoading(false);
         return toast.error("All fields are mandatory to fill");
       }
     }
@@ -71,7 +72,7 @@ const Auth = ({ setActive }) => {
 
   return (
     <div className="bg-gradient-to-r from-blue-700 h-full flex flex-col justify-center items-center">
-      <div className="bg-[#f5f5f5] md:w-[700px] md:h-[700px] w-[350px] h-[550px] rounded-lg">
+      <div className="bg-[#f5f5f5] md:w-[700px] md:h-[700px] w-[350px] h-[550px] rounded-lg drop-shadow-2xl">
         <div className="flex items-center gap-3 p-5">
           <img
             src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTxqlNk5NyNFgk6GT-5bGk2Wrl635pp-0hn9w&usqp=CAU"
@@ -81,7 +82,7 @@ const Auth = ({ setActive }) => {
           <h1 className="md:text-3xl text-xl text-black font-bold">ShopTers</h1>
         </div>
         <form
-          className="md:w-[600px] w-[300px] m-auto md:mt-5"
+          className="md:w-[600px] w-[300px] m-auto md:mt-5 drop-shadow-lg"
           onSubmit={handleAuth}
         >
           <h1 className="font-bold">{!signUp ? "SIGN IN" : "REGISTER"}</h1>

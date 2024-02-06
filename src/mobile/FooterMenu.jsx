@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useContext, useState } from "react";
 import {
   FaShoppingCart,
   FaBars,
@@ -12,10 +12,13 @@ import { auth } from "../firebase-config";
 import { useAuthState } from "react-firebase-hooks/auth";
 import { signOut } from "firebase/auth";
 import { useNavigate } from "react-router-dom";
+import { ShopContext } from "../Context/ShopContext";
+import { toast } from "react-toastify";
 
 const FooterMenu = () => {
   const [dropMenu, setDropMenu] = useState(false);
   const [user] = useAuthState(auth);
+  const { getTotalCartItems, cartItems } = useContext(ShopContext);
   const navigate = useNavigate();
 
   const handleSignOut = async () => {
@@ -54,16 +57,18 @@ const FooterMenu = () => {
           color: isActive ? "white" : "gray",
         })}
       >
-        <FaShoppingCart />
-        <h3 className="text-[10px]">ORDER</h3>
+        <div>
+          {user && (
+            <p className="bg-red-500 absolute  text-white ml-4 top-0 w-6 h-6 text-center rounded-full">
+              {getTotalCartItems()}
+            </p>
+          )}
+          <FaShoppingCart />
+          <h3 className="text-[10px]">ORDER</h3>
+        </div>
       </NavLink>
       <a className="mt-1">
-        <FaBars
-          onClick={() => setDropMenu(!dropMenu)}
-          style={({ isActive }) => ({
-            color: isActive ? "white" : "gray",
-          })}
-        />
+        <FaBars onClick={() => setDropMenu(!dropMenu)} />
       </a>
       {/* </div> */}
       {dropMenu ? (

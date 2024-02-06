@@ -3,7 +3,7 @@ import { FaSquareXTwitter } from "react-icons/fa6";
 
 const Footer = () => {
   return (
-    <div className="flex flex-col justify-center m-auto items-center bg-[#f5f5f5] text-black w-full space-y-5 bottom-0 right-0 mt-10">
+    <div className="flex flex-col justify-center m-auto items-center bg-[#f5f5f5] text-black w-full space-y-5 bottom-0 right-0 mt-10 md:mb-0 mb-10">
       <div className="flex items-center gap-6 mt-5">
         <img
           src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTxqlNk5NyNFgk6GT-5bGk2Wrl635pp-0hn9w&usqp=CAU"

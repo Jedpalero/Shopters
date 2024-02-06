@@ -10,22 +10,22 @@ const Products = ({ product, image, setImage }) => {
 
   return (
     <div>
-      <div className="flex items-center justify-between m-6">
+      <div className="flex items-center justify-between m-6 md:ml-[120px] md:mr-[130px]">
         <Link
           to="/shop"
-          className="flex items-center gap-3 md:ml-[120px] transition hover:-translate-x-2 delay-100"
+          className="flex items-center gap-3  transition hover:-translate-x-2 delay-100"
         >
           <FaArrowCircleLeft className="text-3xl" />
           <h1 className="font-bold text-lg">Go Back</h1>
         </Link>
-        <NavLink to="/order" className="flex md:mr-[130px] relative">
+        <NavLink to="/order" className="flex relative">
           <FaShoppingCart className="text-3xl mt-4 mr-5" />
           <p className="bg-red-500 text-white ml-5 absolute w-6 text-center rounded-full">
             {getTotalCartItems()}
           </p>
         </NavLink>
       </div>
-      <div className="scrollbar md:flex md:justify-center md:gap-10 mb-[60px] ">
+      <div className="md:flex md:justify-center md:gap-10 mb-[60px] md:ml-[120px] md:mr-[130px]">
         <img
           src={image}
           alt="picture"
