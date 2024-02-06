@@ -15,9 +15,6 @@ function App() {
   const [sidebar, setSidebar] = useState(false);
   const [active, setActive] = useState("home");
 
-  // //ccc@gmail.cm 123456
-  // //uninstall redux toolkit
-
   return (
     <>
       <ToastContainer position="top-center" />
@@ -36,7 +33,10 @@ function App() {
             <Route path="/" element={<Home />} />
             <Route path="/auth" element={<Auth setActive={setActive} />} />
             <Route path="/shop" element={<Shop />} />
-            <Route path="/detail/:id" element={<ProductDetail />} />
+            <Route
+              path="/detail/:id"
+              element={<ProductDetail sidebar={sidebar} />}
+            />
             <Route path="/order" element={<Order />} />
             <Route path="/checkout" element={<Checkout />} />
           </Routes>

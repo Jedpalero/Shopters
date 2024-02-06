@@ -5,10 +5,11 @@ import { ShopContext } from "../Context/ShopContext";
 import { addDoc, collection, serverTimestamp } from "firebase/firestore";
 import { useAuthState } from "react-firebase-hooks/auth";
 import { toast } from "react-toastify";
+import Footer from "../components/Footer";
 
 const initialState = {
   homeAddress: "",
-  phoneNumber: 0,
+  phoneNumber: "",
 };
 
 const Checkout = () => {
@@ -44,6 +45,8 @@ const Checkout = () => {
       } catch (error) {
         console.log(error);
       }
+    } else {
+      return toast.error("All fields are mandatory to fill");
     }
     navigate("/");
     toast.success("Thank you for shopping in our store.");
@@ -51,9 +54,11 @@ const Checkout = () => {
   };
 
   return (
-    <div className="bg-gray-400 h-screen">
+    <div className="bg-[#f5f5f5]  h-screen overflow-y-scroll mb-[100px]">
       <div className="flex flex-col justify-between items-center">
-        <h1 className="text-4xl font-bold mt-10">Cashout Details</h1>
+        <h1 className="md:text-4xl text-2xl font-bold mt-10">
+          Cashout Details
+        </h1>
         <form action="submit" onSubmit={handleSubmit}>
           <div className="flex flex-col mt-6 drop-shadow-lg">
             <label className="text-lg font-semibold" htmlFor="name">
@@ -63,10 +68,9 @@ const Checkout = () => {
               type="text"
               name="name"
               id="name"
-              value={user.displayName}
+              defaultValue={user?.displayName}
               autoComplete="off"
-              className="w-[60rem] border p-2 rounded-md"
-              required
+              className="md:w-[60rem] w-[20rem] border p-2 rounded-md"
               disabled
             />
           </div>
@@ -75,13 +79,12 @@ const Checkout = () => {
               Email
             </label>
             <input
-              type="text"
+              type="email"
               id="email"
               name="email"
-              value={user.email}
+              defaultValue={user?.email}
               autoComplete="on"
-              className="w-[60rem] border p-2 rounded-md"
-              required
+              className="md:w-[60rem] w-[20rem] border p-2 rounded-md"
               disabled
             />
           </div>
@@ -94,9 +97,9 @@ const Checkout = () => {
               id="phoneNumber"
               name="phoneNumber"
               value={phoneNumber}
+              placeholder="e.g. 09095151606"
               autoComplete="on"
-              className="w-[60rem] border p-2 rounded-md"
-              required
+              className="md:w-[60rem] w-[20rem] border p-2 rounded-md"
               onChange={handleChange}
             />
           </div>
@@ -110,8 +113,7 @@ const Checkout = () => {
               name="homeAddress"
               value={homeAddress}
               autoComplete="on"
-              className="w-[60rem] border p-2 rounded-md"
-              required
+              className="md:w-[60rem] w-[20rem] border p-2 rounded-md"
               onChange={handleChange}
             />
           </div>
@@ -124,9 +126,10 @@ const Checkout = () => {
               id="priceToPay"
               name="priceToPay"
               autoComplete="on"
-              value={`$${getTotalCartAmount()}.00`}
-              className="w-[60rem] border p-2 rounded-md"
-              required
+              defaultValue={`$${getTotalCartAmount()}.00`}
+              // value={`$${getTotalCartAmount()}.00`}
+              // onChange={(e) => setValue(getTotalCartAmount())}
+              className="md:w-[60rem] w-[20rem] border p-2 rounded-md"
               disabled
             />
           </div>
@@ -139,20 +142,22 @@ const Checkout = () => {
               id="noOfItems"
               name="noOfItems"
               autoComplete="on"
-              value={getTotalCartItems()}
-              className="w-[60rem] border p-2 rounded-md"
-              required
+              defaultValue={getTotalCartItems()}
+              // value={getTotalCartItems()}
+              // onChange={(e) => setValue(getTotalCartItems())}
+              className="md:w-[60rem] w-[20rem] border p-2 rounded-md"
               disabled
             />
           </div>
           <button
-            className="flex m-auto mt-10 w-[20rem] p-4  justify-center rounded-lg bg-blue-700 text-white"
+            className="flex m-auto mt-10 md:w-[20rem] w-[10rem] p-4  justify-center rounded-lg bg-blue-700 text-white "
             type="submit"
           >
             Checkout
           </button>
         </form>
       </div>
+      <Footer />
     </div>
   );
 };

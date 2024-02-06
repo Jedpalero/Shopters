@@ -67,10 +67,12 @@ const Navigation = ({ sidebar, setSidebar }) => {
               textDecoration: isActive ? "underline" : "",
             })}
           >
-            <div className="">
-              <p className="bg-red-500 absolute mt-5 text-white ml-4 w-6 h-6 text-center rounded-full">
-                {getTotalCartItems()}
-              </p>
+            <div>
+              {user && (
+                <p className="bg-red-500 absolute mt-5 text-white ml-4 w-6 h-6 text-center rounded-full">
+                  {getTotalCartItems()}
+                </p>
+              )}
               <FaShoppingCart className="w-6 h-6" />
             </div>
             {sidebar && <h3>ORDER</h3>}

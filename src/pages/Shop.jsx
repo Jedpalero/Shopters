@@ -107,7 +107,7 @@ const Shop = () => {
           <h1 className="md:text-xl text-black font-bold">ShopTers</h1>
         </div>
       </div>
-      <div className="md:scrollbar overflow-y-scroll text-white">
+      <div className="overflow-y-scroll text-white">
         <motion.div
           ref={carousel}
           whileTap={{ cursor: "grabbing" }}
@@ -220,10 +220,6 @@ const Shop = () => {
         </motion.div>
         <div>
           <div className="text-black flex justify-end md:ml-[150px] mr-2 relative">
-            {/* <p className="ml-3 text-xs">
-              <b>{`Showing ${numberOfProducts}`}</b> out of 31 Products
-            </p> */}
-
             <div
               className="flex gap-3 items-center justify-between md:w-[180px] bg-neutral-800 p-1 rounded-sm pl-3 pr-2 cursor-pointer text-white md:mr-[140px]"
               onClick={() => setDropMenu(!dropMenu)}
