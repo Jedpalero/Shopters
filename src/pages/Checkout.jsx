@@ -1,18 +1,19 @@
-import React, { useContext, useEffect, useState } from "react";
-import { useNavigate } from "react-router-dom";
+import React, { useContext, useState } from "react";
+import { Link, useNavigate } from "react-router-dom";
 import { auth, db } from "../firebase-config";
 import { ShopContext } from "../Context/ShopContext";
 import { addDoc, collection, serverTimestamp } from "firebase/firestore";
 import { useAuthState } from "react-firebase-hooks/auth";
 import { toast } from "react-toastify";
 import Footer from "../components/Footer";
+import { FaArrowCircleLeft } from "react-icons/fa";
 
 const initialState = {
   homeAddress: "",
   phoneNumber: "",
 };
 
-const Checkout = () => {
+const Checkout = ({ sidebar }) => {
   const navigate = useNavigate();
   const [form, setForm] = useState(initialState);
   const [user] = useAuthState(auth);
@@ -55,10 +56,19 @@ const Checkout = () => {
 
   return (
     <div className="bg-[#f5f5f5]  h-screen overflow-y-scroll mb-[100px]">
+      <div
+        className={`flex m-6  ${sidebar ? "" : "md:ml-[120px] md:mr-[130px]"}`}
+      >
+        <Link
+          to="/order"
+          className="flex items-center gap-3  transition hover:-translate-x-2 delay-100"
+        >
+          <FaArrowCircleLeft className="text-3xl" />
+          <h1 className="font-bold text-lg">Go Back</h1>
+        </Link>
+      </div>
       <div className="flex flex-col justify-between items-center">
-        <h1 className="md:text-4xl text-2xl font-bold mt-10">
-          Cashout Details
-        </h1>
+        <h1 className="md:text-4xl text-2xl font-bold">Cashout Details</h1>
         <form action="submit" onSubmit={handleSubmit}>
           <div className="flex flex-col mt-6 drop-shadow-lg">
             <label className="text-lg font-semibold" htmlFor="name">

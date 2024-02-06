@@ -5,7 +5,6 @@ import { FaMinus, FaPlus } from "react-icons/fa";
 import { NavLink } from "react-router-dom";
 import { useAuthState } from "react-firebase-hooks/auth";
 import { auth } from "../../firebase-config";
-import { toast } from "react-toastify";
 
 const CartItems = () => {
   const {

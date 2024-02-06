@@ -29,7 +29,6 @@ const FooterMenu = () => {
 
   return (
     <div className="text-white flex justify-between m-3">
-      {/* <div className="flex"> */}
       <NavLink
         to="/"
         className="flex flex-col items-center"
@@ -70,7 +69,6 @@ const FooterMenu = () => {
       <a className="mt-1">
         <FaBars onClick={() => setDropMenu(!dropMenu)} />
       </a>
-      {/* </div> */}
       {dropMenu ? (
         <div className="fixed right-0 bottom-12 bg-[#0f0f0f] bg-opacity-60 ">
           <div className="h-[100px] w-[150px] flex flex-col justify-center items-center">

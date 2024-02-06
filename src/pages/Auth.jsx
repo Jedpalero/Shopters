@@ -17,7 +17,7 @@ const initialState = {
   confirmPassword: "",
 };
 
-const Auth = ({ setActive }) => {
+const Auth = () => {
   const [state, setState] = useState(initialState);
   const [signUp, setSignUp] = useState(false);
   const [loading, setLoading] = useState(false);
@@ -40,7 +40,7 @@ const Auth = ({ setActive }) => {
           email,
           password
         );
-        setActive("home");
+
         setLoading(false);
       } else {
         setLoading(false);
@@ -57,7 +57,6 @@ const Auth = ({ setActive }) => {
           password
         );
         await updateProfile(user, { displayName: `${firstName} ${lastName}` });
-        setActive("home");
       } else {
         setLoading(false);
         return toast.error("All fields are mandatory to fill");

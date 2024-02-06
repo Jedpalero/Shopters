@@ -1,4 +1,4 @@
-import { FaSearch, FaShoppingCart } from "react-icons/fa";
+import { FaSearch } from "react-icons/fa";
 import { IoMdArrowDropdown, IoMdArrowDropup } from "react-icons/io";
 import Card from "../components/Card";
 import { useContext, useRef, useState } from "react";
@@ -9,7 +9,7 @@ import Footer from "../components/Footer";
 import { motion } from "framer-motion";
 import { ShopContext } from "../Context/ShopContext";
 
-const Shop = () => {
+const Shop = ({ sidebar }) => {
   const [dropMenu, setDropMenu] = useState(false);
   const [selectedCategory, setSelectedCategory] = useState(null);
   const [showInput, setShowInput] = useState(false);
@@ -75,7 +75,11 @@ const Shop = () => {
 
   return (
     <div className="grid h-screen grid-rows-[70px_1fr] bg-[#f5f5f5]">
-      <div className="flex items-center justify-between md:p-8 md:ml-[100px] md:mr-[120px]">
+      <div
+        className={`flex items-center justify-between md:p-8 ${
+          sidebar ? "" : "md:ml-[100px] md:mr-[120px]"
+        }`}
+      >
         <div className="relative flex gap-2 items-center justify-between md:ml-4 ml-2">
           <input
             type="text1"
