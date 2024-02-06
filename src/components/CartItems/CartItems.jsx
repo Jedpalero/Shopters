@@ -2,6 +2,9 @@ import { useContext } from "react";
 import { ShopContext } from "../../Context/ShopContext";
 import { MdDelete } from "react-icons/md";
 import { FaMinus, FaPlus } from "react-icons/fa";
+import { NavLink } from "react-router-dom";
+import { useAuthState } from "react-firebase-hooks/auth";
+import { auth } from "../../firebase-config";
 
 const CartItems = () => {
   const {
@@ -12,6 +15,8 @@ const CartItems = () => {
     addToCart,
     deleteFromCart,
   } = useContext(ShopContext);
+
+  const [user] = useAuthState(auth);
 
   return (
     <div className="md:w-[96rem] w-full m-auto space-y-5">
@@ -143,9 +148,26 @@ const CartItems = () => {
             <p>{`$${getTotalCartAmount()}.00`}</p>
           </div>
         </div>
-        <div className="w-[15rem] border p-3 text-center uppercase bg-black text-white mt-5 mb-10 justify-center m-auto md:m-0">
-          Proceed to Checkout
-        </div>
+        {/* bug */}
+        {user ? (
+          <>
+            <NavLink
+              to="/checkout"
+              className="w-[15rem] border p-3 text-center uppercase bg-black text-white mt-5 mb-10 justify-center m-auto md:m-0"
+            >
+              Proceed to Checkout
+            </NavLink>
+          </>
+        ) : (
+          <>
+            <NavLink
+              to="/auth"
+              className="w-[15rem] border p-3 text-center uppercase bg-black text-white mt-5 mb-10 justify-center m-auto md:m-0"
+            >
+              Proceed to Checkout
+            </NavLink>
+          </>
+        )}
       </div>
     </div>
   );

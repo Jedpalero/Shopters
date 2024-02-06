@@ -1,6 +1,6 @@
 const NewsLetter = () => {
   return (
-    <div className="flex flex-col justify-center items-center m-auto md:w-[60rem] w-[22rem] md:h-[30rem] h-[15rem] md:gap-[60px] gap-4 md:mb-12 mb-[60px] bg-gradient-to-t from-black rounded-lg drop-shadow-xl">
+    <div className="flex flex-col justify-center items-center m-auto md:w-[60rem] w-[22rem] md:h-[30rem] h-[15rem] md:gap-[60px] gap-4 md:mb-12 mb-[60px] bg-gradient-to-t from-neutral-300 rounded-lg drop-shadow-xl text-black">
       <div className="mt-12 md:text-4xl text-lg font-semibold">
         Get Exclusive Offers On Your Email
       </div>
@@ -15,7 +15,7 @@ const NewsLetter = () => {
           placeholder="Your Email Id"
           className="bg-transparent border md:p-3 p-1 md:w-[25rem] rounded-l-full md:text-[15px] text-xs"
         />
-        <button className="border border-black md:p-3 p-1 bg-black rounded-r-full md:text-[15px] text-xs">
+        <button className="border border-black md:p-3 p-1 bg-black rounded-r-full md:text-[15px] text-xs text-white">
           Subscribe
         </button>
       </div>
