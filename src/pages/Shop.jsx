@@ -76,8 +76,8 @@ const Shop = ({ sidebar }) => {
   return (
     <div className="grid h-screen grid-rows-[70px_1fr] bg-[#f5f5f5]">
       <div
-        className={`flex items-center justify-between md:p-8 ${
-          sidebar ? "" : "md:ml-[100px] md:mr-[120px]"
+        className={`flex items-center justify-between ${
+          sidebar ? "md:ml-5 md:mr-11" : "md:ml-[100px] md:mr-[120px] md:p-8 "
         }`}
       >
         <div className="relative flex gap-2 items-center justify-between md:ml-4 ml-2">
@@ -115,7 +115,9 @@ const Shop = ({ sidebar }) => {
         <motion.div
           ref={carousel}
           whileTap={{ cursor: "grabbing" }}
-          className="flex justify-between p-3 overflow-hidden md:ml-[140px] ml-4 mr-2"
+          className={`flex justify-between p-3 overflow-hidden  ml-4 mr-2 ${
+            sidebar ? "" : "md:ml-[140px]"
+          }`}
         >
           <motion.div
             drag={isMobile ? "x" : ""}
@@ -223,16 +225,26 @@ const Shop = ({ sidebar }) => {
           </motion.div>
         </motion.div>
         <div>
-          <div className="text-black flex justify-end md:ml-[150px] mr-2 relative">
+          <div
+            className={`text-black flex justify-end  mr-2 relative ${
+              sidebar ? "" : "md:ml-[150px]"
+            }`}
+          >
             <div
-              className="flex gap-3 items-center justify-between md:w-[180px] bg-neutral-800 p-1 rounded-sm pl-3 pr-2 cursor-pointer text-white md:mr-[140px]"
+              className={`flex gap-3 items-center justify-between md:w-[180px] bg-neutral-800 p-1 rounded-sm pl-3 pr-2 cursor-pointer text-white ${
+                sidebar ? "md:mr-7" : "md:mr-[140px]"
+              }`}
               onClick={() => setDropMenu(!dropMenu)}
             >
               <h1 className="md:text-[15px] text-xs">Sort by: Featured</h1>
               {dropMenu ? <IoMdArrowDropup /> : <IoMdArrowDropdown />}
             </div>
             {dropMenu && (
-              <div className="bg-neutral-800 text-white border md:mt-6 mt-6 absolute md:w-[300px] w-[200px] h-[250px] z-10 md:ml-[77.7rem] ml-[10.5rem]">
+              <div
+                className={`bg-neutral-800 text-white border md:mt-6 mt-6 absolute md:w-[300px] w-[200px] h-[250px] z-10 ${
+                  sidebar ? "md:mr-7" : "md:mr-[8.6rem] ml-[10.5rem]"
+                }`}
+              >
                 <div className="text-center space-y-2 mt-4">
                   <Input
                     handleChange={handleChange}
@@ -281,7 +293,11 @@ const Shop = ({ sidebar }) => {
               </div>
             )}
           </div>
-          <p className="ml-4 text-xs text-black md:ml-[150px]">
+          <p
+            className={`ml-4 text-xs text-black ${
+              sidebar ? "md:ml-8" : "md:ml-[150px]"
+            }`}
+          >
             <b>{`Showing ${numberOfProducts}`}</b> out of 31 Products
           </p>
 
