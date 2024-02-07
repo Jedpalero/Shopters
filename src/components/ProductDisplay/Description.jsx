@@ -4,18 +4,20 @@ const Description = ({ product, sidebar }) => {
   return (
     <div>
       <div
-        className={`flex flex-col  md:mr-[120px] items-center md:items-start drop-shadow-lg ${
-          sidebar ? "md:ml-[180px]" : "md:ml-[280px]"
+        className={`flex flex-col lg:items-start drop-shadow-lg ${
+          sidebar
+            ? "lg:ml-[120px] lg:mr-[140px]"
+            : "lg:ml-[160px] lg:mr-[100px]"
         }`}
       >
         <div className="flex items-start justify-start">
-          <div className="border p-7 md:w-[200px] w-[180px] text-sm text-center">
+          <div className="border w-full pt-5 pb-5 lg:pr-[80px] lg:pl-[80px] text-sm text-center">
             Description
           </div>
-          <div className="border p-7 md:w-[200px] w-[180px] text-sm text-center">{`Reviews ${product.reviews}`}</div>
+          <div className="border w-full pt-5 pb-5 lg:pr-[80px] lg:pl-[80px] text-sm text-center text-nowrap">{`Reviews ${product.reviews}`}</div>
         </div>
-        <div className="border md:w-[80rem] w-[22.5rem]">
-          <p className="md:w-[70rem] w-[22rem] m-auto md:p-4 p-2">
+        <div className="border">
+          <p className="m-auto lg:p-8 p-5">
             Lorem ipsum dolor sit amet consectetur adipisicing elit. Voluptatem
             optio ex sed cumque perspiciatis ullam neque, laborum quod facere
             odit maxime eius distinctio fuga dolores quaerat vero molestiae quas

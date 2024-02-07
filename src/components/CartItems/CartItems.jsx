@@ -19,7 +19,7 @@ const CartItems = () => {
   const [user] = useAuthState(auth);
 
   return (
-    <div className="md:w-[96rem] w-full m-auto space-y-5">
+    <div className="w-full m-auto space-y-5">
       <div className="md:grid hidden grid-cols-6 m-8 font-semibold">
         <h1>Products</h1>
         <h1>Title</h1>
@@ -29,10 +29,10 @@ const CartItems = () => {
         <h1>Remove</h1>
       </div>
       <div className="md:hidden grid grid-cols-2 text-center font-semibold">
-        <h1>Products</h1>
+        <h1 className="">Products</h1>
         <h1>Details</h1>
       </div>
-      <hr className="rounded md:my-10 dark:bg-gray-700 md:block" />
+      <hr className="rounded lg:my-10 dark:bg-gray-700 lg:block" />
       {data.map((e) => {
         if (cartItems[e.id] > 0) {
           return (
@@ -72,8 +72,12 @@ const CartItems = () => {
                 </div>
               </div>
               {/* For Mobile */}
-              <div className="md:hidden grid grid-cols-2  items-center m-8 ">
-                <img src={e.img} alt="shoe" className="h-[50px] w-[90px]" />
+              <div className="md:hidden grid grid-cols-2 items-center mt-8 mb-8 mr-8">
+                <img
+                  src={e.img}
+                  alt="shoe"
+                  className="h-[50px] w-[90px] m-auto"
+                />
                 <div className="space-y-1 relative mb-3">
                   <p>{e.title}</p>
                   <div className="flex items-center">
@@ -114,9 +118,9 @@ const CartItems = () => {
         }
         return null;
       })}
-      <div className="">
-        <div className="flex flex-col md:flex-row items-center md:justify-between md:mb-0 mb-6">
-          <p className="font-bold text-2xl md:mb-0 mb-4">Cart Totals</p>
+      <div className="lg:ml-5 ml-0">
+        <div className="flex flex-col lg:flex-row items-center lg:justify-between">
+          <p className="font-bold text-2xl lg:mb-0 mb-4">Cart Totals</p>
           <div>
             <p>If you have a promo code. Enter here</p>
             <div>
@@ -132,18 +136,18 @@ const CartItems = () => {
             </div>
           </div>
         </div>
-        <div className="md:block flex flex-col justify-between items-center">
-          <div className="flex justify-between md:w-[60rem] w-[22rem] space-y-5 items-center">
+        <div className="lg:block flex flex-col justify-between items-center lg:mt-0 mt-4">
+          <div className="flex justify-between lg:w-[40rem] w-[22rem] space-y-5 items-center">
             <p>Subtotal</p>
             <p>${getTotalCartAmount()}</p>
           </div>
-          <hr className="md:w-[60rem] w-[22rem]" />
-          <div className="flex justify-between md:w-[60rem] w-[22rem] space-y-5 items-center">
+          <hr className="lg:w-[40rem] w-[22rem]" />
+          <div className="flex justify-between lg:w-[40rem] w-[22rem] space-y-5 items-center">
             <p>Shipping Fee</p>
             <p>Free</p>
           </div>
-          <hr className="md:w-[60rem] w-[22rem]" />
-          <div className="flex justify-between md:w-[60rem] w-[22rem] space-y-5 items-center font-bold md:mb-5 mb-10">
+          <hr className="lg:w-[40rem] w-[22rem]" />
+          <div className="flex justify-between lg:w-[40rem] w-[22rem] space-y-5 items-center font-bold lg:mb-5 mb-10">
             <p>Total</p>
             <p>{`$${getTotalCartAmount()}.00`}</p>
           </div>
@@ -151,7 +155,7 @@ const CartItems = () => {
 
         <NavLink
           to={`${user ? "/checkout" : "/auth"}`}
-          className="w-[15rem] border p-3 text-center flex m-auto justify-center uppercase bg-black text-white mt-5 mb-10  md:m-0"
+          className="w-[15rem] border p-3 text-center flex m-auto justify-center uppercase bg-black text-white mt-5 mb-10 lg:m-0"
         >
           Proceed to Checkout
         </NavLink>

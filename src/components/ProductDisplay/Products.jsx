@@ -9,36 +9,44 @@ const Products = ({ product, image, setImage, sidebar }) => {
 
   return (
     <div>
-      <div
-        className={`flex items-center justify-between m-6  ${
-          sidebar ? "" : "md:ml-[120px] md:mr-[130px]"
-        }`}
-      >
+      <div className="flex items-center justify-between m-6 lg:ml-[120px] lg:mr-[130px]">
         <Link
           to="/shop"
-          className="flex items-center gap-3  transition hover:-translate-x-2 delay-100"
+          className="flex items-center gap-3 transition hover:-translate-x-2 delay-100"
         >
           <FaArrowCircleLeft className="text-3xl" />
           <h1 className="font-bold text-lg">Go Back</h1>
         </Link>
         <NavLink to="/order" className="flex relative">
-          <FaShoppingCart className="text-3xl mt-4 mr-5" />
+          <FaShoppingCart className="text-3xl md:mt-4 md:mr-5" />
           <p className="bg-red-500 text-white ml-5 absolute w-6 text-center rounded-full">
             {getTotalCartItems()}
           </p>
         </NavLink>
       </div>
-      <div className="md:flex md:justify-center md:gap-10 mb-[60px] md:ml-[120px] md:mr-[130px]">
+      <div
+        className={`lg:flex gap-[50px] mb-[60px]  box-border justify-center ${
+          sidebar
+            ? "lg:ml-[120px] lg:mr-[130px]"
+            : "lg:ml-[120px] lg:mr-[130px]"
+        }`}
+      >
         <img
           src={image}
           alt="picture"
-          className="block md:h-[500px] md:w-[800px] h-[200px] w-[300px] m-auto md:m-0 object-contain"
+          className={`block object-contain  m-auto w-[40rem] ${
+            sidebar ? "" : ""
+          }`}
         />
-        <div className="md:space-y-10 space-y-5 md:block flex flex-col items-center">
-          <h1 className="font-bold md:text-4xl text-xl md:text-start text-center">
+        <div className="lg:space-y-10 space-y-5 lg:block flex flex-col items-center">
+          <h1
+            className={`font-bold lg:text-4xl text-xl lg:text-start mt-10 lg:mt-0 text-center ${
+              sidebar ? "lg:text-2xl " : "lg:text-4xl "
+            }`}
+          >
             {product.title}
           </h1>
-          <p className="md:w-[690px] w-[370px] md:text-start text-center">
+          <p className={`md:text-start text-center  ${sidebar ? "" : ""}`}>
             {product.details}
           </p>
           <div className="flex items-center md:justify-start justify-center gap-1">
@@ -55,20 +63,20 @@ const Products = ({ product, image, setImage, sidebar }) => {
           <h1 className="font-semibold md:text-start text-center">
             Select Size
           </h1>
-          <div className="flex gap-3 md:justify-start justify-center">
-            <div className="border md:w-[70px] w-12 text-center md:p-2 rounded-lg">
+          <div className="flex flex-wrap gap-3 md:justify-start justify-center">
+            <div className="border lg:p-2 w-12 text-center md:p-2 rounded-lg">
               SM
             </div>
-            <div className="border md:w-[70px] w-12 text-center md:p-2 rounded-lg">
+            <div className="border lg:p-2 w-12 text-center md:p-2 rounded-lg">
               MD
             </div>
-            <div className="border md:w-[70px] w-12 text-center md:p-2 rounded-lg">
+            <div className="border lg:p-2 w-12 text-center md:p-2 rounded-lg">
               LG
             </div>
-            <div className="border md:w-[70px] w-12 text-center md:p-2 rounded-lg">
+            <div className="border lg:p-2 w-12 text-center md:p-2 rounded-lg">
               XL
             </div>
-            <div className="border md:w-[70px] w-12 text-center md:p-2 rounded-lg">
+            <div className="border lg:p-2 w-12 text-center md:p-2 rounded-lg">
               XLL
             </div>
           </div>

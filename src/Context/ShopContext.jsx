@@ -14,7 +14,7 @@ const getDefaultCart = () => {
 
 const ShopContextProvider = (props) => {
   const [cartItems, setCartItems] = useState(getDefaultCart);
-  const [isMobile, setIsMobile] = useState(() => window.innerWidth < 720);
+  const [isMobile, setIsMobile] = useState(() => window.innerWidth < 600);
 
   const addToCart = (itemId) => {
     setCartItems((prev) => ({ ...prev, [itemId]: prev[itemId] + 1 }));

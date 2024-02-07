@@ -77,14 +77,14 @@ const Shop = ({ sidebar }) => {
     <div className="grid h-screen grid-rows-[70px_1fr] bg-[#f5f5f5]">
       <div
         className={`flex items-center justify-between ${
-          sidebar ? "md:ml-5 md:mr-11" : "md:ml-[100px] md:mr-[120px] md:p-8 "
+          sidebar ? "lg:ml-5 lg:mr-11" : "lg:ml-[100px] lg:mr-[120px] lg:p-8 "
         }`}
       >
-        <div className="relative flex gap-2 items-center justify-between md:ml-4 ml-2">
+        <div className="relative flex gap-2 items-center justify-between lg:ml-4 ml-2">
           <input
             type="text1"
             id="text1"
-            className={`h-10 md:p-4 p-1 md:ps-10 ps-10 text-sm md:dark:bg-neutral-800  rounded-md md:w-full outline-none ease-in-out duration-500 text-white ${
+            className={`h-10 lg:p-4 p-1 lg:ps-10 ps-10 text-sm lg:dark:bg-neutral-800  rounded-md lg:w-full outline-none ease-in-out duration-500 text-white ${
               showInput
                 ? "w-[200px] bg-[#121212] bg-opactiy-40"
                 : "w-[10px] bg-transparent"
@@ -95,7 +95,7 @@ const Shop = ({ sidebar }) => {
             onChange={handleInputChange}
           />
           <div
-            className={`absolute inset-y-0 flex items-center ps-3 md:text-white text-black ${
+            className={`absolute inset-y-0 flex items-center ps-3 lg:text-white text-black ${
               showInput ? "text-white" : "text-black"
             }`}
           >
@@ -106,17 +106,17 @@ const Shop = ({ sidebar }) => {
           <img
             src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTxqlNk5NyNFgk6GT-5bGk2Wrl635pp-0hn9w&usqp=CAU"
             alt="shopping logo"
-            className="md:w-[60px] md:h-[60px] w-[50px] h-[50px]"
+            className="lg:w-[60px] lg:h-[60px] w-[50px] h-[50px]"
           />
-          <h1 className="md:text-xl text-black font-bold">ShopTers</h1>
+          <h1 className="lg:text-xl text-black font-bold">ShopTers</h1>
         </div>
       </div>
       <div className="overflow-y-scroll text-white">
         <motion.div
           ref={carousel}
           whileTap={{ cursor: "grabbing" }}
-          className={`flex justify-between p-3 overflow-hidden  ml-4 mr-2 ${
-            sidebar ? "" : "md:ml-[140px]"
+          className={`flex justify-between p-3 overflow-hidden ml-2 mr-2 ${
+            sidebar ? "" : "lg:ml-[140px]"
           }`}
         >
           <motion.div
@@ -130,7 +130,7 @@ const Shop = ({ sidebar }) => {
                 setActive("b1");
               }}
               value=""
-              className={`md:hover:bg-neutral-600 transition hover:translate-x-1 ease-in-out w-[80px] p-2 text-center rounded-full cursor-pointer md:text-sm text-xs font-semibold  ${
+              className={`lg:hover:bg-neutral-600 transition hover:translate-x-1 ease-in-out w-[80px] p-2 text-center rounded-full cursor-pointer lg:text-sm text-xs font-semibold  ${
                 active === "b1"
                   ? "bg-white text-black border drop-shadow-md"
                   : "bg-neutral-800"
@@ -144,7 +144,7 @@ const Shop = ({ sidebar }) => {
                 setActive("b2");
               }}
               value="Nike"
-              className={`md:hover:bg-neutral-600 transition hover:translate-x-1 ease-in-out w-[80px] p-2 text-center rounded-full cursor-pointer md:text-sm text-xs font-semibold bg-neutral-800 ${
+              className={`lg:hover:bg-neutral-600 transition hover:translate-x-1 ease-in-out w-[80px] p-2 text-center rounded-full cursor-pointer lg:text-sm text-xs font-semibold bg-neutral-800 ${
                 active === "b2"
                   ? "bg-white text-black border drop-shadow-md"
                   : "bg-neutral-800"
@@ -158,7 +158,7 @@ const Shop = ({ sidebar }) => {
                 setActive("b3");
               }}
               value="Adidas"
-              className={`md:hover:bg-neutral-600 transition hover:translate-x-1 ease-in-out w-[80px] p-2 text-center rounded-full cursor-pointer md:text-sm text-xs font-semibold bg-neutral-800 ${
+              className={`lg:hover:bg-neutral-600 transition hover:translate-x-1 ease-in-out w-[80px] p-2 text-center rounded-full cursor-pointer lg:text-sm text-xs font-semibold bg-neutral-800 ${
                 active === "b3"
                   ? "bg-white text-black border drop-shadow-md"
                   : "bg-neutral-800"
@@ -172,7 +172,7 @@ const Shop = ({ sidebar }) => {
                 setActive("b4");
               }}
               value="Puma"
-              className={`md:hover:bg-neutral-600 transition hover:translate-x-1 ease-in-out w-[80px] p-2 text-center rounded-full cursor-pointer md:text-sm text-xs font-semibold bg-neutral-800 ${
+              className={`lg:hover:bg-neutral-600 transition hover:translate-x-1 ease-in-out w-[80px] p-2 text-center rounded-full cursor-pointer lg:text-sm text-xs font-semibold bg-neutral-800 ${
                 active === "b4"
                   ? "bg-white text-black border drop-shadow-md"
                   : "bg-neutral-800"
@@ -186,7 +186,7 @@ const Shop = ({ sidebar }) => {
                 setActive("b5");
               }}
               value="Vans"
-              className={`md:hover:bg-neutral-600 transition hover:translate-x-1 ease-in-out w-[80px] p-2 text-center rounded-full cursor-pointer md:text-sm text-xs font-semibold bg-neutral-800 ${
+              className={`lg:hover:bg-neutral-600 transition hover:translate-x-1 ease-in-out w-[80px] p-2 text-center rounded-full cursor-pointer lg:text-sm text-xs font-semibold bg-neutral-800 ${
                 active === "b5"
                   ? "bg-white text-black border drop-shadow-md"
                   : "bg-neutral-800"
@@ -200,7 +200,7 @@ const Shop = ({ sidebar }) => {
                 setActive("b6");
               }}
               value="Genshuo"
-              className={`md:hover:bg-neutral-600 transition hover:translate-x-1 ease-in-out w-[80px] p-2 text-center rounded-full cursor-pointer md:text-sm text-xs font-semibold bg-neutral-800 ${
+              className={`lg:hover:bg-neutral-600 transition hover:translate-x-1 ease-in-out w-[80px] p-2 text-center rounded-full cursor-pointer lg:text-sm text-xs font-semibold bg-neutral-800 ${
                 active === "b6"
                   ? "bg-white text-black border drop-shadow-md"
                   : "bg-neutral-800"
@@ -214,7 +214,7 @@ const Shop = ({ sidebar }) => {
                 setActive("b7");
               }}
               value="Dream Pairs"
-              className={`md:hover:bg-neutral-600 transition hover:translate-x-1 ease-in-out w-[80px] p-2 text-center rounded-full cursor-pointer md:text-sm text-xs font-semibold bg-neutral-800 ${
+              className={`lg:hover:bg-neutral-600 transition hover:translate-x-1 ease-in-out w-[80px] p-2 text-center rounded-full cursor-pointer lg:text-sm text-xs font-semibold bg-neutral-800 ${
                 active === "b7"
                   ? "bg-white text-black border drop-shadow-md"
                   : "bg-neutral-800"
@@ -227,12 +227,12 @@ const Shop = ({ sidebar }) => {
         <div>
           <div
             className={`text-black flex justify-end  mr-2 relative ${
-              sidebar ? "" : "md:ml-[150px]"
+              sidebar ? "" : "lg:ml-[150px]"
             }`}
           >
             <div
               className={`flex gap-3 items-center justify-between md:w-[180px] bg-neutral-800 p-1 rounded-sm pl-3 pr-2 cursor-pointer text-white ${
-                sidebar ? "md:mr-7" : "md:mr-[140px]"
+                sidebar ? "lg:mr-7" : "lg:mr-[140px]"
               }`}
               onClick={() => setDropMenu(!dropMenu)}
             >
@@ -295,7 +295,7 @@ const Shop = ({ sidebar }) => {
           </div>
           <p
             className={`ml-4 text-xs text-black ${
-              sidebar ? "md:ml-8" : "md:ml-[150px]"
+              sidebar ? "lg:ml-8" : "lg:ml-[150px]"
             }`}
           >
             <b>{`Showing ${numberOfProducts}`}</b> out of 31 Products
@@ -306,7 +306,7 @@ const Shop = ({ sidebar }) => {
           </div>
         </div>
 
-        <NewsLetter />
+        <NewsLetter sidebar={sidebar} />
         <Footer />
       </div>
     </div>
