@@ -13,6 +13,17 @@ import Checkout from "./pages/Checkout";
 
 function App() {
   const [sidebar, setSidebar] = useState(false);
+  const [dropMenu, setDropMenu] = useState(false);
+
+  const openCloseDropDown = () => {
+    setDropMenu((prev) => !prev);
+  };
+
+  const closeDropDown = () => {
+    if (setDropMenu) {
+      setDropMenu(false);
+    }
+  };
 
   return (
     <>
@@ -20,16 +31,16 @@ function App() {
       <div
         className={`main overflow-hidden grid-rows-[70px_1fr] ${
           sidebar
-            ? "md:grid-cols-[300px_1fr]"
-            : "md:grid-cols-[70px_1fr] grid-cols-[0px_1fr]"
+            ? "lg:grid-cols-[300px_1fr] grid-cols-[0px_1fr]"
+            : "lg:grid-cols-[70px_1fr] grid-cols-[0px_1fr]"
         }`}
       >
-        <div className={`sidebar md:flex hidden`}>
+        <div className={`sidebar lg:flex hidden`}>
           <Navigation sidebar={sidebar} setSidebar={setSidebar} />
         </div>
-        <main className="content">
+        <main className="content" onClick={closeDropDown}>
           <Routes>
-            <Route path="/" element={<Home />} />
+            <Route path="/" element={<Home sidebar={sidebar} />} />
             <Route path="/auth" element={<Auth />} />
             <Route path="/shop" element={<Shop sidebar={sidebar} />} />
             <Route
@@ -40,8 +51,11 @@ function App() {
             <Route path="/checkout" element={<Checkout sidebar={sidebar} />} />
           </Routes>
         </main>
-        <div className="md:hidden block h-[50px] bg-[#0f0f0f] bg-opacity-60 w-full absolute bottom-0">
-          <FooterMenu />
+        <div className="lg:hidden block h-[50px] bg-[#0f0f0f] bg-opacity-60 w-full fixed bottom-0">
+          <FooterMenu
+            openCloseDropDown={openCloseDropDown}
+            dropMenu={dropMenu}
+          />
         </div>
       </div>
     </>

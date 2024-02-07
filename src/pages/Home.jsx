@@ -5,7 +5,7 @@ import products from "../db/data";
 import { NavLink } from "react-router-dom";
 import Footer from "../components/Footer";
 
-const Home = () => {
+const Home = ({ sidebar }) => {
   const settings = {
     dots: false,
     infinite: true,
@@ -18,29 +18,43 @@ const Home = () => {
   };
 
   return (
-    <div className=" bg-white h-full overflow-hidden flex flex-col items-center gap-y-10 overflow-y-scroll">
-      <div className="flex items-center justify-center bg-white p-10 md:w-[96rem] md:h-[30rem]  mt-8">
+    <div className=" bg-white h-screen overflow-hidden flex flex-col items-center gap-y-10 overflow-y-scroll">
+      {/* md:w-[96rem] md:h-[30rem] */}
+      <div className="flex items-center justify-center bg-white xl:p-10 box-border  mt-8">
         <Slider
           {...settings}
-          className="overflow-hidden md:w-[90rem] w-[18rem]"
+          className={`overflow-hidden  ${
+            sidebar
+              ? "xl:w-[70rem] lg:w-[40rem] md:w-[20rem]"
+              : "xl:w-[80rem] lg:w-[60rem] md:w-[40rem] w-[20rem]"
+          }`}
         >
           {products.slice(0, 15).map((product) => (
             <img
               key={product.title}
               src={product.img}
               alt={product.title}
-              className="rounded-lg md:object-contain"
+              // md:object-contain
+              className={`rounded-lg box-border`}
             />
           ))}
         </Slider>
       </div>
-      <p className="font-bold uppercase md:text-4xl text-sm drop-shadow-lg bg-white text-black p-4 rounded-lg">
+      <p
+        className={`font-bold uppercase  text-sm drop-shadow-lg bg-white text-black p-4 rounded-lg ${
+          sidebar ? "lg:text-2xl md:text-2xl" : "lg:text-4xl md:text-2xl"
+        }`}
+      >
         Shop Through Our Variety of Products
       </p>
-      <div className="md:flex md:gap-[3rem] gap-2 grid grid-cols-2 mb-10">
+      <div className="xl:flex lg:gap-[3rem] gap-2 grid grid-cols-2 mb-10">
         <NavLink
           to="/shop"
-          className="md:h-[250px] md:w-[300px] bg-white flex flex-col justify-center items-center rounded-xl drop-shadow-2xl transition hover:-translate-y-5 ease-in-out duration-300 md:mb-0 mb-10"
+          className={`w-[160px] bg-white flex flex-col justify-center items-center rounded-xl drop-shadow-2xl transition hover:-translate-y-5 ease-in-out md:duration-300 md:mb-0 mb-10 ${
+            sidebar
+              ? "lg:h-[240px] lg:w-[250px] h-[140px]"
+              : "lg:h-[250px] lg:w-[300px] h-[180px]"
+          }`}
         >
           <h1 className=" text-black z-10 font-semibold m-2 md:text-xl text-sm italic">
             Shoes
@@ -48,12 +62,16 @@ const Home = () => {
           <img
             src="https://m.media-amazon.com/images/I/51t3v0drWbL._AC_SY395_.jpg"
             alt="shoe"
-            className="md:h-[210px] md:w-[300px] h-[100px] w-[160px] rounded-lg"
+            className="lg:h-[210px] lg:w-[300px] h-[100px] w-[160px] rounded-lg"
           />
         </NavLink>
         <NavLink
           to="/shop"
-          className="md:h-[250px] md:w-[300px] bg-white flex flex-col justify-center items-center rounded-xl drop-shadow-2xl transition hover:-translate-y-5 ease-in-out md:duration-300 md:mb-0 mb-10"
+          className={`w-[160px] bg-white flex flex-col justify-center items-center rounded-xl drop-shadow-2xl transition hover:-translate-y-5 ease-in-out md:duration-300 md:mb-0 mb-10 ${
+            sidebar
+              ? "lg:h-[240px] lg:w-[250px] h-[140px]"
+              : "lg:h-[250px] lg:w-[300px] h-[180px]"
+          }`}
         >
           <h1 className=" text-black z-10 font-semibold m-2 md:text-xl text-sm italic">
             Sneakers
@@ -61,25 +79,33 @@ const Home = () => {
           <img
             src="https://m.media-amazon.com/images/I/7106GdadSGL._AC_SY395_.jpg"
             alt="shoe"
-            className="md:h-[210px] md:w-[300px] h-[100px] w-[160px] rounded-lg"
+            className="lg:h-[210px] lg:w-[300px] h-[100px] w-[160px] rounded-lg"
           />
         </NavLink>
         <NavLink
           to="/shop"
-          className="md:max-h-[250px] md:w-[300px] max-h-[135px] bg-white flex flex-col justify-center items-center rounded-xl drop-shadow-2xl transition hover:-translate-y-5 ease-in-out md:duration-300 md:mb-0 mb-10"
+          className={` w-[160px] bg-white flex flex-col justify-center items-center rounded-xl drop-shadow-2xl transition hover:-translate-y-5 ease-in-out md:duration-300 md:mb-0 mb-10 ${
+            sidebar
+              ? "lg:h-[240px] lg:w-[250px] h-[140px]"
+              : "lg:h-[250px] lg:w-[300px] h-[180px]"
+          }`}
         >
           <h1 className=" text-black z-10 font-semibold m-2 md:text-xl text-sm italic">
             Heels
           </h1>
           <img
-            src="https://m.media-amazon.com/images/I/71gbhKDkYLL._AC_SY500_.jpg"
+            src="https://m.media-amazon.com/images/I/71iX3CoNNcL._AC_SY500_.jpg"
             alt="shoe"
-            className="md:h-[210px] md:w-[300px] h-[100px] w-[160px] rounded-lg"
+            className="lg:h-[210px] lg:w-[300px] h-[100px] w-[160px] rounded-lg"
           />
         </NavLink>
         <NavLink
           to="/shop"
-          className="md:h-[250px] md:w-[300px] bg-white flex flex-col justify-center items-center rounded-xl drop-shadow-2xl transition hover:-translate-y-5 ease-in-out md:duration-300 md:mb-0 mb-10"
+          className={` w-[160px] bg-white flex flex-col justify-center items-center rounded-xl drop-shadow-2xl transition hover:-translate-y-5 ease-in-out md:duration-300 md:mb-0 mb-10 ${
+            sidebar
+              ? "lg:h-[240px] lg:w-[250px] h-[140px]"
+              : "lg:h-[250px] lg:w-[300px] h-[180px]"
+          }`}
         >
           <h1 className=" text-black z-10 font-semibold m-2 md:text-xl text-sm italic">
             Flats
@@ -87,7 +113,7 @@ const Home = () => {
           <img
             src="https://m.media-amazon.com/images/I/71gyleEVlaL._AC_SY395_.jpg"
             alt="shoe"
-            className="md:h-[210px] md:w-[300px] h-[100px] w-[160px] rounded-lg"
+            className="lg:h-[210px] lg:w-[300px] h-[100px] w-[160px] rounded-lg"
           />
         </NavLink>
       </div>

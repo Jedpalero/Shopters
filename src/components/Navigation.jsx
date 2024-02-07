@@ -27,7 +27,7 @@ const Navigation = ({ sidebar, setSidebar }) => {
   };
 
   return (
-    <div className={`md:h-screen flex ${sidebar ? "" : ""}`}>
+    <div className={`xl:h-screen flex ${sidebar ? "" : ""}`}>
       <div className="flex flex-col justify-between text-white m-5 space-y-10">
         <div className="flex flex-col gap-y-10">
           <FaBars

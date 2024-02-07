@@ -15,8 +15,8 @@ import { useNavigate } from "react-router-dom";
 import { ShopContext } from "../Context/ShopContext";
 import { toast } from "react-toastify";
 
-const FooterMenu = () => {
-  const [dropMenu, setDropMenu] = useState(false);
+const FooterMenu = ({ openCloseDropDown, dropMenu }) => {
+  // const [dropMenu, setDropMenu] = useState(false);
   const [user] = useAuthState(auth);
   const { getTotalCartItems, cartItems } = useContext(ShopContext);
   const navigate = useNavigate();
@@ -67,7 +67,7 @@ const FooterMenu = () => {
         </div>
       </NavLink>
       <a className="mt-1">
-        <FaBars onClick={() => setDropMenu(!dropMenu)} />
+        <FaBars onClick={openCloseDropDown} />
       </a>
       {dropMenu ? (
         <div className="fixed right-0 bottom-12 bg-[#0f0f0f] bg-opacity-60 ">

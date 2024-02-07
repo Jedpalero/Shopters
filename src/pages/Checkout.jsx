@@ -23,10 +23,6 @@ const Checkout = ({ sidebar }) => {
   let { getTotalCartAmount, getTotalCartItems, resetCart } =
     useContext(ShopContext);
 
-  // console.log("form", form);
-  // console.log(getTotalCartItems());
-  // console.log(user);
-
   const handleChange = (e) => {
     setForm({ ...form, [e.target.name]: e.target.value });
   };
@@ -55,7 +51,7 @@ const Checkout = ({ sidebar }) => {
   };
 
   return (
-    <div className="bg-[#f5f5f5]  h-screen overflow-y-scroll mb-[100px]">
+    <div className="bg-[#f5f5f5] h-screen overflow-y-scroll mb-[100px]">
       <div
         className={`flex m-6  ${sidebar ? "" : "md:ml-[120px] md:mr-[130px]"}`}
       >
@@ -80,7 +76,7 @@ const Checkout = ({ sidebar }) => {
               id="name"
               defaultValue={user?.displayName}
               autoComplete="off"
-              className="md:w-[60rem] w-[20rem] border p-2 rounded-md"
+              className="md:w-[40rem] w-[20rem] border p-2 rounded-md lg:w-[44rem]"
               disabled
             />
           </div>
@@ -94,7 +90,7 @@ const Checkout = ({ sidebar }) => {
               name="email"
               defaultValue={user?.email}
               autoComplete="on"
-              className="md:w-[60rem] w-[20rem] border p-2 rounded-md"
+              className="md:w-[40rem] w-[20rem] border p-2 rounded-md lg:w-[44rem]"
               disabled
             />
           </div>
@@ -109,7 +105,7 @@ const Checkout = ({ sidebar }) => {
               value={phoneNumber}
               placeholder="e.g. 09095151606"
               autoComplete="on"
-              className="md:w-[60rem] w-[20rem] border p-2 rounded-md"
+              className="md:w-[40rem] w-[20rem] border p-2 rounded-md lg:w-[44rem]"
               onChange={handleChange}
             />
           </div>
@@ -123,7 +119,7 @@ const Checkout = ({ sidebar }) => {
               name="homeAddress"
               value={homeAddress}
               autoComplete="on"
-              className="md:w-[60rem] w-[20rem] border p-2 rounded-md"
+              className="md:w-[40rem] w-[20rem] border p-2 rounded-md lg:w-[44rem]"
               onChange={handleChange}
             />
           </div>
@@ -137,9 +133,7 @@ const Checkout = ({ sidebar }) => {
               name="priceToPay"
               autoComplete="on"
               defaultValue={`$${getTotalCartAmount()}.00`}
-              // value={`$${getTotalCartAmount()}.00`}
-              // onChange={(e) => setValue(getTotalCartAmount())}
-              className="md:w-[60rem] w-[20rem] border p-2 rounded-md"
+              className="md:w-[40rem] w-[20rem] border p-2 rounded-md lg:w-[44rem]"
               disabled
             />
           </div>
@@ -153,14 +147,12 @@ const Checkout = ({ sidebar }) => {
               name="noOfItems"
               autoComplete="on"
               defaultValue={getTotalCartItems()}
-              // value={getTotalCartItems()}
-              // onChange={(e) => setValue(getTotalCartItems())}
-              className="md:w-[60rem] w-[20rem] border p-2 rounded-md"
+              className="md:w-[40rem] w-[20rem] border p-2 rounded-md lg:w-[44rem]"
               disabled
             />
           </div>
           <button
-            className="flex m-auto mt-10 md:w-[20rem] w-[10rem] p-4  justify-center rounded-lg bg-blue-700 text-white "
+            className="flex m-auto mt-10 lg:w-[20rem] w-[10rem] p-4  justify-center rounded-lg bg-blue-700 text-white "
             type="submit"
           >
             Checkout
