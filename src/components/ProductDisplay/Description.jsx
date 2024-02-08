@@ -11,10 +11,10 @@ const Description = ({ product, sidebar }) => {
         }`}
       >
         <div className="flex items-start justify-start">
-          <div className="border w-full pt-5 pb-5 lg:pr-[80px] lg:pl-[80px] text-sm text-center">
+          <div className="border w-full pt-5 pb-5 lg:pr-[30px] lg:pl-[30px] text-sm text-center">
             Description
           </div>
-          <div className="border w-full pt-5 pb-5 lg:pr-[80px] lg:pl-[80px] text-sm text-center text-nowrap">{`Reviews ${product.reviews}`}</div>
+          <div className="border lg:w-[400px] w-full pt-5 pb-5 lg:pr-[80px] lg:pl-[80px] text-sm text-center text-nowrap ab">{`Reviews ${product.reviews}`}</div>
         </div>
         <div className="border">
           <p className="m-auto lg:p-8 p-5">

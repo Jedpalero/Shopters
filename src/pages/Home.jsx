@@ -41,11 +41,7 @@ const Home = ({ sidebar }) => {
           ))}
         </Slider>
       </div>
-      <p
-        className={`font-bold uppercase  text-sm drop-shadow-lg bg-white text-black p-4 rounded-lg ${
-          sidebar ? "lg:text-2xl md:text-2xl" : "lg:text-4xl md:text-2xl"
-        }`}
-      >
+      <p className="font-bold lg:text-3xl text-sm text-black p-4 rounded-lg ">
         Shop Through Our Variety of Products
       </p>
       <div className="xl:flex lg:gap-[3rem] gap-2 grid grid-cols-2 mb-10">
@@ -118,7 +114,9 @@ const Home = ({ sidebar }) => {
           />
         </NavLink>
       </div>
-      <h1 clas>Our Popular Products</h1>
+      <h1 className="font-bold text-3xl flex justify-start">
+        Our Popular Products
+      </h1>
       <PopularProducts />
       <Footer />
     </div>
