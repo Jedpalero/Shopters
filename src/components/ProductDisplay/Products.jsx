@@ -25,7 +25,7 @@ const Products = ({ product, image, setImage, sidebar }) => {
         </NavLink>
       </div>
       <div
-        className={`lg:flex gap-[50px] mb-[60px]  box-border justify-center ${
+        className={`lg:grid grid-cols-2 gap-[50px] mb-[60px]  box-border justify-center ${
           sidebar
             ? "lg:ml-[120px] lg:mr-[130px]"
             : "lg:ml-[120px] lg:mr-[130px]"

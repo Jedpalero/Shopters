@@ -54,7 +54,17 @@ const Shop = ({ sidebar }) => {
       );
     }
     return filteredProducts.map(
-      ({ img, title, star, reviews, newPrice, sold, prevPrice, id }) => (
+      ({
+        img,
+        title,
+        star,
+        reviews,
+        newPrice,
+        sold,
+        prevPrice,
+        id,
+        company,
+      }) => (
         <Card
           key={Math.random()}
           img={img}
@@ -65,6 +75,7 @@ const Shop = ({ sidebar }) => {
           newPrice={newPrice}
           sold={sold}
           id={id}
+          company={company}
         />
       )
     );
@@ -301,7 +312,11 @@ const Shop = ({ sidebar }) => {
             <b>{`Showing ${numberOfProducts}`}</b> out of 31 Products
           </p>
 
-          <div className="flex flex-wrap justify-center m-auto md:gap-[60px] gap-4 md:mb-10 mb-[10px]">
+          <div
+            className={`flex flex-wrap justify-center m-auto lg:gap-6 gap-4 md:mb-10 mb-[10px] mt-5 ${
+              sidebar ? "lg:ml-5 lg:mr-11" : "lg:ml-[100px] lg:mr-[110px]"
+            }`}
+          >
             {result}
           </div>
         </div>
