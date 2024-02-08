@@ -1,29 +1,44 @@
 import { Link } from "react-router-dom";
 
-const Card = ({ img, title, star, reviews, sold, newPrice, id }) => {
+const Card = ({
+  img,
+  title,
+  star,
+  reviews,
+  sold,
+  newPrice,
+  id,
+  company,
+  prevPrice,
+}) => {
   return (
-    <div className="md:w-auto">
-      {/* {products.map((product) => ( */}
-      <div
-        className="lg:h-[280px] h-[180px] lg:w-[260px] w-[150px]  border-neutral-800  lg:flex lg:flex-col grid grid-col-2 lg:items-center bg-gradient-to-t from-black rounded-lg mt-4 drop-shadow-xl overflow-hidden transition ease-in-out hover:translate-y-3 duration-150"
-        key={title}
-      >
-        <Link to={`/detail/${id}`}>
+    <div className="text-black lg:w-[18rem] lg:h-[25rem] w-[10rem] h-[15rem] bg-white rounded-lg drop-shadow-lg transition ease-in-out hover:translate-y-3 duration-150">
+      <Link to={`/detail/${id}`}>
+        <div className="flex items-center justify-center mt-10">
           <img
             src={img}
             alt={title}
-            className="lg:h-[150px] h-[100px] lg:w-[260px] w-[200px] object-fill"
+            className="lg:w-[200px] lg:h-[130px] w-[100px] h-[80px] object-scale-down"
           />
-          <div className="text-center mt-4">
-            <h1 className="font-bold lg:text-[15px] text-[10px]">{title}</h1>
+        </div>
+        <div className="lg:mt-8 lg:p-5 p-2 lg:space-y-5 space-y-2 lg:text-md text-xs">
+          <p className="text-orange-500">{company}</p>
+          <p className="font-semibold lg:text-sm">{title}</p>
+          <div className="text-yellow-400 flex">
+            {star}
+            {star}
+            {star}
+            {star}
           </div>
-          <div className="flex justify-between m-5 lg:mt-10 mt-3 lg:text-[15px] text-[10px]">
-            <h1>{`$${newPrice}.00`}</h1>
-            <p>{sold}</p>
+          <div className="flex justify-between">
+            <div className="flex gap-2">
+              <p className="text-red-500">{`$${newPrice}.00`}</p>
+              <del className="text-gray-600">{prevPrice}</del>
+            </div>
+            <div>{sold}</div>
           </div>
-        </Link>
-      </div>
-      {/* ))} */}
+        </div>
+      </Link>
     </div>
   );
 };

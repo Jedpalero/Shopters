@@ -14,6 +14,7 @@ import { useNavigate } from "react-router-dom";
 import { useContext, useState } from "react";
 import { toast } from "react-toastify";
 import { ShopContext } from "../Context/ShopContext";
+import { IoMdSettings } from "react-icons/io";
 
 const Navigation = ({ sidebar, setSidebar }) => {
   const [user] = useAuthState(auth);
@@ -27,7 +28,7 @@ const Navigation = ({ sidebar, setSidebar }) => {
   };
 
   return (
-    <div className={`xl:h-screen flex ${sidebar ? "" : ""}`}>
+    <div className="xl:h-screen flex">
       <div className="flex flex-col justify-between text-white m-5 space-y-10">
         <div className="flex flex-col gap-y-10">
           <FaBars
@@ -36,7 +37,7 @@ const Navigation = ({ sidebar, setSidebar }) => {
           />
           <NavLink
             to="/"
-            className={`${sidebar ? "flex gap-10 " : ""}`}
+            className="flex gap-10 "
             style={({ isActive }) => ({
               color: isActive ? "white" : "gray",
               textDecoration: isActive ? "underline" : "",
@@ -48,7 +49,7 @@ const Navigation = ({ sidebar, setSidebar }) => {
           </NavLink>
           <NavLink
             to="/shop"
-            className={`${sidebar ? "flex gap-10" : ""}`}
+            className="flex gap-10"
             style={({ isActive }) => ({
               color: isActive ? "white" : "gray",
               textDecoration: isActive ? "underline" : "",
@@ -60,7 +61,7 @@ const Navigation = ({ sidebar, setSidebar }) => {
           </NavLink>
           <NavLink
             to="/order"
-            className={` ${sidebar ? "flex gap-10" : ""}`}
+            className="flex gap-10"
             style={({ isActive }) => ({
               color: isActive ? "white" : "gray",
               fontWeight: isActive ? "bold" : "",
@@ -80,15 +81,29 @@ const Navigation = ({ sidebar, setSidebar }) => {
         </div>
         {user ? (
           <>
-            <div className="space-y-4">
-              <div className="flex gap-10 items-center">
-                <FaUser className="mt-2" />
+            <div className="flex flex-col gap-3">
+              <div className="flex gap-10">
+                <FaUser className="h-6 size-3" />
                 {sidebar && <p>{user?.displayName}</p>}
               </div>
-              <button className="flex gap-10" onClick={handleSignOut}>
-                <RiLogoutCircleLine className="mt-2" />
+              <button
+                className="flex gap-10 text-gray-400"
+                onClick={handleSignOut}
+              >
+                <RiLogoutCircleLine className="h-6" />
                 {sidebar && <h3>LOGOUT</h3>}
               </button>
+              <NavLink
+                to="/settings"
+                className="flex gap-10"
+                style={({ isActive }) => ({
+                  color: isActive ? "white" : "gray",
+                  fontWeight: isActive ? "bold" : "",
+                })}
+              >
+                <IoMdSettings className="h-6" />
+                {sidebar && <h3>SETTING</h3>}
+              </NavLink>
             </div>
           </>
         ) : (
@@ -99,12 +114,22 @@ const Navigation = ({ sidebar, setSidebar }) => {
                 className="flex gap-10"
                 style={({ isActive }) => ({
                   color: isActive ? "white" : "gray",
-                  textDecoration: isActive ? "underline" : "",
                   fontWeight: isActive ? "bold" : "",
                 })}
               >
                 <RiLoginCircleLine className="mt-2" />
                 {sidebar && <h3>LOGIN</h3>}
+              </NavLink>
+              <NavLink
+                to="/settings"
+                className="flex gap-10"
+                style={({ isActive }) => ({
+                  color: isActive ? "white" : "gray",
+                  fontWeight: isActive ? "bold" : "",
+                })}
+              >
+                <IoMdSettings className="h-6" />
+                {sidebar && <h3>SETTING</h3>}
               </NavLink>
             </div>
           </>

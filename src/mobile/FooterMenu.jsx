@@ -14,6 +14,7 @@ import { signOut } from "firebase/auth";
 import { useNavigate } from "react-router-dom";
 import { ShopContext } from "../Context/ShopContext";
 import { toast } from "react-toastify";
+import { IoMdSettings } from "react-icons/io";
 
 const FooterMenu = ({ openCloseDropDown, dropMenu }) => {
   // const [dropMenu, setDropMenu] = useState(false);
@@ -66,9 +67,15 @@ const FooterMenu = ({ openCloseDropDown, dropMenu }) => {
           <h3 className="text-[10px]">ORDER</h3>
         </div>
       </NavLink>
-      <a className="mt-1">
-        <FaBars onClick={openCloseDropDown} />
-      </a>
+      {/* <FaSetting onClick={openCloseDropDown} /> */}
+      <NavLink
+        to="/settings"
+        style={({ isActive }) => ({
+          color: isActive ? "white" : "gray",
+        })}
+      >
+        <IoMdSettings className="size-6" />
+      </NavLink>
       {dropMenu ? (
         <div className="fixed right-0 bottom-12 bg-[#0f0f0f] bg-opacity-60 ">
           <div className="h-[100px] w-[150px] flex flex-col justify-center items-center">

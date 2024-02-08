@@ -4,6 +4,7 @@ import "slick-carousel/slick/slick-theme.css";
 import products from "../db/data";
 import { NavLink } from "react-router-dom";
 import Footer from "../components/Footer";
+import PopularProducts from "../components/ProductDisplay/PopularProducts";
 
 const Home = ({ sidebar }) => {
   const settings = {
@@ -117,6 +118,8 @@ const Home = ({ sidebar }) => {
           />
         </NavLink>
       </div>
+      <h1 clas>Our Popular Products</h1>
+      <PopularProducts />
       <Footer />
     </div>
   );
