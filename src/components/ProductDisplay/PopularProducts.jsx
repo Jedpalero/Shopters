@@ -43,7 +43,7 @@ const PopularProducts = () => {
         <div className="p-8 lg:space-y-6 space-y-1 lg:text-sm text-xs">
           <p>15% OFF</p>
           <p className="font-bold lg:text-xl">Sneakers</p>
-          <p>From $199or$or$6.72/mo. for 24 mo.*</p>
+          <p>From $199 or $6.72/mo. for 24 mo.*</p>
         </div>
         <div className="flex ml-12">
           <img

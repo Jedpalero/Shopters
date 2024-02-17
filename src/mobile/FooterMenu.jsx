@@ -6,27 +6,17 @@ import {
   FaHome,
   FaUser,
 } from "react-icons/fa";
-import { RiLoginCircleLine, RiLogoutCircleLine } from "react-icons/ri";
 import { NavLink } from "react-router-dom";
 import { auth } from "../firebase-config";
 import { useAuthState } from "react-firebase-hooks/auth";
-import { signOut } from "firebase/auth";
 import { useNavigate } from "react-router-dom";
 import { ShopContext } from "../Context/ShopContext";
-import { toast } from "react-toastify";
 import { IoMdSettings } from "react-icons/io";
 
 const FooterMenu = ({ openCloseDropDown, dropMenu }) => {
-  // const [dropMenu, setDropMenu] = useState(false);
   const [user] = useAuthState(auth);
   const { getTotalCartItems, cartItems } = useContext(ShopContext);
   const navigate = useNavigate();
-
-  const handleSignOut = async () => {
-    await signOut(auth);
-    navigate("/auth");
-    toast.success("Logout Successfully");
-  };
 
   return (
     <div className="text-white flex justify-between m-3">
@@ -67,7 +57,6 @@ const FooterMenu = ({ openCloseDropDown, dropMenu }) => {
           <h3 className="text-[10px]">ORDER</h3>
         </div>
       </NavLink>
-      {/* <FaSetting onClick={openCloseDropDown} /> */}
       <NavLink
         to="/settings"
         style={({ isActive }) => ({
@@ -76,36 +65,6 @@ const FooterMenu = ({ openCloseDropDown, dropMenu }) => {
       >
         <IoMdSettings className="size-6" />
       </NavLink>
-      {dropMenu ? (
-        <div className="fixed right-0 bottom-12 bg-[#0f0f0f] bg-opacity-60 ">
-          <div className="h-[100px] w-[150px] flex flex-col justify-center items-center">
-            {user ? (
-              <>
-                <div className="flex gap-2 items-center">
-                  <FaUser />
-                  <p>{user?.displayName}</p>
-                </div>
-                <button
-                  className="flex items-center gap-2"
-                  onClick={handleSignOut}
-                >
-                  <RiLogoutCircleLine />
-                  <h3>LOGOUT</h3>
-                </button>
-              </>
-            ) : (
-              <>
-                <NavLink to="/auth" className="flex items-center gap-2">
-                  <RiLoginCircleLine />
-                  <h3>LOGIN</h3>
-                </NavLink>
-              </>
-            )}
-          </div>
-        </div>
-      ) : (
-        <></>
-      )}
     </div>
   );
 };

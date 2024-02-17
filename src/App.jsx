@@ -11,6 +11,7 @@ import Order from "./pages/Order";
 import Auth from "./pages/Auth";
 import Checkout from "./pages/Checkout";
 import Setting from "./pages/Setting";
+import ErrorNotFound from "./components/ErrorNotFound";
 
 function App() {
   const [sidebar, setSidebar] = useState(false);
@@ -51,6 +52,7 @@ function App() {
             <Route path="/order" element={<Order />} />
             <Route path="/checkout" element={<Checkout sidebar={sidebar} />} />
             <Route path="/settings" element={<Setting sidebar={sidebar} />} />
+            <Route path="*" element={<ErrorNotFound />} />
           </Routes>
         </main>
         <div className="lg:hidden block h-[50px] bg-[#0f0f0f] bg-opacity-60 w-full fixed bottom-0">
