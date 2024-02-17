@@ -252,8 +252,8 @@ const Shop = ({ sidebar }) => {
             </div>
             {dropMenu && (
               <div
-                className={`bg-neutral-800 text-white border md:mt-6 mt-6 absolute md:w-[300px] w-[200px] h-[250px] z-10 ${
-                  sidebar ? "md:mr-7" : "md:mr-[8.6rem] ml-[10.5rem]"
+                className={`bg-neutral-800 text-white border lg:mt-6 mt-6 absolute lg:w-[300px] w-[200px] h-[250px] z-10 ${
+                  sidebar ? "lg:mr-7" : "lg:mr-[8.6rem] ml-[10.5rem]"
                 }`}
               >
                 <div className="text-center space-y-2 mt-4">
