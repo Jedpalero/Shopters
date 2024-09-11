@@ -1,47 +1,54 @@
-import { useAuthState } from "react-firebase-hooks/auth";
+// import { useAuthState } from "react-firebase-hooks/auth";
 import { FaArrowCircleLeft, FaUserCircle } from "react-icons/fa";
 import { Link, useNavigate } from "react-router-dom";
-import { auth, db } from "../firebase-config";
+// import { auth, db } from "../firebase-config";
 import { toast } from "react-toastify";
-import { signOut } from "firebase/auth";
-import { onSnapshot, collection, query, where } from "firebase/firestore";
-import React, { useEffect, useState } from "react";
+// import { signOut } from "firebase/auth";
+// import { onSnapshot, collection, query, where } from "firebase/firestore";
+import { useState } from "react";
 import Footer from "../components/Footer";
 
 const Setting = (sidebar) => {
-  const [user] = useAuthState(auth);
+  //   const [user] = useAuthState(auth);
   const navigate = useNavigate();
-  const [order, setOrders] = useState([]);
+  //   const [order, setOrders] = useState([]);
+  const [isAuthenticated, setIsAuthenticated] = useState(true);
 
-  const handleSignOut = async () => {
-    await signOut(auth);
-    navigate("/auth");
+  // const handleSignOut = async () => {
+  //   await signOut(auth);
+  //   navigate("/auth");
+  //   toast.success("Logout Successfully");
+  // };
+  // };
+  const handleSignOut = () => {
+    setIsAuthenticated(false);
+    navigate("/login");
     toast.success("Logout Successfully");
   };
 
-  useEffect(() => {
-    const unsub = onSnapshot(
-      query(
-        collection(db, "userCheckout"),
-        where("userId", "==", user ? auth?.currentUser?.uid : null)
-      ),
-      (snapshot) => {
-        let list = [];
+  //   useEffect(() => {
+  //     const unsub = onSnapshot(
+  //       query(
+  //         collection(db, "userCheckout"),
+  //         where("userId", "==", user ? auth?.currentUser?.uid : null)
+  //       ),
+  //       (snapshot) => {
+  //         let list = [];
 
-        snapshot.docs.forEach((doc) => {
-          list.push({ id: doc.id, ...doc.data() });
-        });
-        setOrders(list);
-      },
-      (error) => {
-        console.log(error);
-      }
-    );
+  //         snapshot.docs.forEach((doc) => {
+  //           list.push({ id: doc.id, ...doc.data() });
+  //         });
+  //         setOrders(list);
+  //       },
+  //       (error) => {
+  //         console.log(error);
+  //       }
+  //     );
 
-    return () => {
-      unsub();
-    };
-  }, []);
+  //     return () => {
+  //       unsub();
+  //     };
+  //   }, []);
 
   return (
     <div className="bg-[#f5f5f5] h-screen overflow-y-scroll">

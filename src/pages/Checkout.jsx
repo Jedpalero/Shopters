@@ -1,9 +1,9 @@
-import React, { useContext, useState } from "react";
+import { useContext, useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
-import { auth, db } from "../firebase-config";
+// import { auth, db } from "../firebase-config";
 import { ShopContext } from "../Context/ShopContext";
-import { addDoc, collection, serverTimestamp } from "firebase/firestore";
-import { useAuthState } from "react-firebase-hooks/auth";
+// import { addDoc, collection, serverTimestamp } from "firebase/firestore";
+// import { useAuthState } from "react-firebase-hooks/auth";
 import { toast } from "react-toastify";
 import Footer from "../components/Footer";
 import { FaArrowCircleLeft } from "react-icons/fa";
@@ -16,7 +16,7 @@ const initialState = {
 const Checkout = ({ sidebar }) => {
   const navigate = useNavigate();
   const [form, setForm] = useState(initialState);
-  const [user] = useAuthState(auth);
+  // const [user] = useAuthState(auth);
 
   let { homeAddress, phoneNumber } = form;
 

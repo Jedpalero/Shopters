@@ -1,25 +1,25 @@
-import {
-  createUserWithEmailAndPassword,
-  signInWithEmailAndPassword,
-  updateProfile,
-} from "firebase/auth";
+// import {
+//   createUserWithEmailAndPassword,
+//   signInWithEmailAndPassword,
+//   updateProfile,
+// } from "firebase/auth";
 import { useState } from "react";
 import { toast } from "react-toastify";
-import { auth } from "../firebase-config";
+// import { auth } from "../firebase-config";
 import { useNavigate } from "react-router";
 
 const initialState = {
-  firstName: "",
-  lastName: "",
+  first_name: "",
+  last_name: "",
   email: "",
   password: "",
-  confirmPassword: "",
+  confirm_password: "",
 };
 
 const Auth = () => {
   const [state, setState] = useState(initialState);
   const [signUp, setSignUp] = useState(false);
-  const { firstName, lastName, email, password, confirmPassword } = state;
+  const { first_name, last_name, email, password, confirm_password } = state;
 
   const navigate = useNavigate();
 
@@ -27,36 +27,116 @@ const Auth = () => {
     setState({ ...state, [e.target.name]: e.target.value });
   };
 
-  const handleAuth = async (e) => {
-    e.preventDefault();
+  //   await wait(2000);
+
+  // function wait(duration: number) {
+  // return new Promise((resolve) => setTimeout(resolve, duration));
+  // const handleReset = () => {
+  //   setState(initialState);
+  // };
+
+  // const handleAuth = async (e) => {
+  //   e.preventDefault();
+  //   if (!signUp) {
+  //     if (email && password) {
+  //       // const { user } = await signInWithEmailAndPassword(
+  //       //   auth,
+  //       //   email,
+  //       //   password
+  //       // );
+  //       toast.success("Login Successfully");
+  //     } else {
+  //       return toast.error("All fields are mandatory to fill");
+  //     }
+  //   } else {
+  //     if (password !== confirm_password) {
+  //       return toast.error("Password didn't match");
+  //     }
+
+  //     if (first_name && last_name && email && password) {
+  //       // const { user } = await createUserWithEmailAndPassword(
+  //       //   auth,
+  //       //   email,
+  //       //   password
+  //       // );
+  //       toast.success("Registered Successfully");
+  //     } else {
+  //       return toast.error("All fields are mandatory to fill");
+  //     }
+  //   }
+  //   navigate("/");
+  // };
+
+  const handleAuth = async (event) => {
+    event.preventDefault();
+
     if (!signUp) {
       if (email && password) {
-        const { user } = await signInWithEmailAndPassword(
-          auth,
-          email,
-          password
-        );
+        const response = await fetch("http://localhost:8081/api/auth/login", {
+          method: "POST",
+          headers: { "Content-Type": "application/json" },
+          // body: JSON.stringify({
+          //   email: this.email,
+          //   password: this.password,
+          // }),
+          body: JSON.stringify({
+            email,
+            password,
+          }),
+        });
+
+        if (!response.ok) {
+          // Extract the response message
+          const errorData = await response.json();
+          throw new Error(errorData.message || "An error occurred");
+        }
+        const data = await response.json();
         toast.success("Login Successfully");
       } else {
         return toast.error("All fields are mandatory to fill");
       }
     } else {
-      if (password !== confirmPassword) {
+      // Basic validation
+      if (password !== confirm_password) {
         return toast.error("Password didn't match");
       }
-      if (firstName && lastName && email && password) {
-        const { user } = await createUserWithEmailAndPassword(
-          auth,
-          email,
-          password
+
+      try {
+        const response = await fetch(
+          "http://localhost:8081/api/auth/register",
+          {
+            method: "POST",
+            headers: {
+              "Content-Type": "application/json",
+            },
+            body: JSON.stringify({
+              first_name,
+              last_name,
+              email,
+              password,
+            }),
+          }
         );
-        await updateProfile(user, { displayName: `${firstName} ${lastName}` });
-        toast.success("Registered Successfully");
-      } else {
-        return toast.error("All fields are mandatory to fill");
+
+        if (!response.ok) {
+          const errorData = await response.json();
+          console.log(errorData);
+          // toast.error("Registration failed. Please try again.");
+          toast.error("Registration failed. Please try again.", errorData.err);
+          return;
+        }
+
+        const data = await response.json();
+        toast.success("Registration successful. You can now log in.");
+
+        // Clear the form
+        // setState(initialState);
+        navigate("/auth");
+      } catch (error) {
+        console.error("Error:", error);
+        toast.error("Registration failed. Please try again.");
       }
     }
-    navigate("/");
   };
 
   return (
@@ -85,8 +165,8 @@ const Auth = () => {
                   </label>
                   <input
                     type="text"
-                    name="firstName"
-                    value={firstName}
+                    name="first_name"
+                    value={first_name}
                     id="firstname"
                     autoComplete="on"
                     className="bg-transparent border border-b-[3px] rounded-md p-2 w-[170px]"
@@ -99,8 +179,8 @@ const Auth = () => {
                   </label>
                   <input
                     type="text"
-                    name="lastName"
-                    value={lastName}
+                    name="last_name"
+                    value={last_name}
                     id="lastname"
                     autoComplete="on"
                     className="bg-transparent border border-b-[3px] rounded-md p-2 w-[170px]"
@@ -146,9 +226,9 @@ const Auth = () => {
                 </label>
                 <input
                   type="password"
-                  name="confirmPassword"
+                  name="confirm_password"
                   id="conPassword"
-                  value={confirmPassword}
+                  value={confirm_password}
                   autoComplete="on"
                   className="bg-transparent border border-b-[3px] rounded-md p-2 lg:w-[400px] w-[340px]"
                   onChange={handleChange}

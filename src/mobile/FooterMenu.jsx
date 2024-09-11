@@ -7,14 +7,14 @@ import {
   FaUser,
 } from "react-icons/fa";
 import { NavLink } from "react-router-dom";
-import { auth } from "../firebase-config";
-import { useAuthState } from "react-firebase-hooks/auth";
+// import { auth } from "../firebase-config";
+// import { useAuthState } from "react-firebase-hooks/auth";
 import { useNavigate } from "react-router-dom";
 import { ShopContext } from "../Context/ShopContext";
 import { IoMdSettings } from "react-icons/io";
 
 const FooterMenu = ({ openCloseDropDown, dropMenu }) => {
-  const [user] = useAuthState(auth);
+  // const [user] = useAuthState(auth);
   const { getTotalCartItems, cartItems } = useContext(ShopContext);
   const navigate = useNavigate();
 
