@@ -3,8 +3,8 @@ import { ShopContext } from "../../Context/ShopContext";
 import { MdDelete } from "react-icons/md";
 import { FaMinus, FaPlus } from "react-icons/fa";
 import { NavLink } from "react-router-dom";
-import { useAuthState } from "react-firebase-hooks/auth";
-import { auth } from "../../firebase-config";
+// import { useAuthState } from "react-firebase-hooks/auth";
+// import { auth } from "../../firebase-config";
 
 const CartItems = () => {
   const {
@@ -16,7 +16,7 @@ const CartItems = () => {
     deleteFromCart,
   } = useContext(ShopContext);
 
-  const [user] = useAuthState(auth);
+  // const [user] = useAuthState(auth);
 
   return (
     <div className="w-full m-auto space-y-5">

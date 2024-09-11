@@ -7,7 +7,7 @@ import {
 } from "react-icons/fa";
 import { RiLoginCircleLine, RiLogoutCircleLine } from "react-icons/ri";
 import { NavLink } from "react-router-dom";
-import { auth } from "../firebase-config";
+// import { auth } from "../firebase-config";
 import { useAuthState } from "react-firebase-hooks/auth";
 import { signOut } from "firebase/auth";
 import { useNavigate } from "react-router-dom";
@@ -17,15 +17,15 @@ import { ShopContext } from "../Context/ShopContext";
 import { IoMdSettings } from "react-icons/io";
 
 const Navigation = ({ sidebar, setSidebar }) => {
-  const [user] = useAuthState(auth);
-  const navigate = useNavigate();
+  // const [user] = useAuthState(auth);
+  // const navigate = useNavigate();
   const { getTotalCartItems } = useContext(ShopContext);
 
-  const handleSignOut = async () => {
-    await signOut(auth);
-    navigate("/auth");
-    toast.success("Logout Successfully");
-  };
+  // const handleSignOut = async () => {
+  //   await signOut(auth);
+  //   navigate("/auth");
+  //   toast.success("Logout Successfully");
+  // };
 
   return (
     <div className="xl:h-screen flex">
@@ -84,11 +84,11 @@ const Navigation = ({ sidebar, setSidebar }) => {
             <div className="flex flex-col gap-3">
               <div className="flex gap-10">
                 <FaUser className="h-6 size-3" />
-                {sidebar && <p>{user?.displayName}</p>}
+                {/* {sidebar && <p>{user?.displayName}</p>} */}
               </div>
               <button
                 className="flex gap-10 text-gray-400"
-                onClick={handleSignOut}
+                // onClick={handleSignOut}
               >
                 <RiLogoutCircleLine className="h-6" />
                 {sidebar && <h3>LOGOUT</h3>}
