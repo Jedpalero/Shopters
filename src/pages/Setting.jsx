@@ -2,17 +2,22 @@
 import { FaArrowCircleLeft, FaUserCircle } from "react-icons/fa";
 import { Link, useNavigate } from "react-router-dom";
 // import { auth, db } from "../firebase-config";
-import { toast } from "react-toastify";
+// import { toast } from "react-toastify";
 // import { signOut } from "firebase/auth";
 // import { onSnapshot, collection, query, where } from "firebase/firestore";
-import { useState } from "react";
+import { useContext, useState } from "react";
 import Footer from "../components/Footer";
+// import Users from "./Users";
+import { ShopContext } from "../Context/ShopContext";
+import axios from "axios";
 
-const Setting = (sidebar) => {
+const Setting = async (sidebar) => {
   //   const [user] = useAuthState(auth);
-  const navigate = useNavigate();
+  // const [users, setUsers] = useState();
+  // const navigate = useNavigate();
   //   const [order, setOrders] = useState([]);
-  const [isAuthenticated, setIsAuthenticated] = useState(true);
+  // const [isAuthenticated, setIsAuthenticated] = useState(true);
+  const { first_name, last_name, email } = useContext(ShopContext);
 
   // const handleSignOut = async () => {
   //   await signOut(auth);
@@ -20,11 +25,11 @@ const Setting = (sidebar) => {
   //   toast.success("Logout Successfully");
   // };
   // };
-  const handleSignOut = () => {
-    setIsAuthenticated(false);
-    navigate("/login");
-    toast.success("Logout Successfully");
-  };
+  // const handleSignOut = () => {
+  //   setIsAuthenticated(false);
+  //   navigate("/login");
+  //   toast.success("Logout Successfully");
+  // };
 
   //   useEffect(() => {
   //     const unsub = onSnapshot(
@@ -49,6 +54,13 @@ const Setting = (sidebar) => {
   //       unsub();
   //     };
   //   }, []);
+  // try {
+  //   const response = await axios.get("http://localhost:8081/api/user/get_user");
+  //   const result = response.data;
+  //   console.log(result);
+  // } catch (error) {
+  //   console.log(error);
+  // }
 
   return (
     <div className="bg-[#f5f5f5] h-screen overflow-y-scroll">
@@ -74,13 +86,13 @@ const Setting = (sidebar) => {
         <div className="flex lg:gap-[100px] gap-6 items-center">
           <FaUserCircle className="lg:size-[8rem] size-[5rem] text-black" />
           <div className="space-y-2">
-            {user ? (
+            {email ? (
               <>
-                <p className="font-bold text-xl">{user?.displayName}</p>
-                <p className="text-sm"> {`Email: ${user?.email}`}</p>
+                <p className="font-bold text-xl">{`Name: ${first_name} ${last_name}`}</p>
+                <p className="text-sm"> {`Email: ${email}`}</p>
                 <button
                   className="border p-3 w-[10rem] bg-red-700 text-white text-center font-bold rounded-lg"
-                  onClick={handleSignOut}
+                  // onClick={handleSignOut}
                 >
                   Logout
                 </button>
@@ -97,6 +109,7 @@ const Setting = (sidebar) => {
               </div>
             )}
           </div>
+          {/* <Users /> */}
         </div>
       </div>
       <h1 className="font-bold text-xl mt-8 text-center">ORDER SUMMARY</h1>
@@ -105,7 +118,7 @@ const Setting = (sidebar) => {
         <p>Qty</p>
         <p>Total</p>
       </div>
-      {user ? (
+      {/* {user ? (
         <>
           {order.length ? (
             <>
@@ -134,7 +147,7 @@ const Setting = (sidebar) => {
             <p className="">Please Login to see your orders.</p>
           </div>
         </>
-      )}
+      )} */}
       <Footer />
     </div>
   );
