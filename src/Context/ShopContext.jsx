@@ -1,6 +1,7 @@
 import { createContext, useEffect, useState } from "react";
 import data from "../db/data";
 import { toast } from "react-toastify";
+import axios from "axios";
 
 export const ShopContext = createContext(null);
 
@@ -12,9 +13,19 @@ const getDefaultCart = () => {
   return cart;
 };
 
+const initialState = {
+  first_name: "",
+  last_name: "",
+  email: "",
+  password: "",
+  confirm_password: "",
+};
+
 const ShopContextProvider = (props) => {
   const [cartItems, setCartItems] = useState(getDefaultCart);
   const [isMobile, setIsMobile] = useState(() => window.innerWidth < 600);
+  const [state, setState] = useState(initialState);
+  const { first_name, last_name, email, password, confirm_password } = state;
 
   const addToCart = (itemId) => {
     setCartItems((prev) => ({ ...prev, [itemId]: prev[itemId] + 1 }));
@@ -76,6 +87,74 @@ const ShopContextProvider = (props) => {
     };
   });
 
+  const handleChange = (e) => {
+    setState({ ...state, [e.target.name]: e.target.value });
+  };
+
+  const login = async () => {
+    // if (email && password) {
+    try {
+      const response = await axios.post(
+        "http://localhost:8081/api/auth/login",
+        {
+          email,
+          password,
+        },
+        {
+          headers: { "Content-Type": "application/json" },
+        }
+      );
+
+      const data = response.data;
+      console.log(data);
+      toast.success("Login Successfully");
+    } catch (error) {
+      const errorMessage = error.response?.data?.message || "An error occurred";
+      throw new Error(errorMessage);
+    }
+    // }
+  };
+
+  const register = async () => {
+    // if (password !== confirm_password) {
+    //   return toast.error("Password didn't match");
+    // }
+
+    try {
+      const response = await fetch("http://localhost:8081/api/auth/register", {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify({
+          first_name,
+          last_name,
+          email,
+          password,
+        }),
+      });
+
+      if (!response.ok) {
+        const errorData = await response.json();
+        console.log(errorData);
+        // toast.error("Registration failed. Please try again.");
+        toast.error("Registration failed. Please try again.", errorData.err);
+        return;
+      }
+
+      const data = await response.json();
+      console.log(data);
+      toast.success("Registration successful. You can now log in.");
+
+      // Clear the form
+      // setState(initialState);
+      // navigate("/auth");
+    } catch (error) {
+      console.error("Error:", error);
+      toast.error("Registration failed. Please try again.");
+    }
+  };
+
   const contextValue = {
     data,
     cartItems,
@@ -87,6 +166,15 @@ const ShopContextProvider = (props) => {
     deleteFromCart,
     handleResize,
     isMobile,
+    login,
+    handleChange,
+    first_name,
+    last_name,
+    password,
+    email,
+    confirm_password,
+    register,
+    // resultD,
   };
 
   return (

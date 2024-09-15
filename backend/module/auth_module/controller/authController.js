@@ -1,9 +1,10 @@
 import DB from "../../../config/database.js";
 import { v4 as uuidv4 } from "uuid";
 import bcrypt from "bcrypt";
-// import pkg from "jsonwebtoken";
+import pkg from "jsonwebtoken";
+import "dotenv/config";
 
-// const { sign } = pkg;
+const { sign } = pkg; //jwt
 const salt = bcrypt.genSaltSync(1);
 
 uuidv4();
@@ -45,55 +46,143 @@ const login = (req, res) => {
 
   DB.localDB.query(query, value, (err, results) => {
     if (err) {
-      res.status(500).json({ message: "Error fetching user" });
-      return;
+      return res.status(500).json({ message: "Error fetching user" });
     }
 
     if (results.length === 0) {
-      res.status(404).json({ message: "User not found" });
-      return;
+      return res.status(404).json({ message: "User not found" });
     }
-
-    // const secret_key = process.env.ACCESS_TOKEN_SECRET;
 
     const user = results[0];
-    // let payload = {
-    //   user_id: user.user_id,
-    // };
-    // const isPasswordValid = bcrypt.compareSync(password, user.password);
-    // const options = {
-    //   expiresIn: "1h", // Set an appropriate expiration time
-    // };
-    // const token = jwt.sign(payload, secret_key, options);
 
-    if (results.length) {
-      // res.status(200).json({
-      //   user_id: user.user_id,
-      //   email: user.email,
-      //   username: user.username,
-      //   contact_no: user.contact_no,
-      //   status: user.status,
-      //   token: token,
-      // });
-      bcrypt.compare(password, user.password, (err, result) => {
-        const payload1 = results[0];
-        // payload1.role = "Admin";
-        // const secret_key = process.env.ACCESS_TOKEN_SECRET;
-        // const options = { expiresIn: "5m" };
-        // const accesstoken = sign(payload1, secret_key, options);
-        // const accesstoken = sign(payload1);
-        result
-          ? res.status(200).json({
-              // token: accesstoken,
-              message: "Login Success",
-              payload: payload1,
-            })
-          : res.status(500).json({ message: "Invalid Password" });
+    // if (results.length) {
+    //   bcrypt.compare(password, user.password, (err, result) => {
+    //     const payload1 = { id: user.user_id, email: user.email };
+    //     // payload1.role = "Admin";
+    //     const secret_key = process.env.ACCESS_TOKEN_SECRET;
+    //     const options = { expiresIn: "5m" };
+    //     const accesstoken = sign(payload1, secret_key, options);
+
+    //     res.cookie("jwt", accesstoken, {
+    //       httpOnly: true,
+    //       maxAge: 24 * 60 * 60 * 1000,
+    //     });
+    //     res.send({
+    //       message: "success",
+    //     });
+    //     result
+    //       ? res.status(200).json({
+    //           token: accesstoken,
+    //           message: "Login Success",
+    //           payload: payload1,
+    //         })
+    //       : res.status(500).json({ message: "Invalid Password" });
+    //   });
+    // } else {
+    //   res.status(401).json({ message: "Invalid password" });
+    // }
+
+    bcrypt.compare(password, user.password, (err, result) => {
+      if (err) {
+        return res.status(500).json({ message: "Error comparing passwords" });
+      }
+
+      if (!result) {
+        return res.status(401).json({ message: "Invalid password" });
+      }
+
+      const payload1 = { user_id: user.user_id, email: user.email }; // Adjust payload as needed
+      const secret_key = process.env.ACCESS_TOKEN_SECRET;
+      const options = { expiresIn: "5m" };
+      const accesstoken = pkg.sign(payload1, secret_key, options);
+
+      res.cookie("jwt", accesstoken, {
+        httpOnly: true,
+        maxAge: 24 * 60 * 60 * 1000,
       });
-    } else {
-      res.status(401).json({ message: "Invalid password" });
-    }
+
+      return res.status(200).json({
+        token: accesstoken,
+        message: "Login Success",
+        payload: payload1,
+      });
+    });
   });
 };
 
-export default { register, login };
+const user = async (req, res) => {
+  const secret_key = process.env.ACCESS_TOKEN_SECRET;
+
+  const cookie = req.cookies["jwt"];
+
+  // try {
+  //   const claims = pkg.verify(cookie, secret_key);
+
+  //   if (!claims) {
+  //     return res.status(400).json({ message: "unauthenticated" });
+  //   }
+
+  //   const [rows] = DB.localDB.query("SELECT * FROM users WHERE user_id = ?", [
+  //     claims.user_id,
+  //   ]);
+  //   const user = rows[0];
+
+  //   if (!user) {
+  //     return res.status(404).send({ message: "User not found" });
+  //   }
+
+  //   res.send(user);
+  // } catch (error) {
+  //   return res.status(401).send({ message: "unauthenticated" });
+  // }
+  try {
+    const claims = pkg.verify(cookie, secret_key);
+    if (!claims) {
+      return res.status(401).send({ message: "unauthenticated" });
+    }
+
+    DB.localDB.getConnection((err, connection) => {
+      if (err) {
+        return res.status(500).send({ message: "Database connection error" });
+      }
+
+      connection.query(
+        "SELECT * FROM users WHERE user_id = ?",
+        [claims.user_id],
+        (queryErr, rows) => {
+          connection.release();
+
+          if (queryErr) {
+            return res.status(500).send({ message: "Database query error" });
+          }
+
+          const user = rows[0];
+          const payload = {
+            user_id: user.user_id,
+            email: user.email,
+            first_name: user.first_name,
+            last_name: user.last_name,
+          };
+
+          if (!user) {
+            return res.status(404).send({ message: "User not found" });
+          }
+
+          return res.send(payload);
+        }
+      );
+    });
+  } catch (error) {
+    return res.status(401).send({ message: "unauthenticated" });
+  }
+};
+
+const logout = (req, res) => {
+  res.cookie("jwt", "", { maxAge: 0 });
+
+  res.send({
+    message: "success",
+  });
+};
+
+export default { register, login, user, logout };

@@ -1,7 +1,12 @@
+/*eslint no-unused-vars*/
+
 import DB from "../../../config/database.js";
 import { v4 as uuidv4 } from "uuid";
 import bcrypt from "bcrypt";
 // import pkg from "jsonwebtoken";
+import date_and_time from "date-and-time";
+
+const now = new Date();
 
 // const { sign } = pkg;
 const salt = bcrypt.genSaltSync(1);
@@ -57,7 +62,13 @@ const getUser = (req, res) => {
     if (err) {
       res.status(500).json({ message: "Failed to get user" });
     } else {
-      res.status(200).json(results);
+      res.status(200).json({ results });
+      // const sanitizedResults = results.map((user) => {
+      //   const { password, ...rest } = user;
+      //   return rest;
+      // });
+      // res.status(200).json(sanitizedResults); // to remove password from console
+      // res.status(200).json({ results: sanitizedResults });
     }
   });
 };
@@ -99,5 +110,7 @@ const deleteUser = (req, res) => {
     throw error;
   }
 };
+
+// const
 
 export default { createUser, getAllUser, getUser, updateUser, deleteUser };

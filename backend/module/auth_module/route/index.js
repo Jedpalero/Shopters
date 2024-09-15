@@ -6,6 +6,8 @@ const route = express.Router();
 
 route.post("/register", controller.register);
 route.post("/login", controller.login);
+route.post("/logout", controller.logout);
+route.get("/user", controller.user);
 // route.get("/get_all_users", controller.getAllUser);
 
 export default route;
