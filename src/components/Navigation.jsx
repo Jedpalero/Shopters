@@ -7,25 +7,22 @@ import {
 } from "react-icons/fa";
 import { RiLoginCircleLine, RiLogoutCircleLine } from "react-icons/ri";
 import { NavLink } from "react-router-dom";
-// import { auth } from "../firebase-config";
-import { useAuthState } from "react-firebase-hooks/auth";
-import { signOut } from "firebase/auth";
 import { useNavigate } from "react-router-dom";
-import { useContext, useState } from "react";
-import { toast } from "react-toastify";
+import { useContext } from "react";
 import { ShopContext } from "../Context/ShopContext";
 import { IoMdSettings } from "react-icons/io";
+import useDataFetch from "../hooks/useDataFetch";
 
 const Navigation = ({ sidebar, setSidebar }) => {
-  // const [user] = useAuthState(auth);
-  // const navigate = useNavigate();
-  const { getTotalCartItems } = useContext(ShopContext);
+  const navigate = useNavigate();
+  const { getTotalCartItems, logout } = useContext(ShopContext);
 
-  // const handleSignOut = async () => {
-  //   await signOut(auth);
-  //   navigate("/auth");
-  //   toast.success("Logout Successfully");
-  // };
+  const handleSignOut = async () => {
+    logout();
+    navigate("/auth");
+  };
+
+  const { data } = useDataFetch();
 
   return (
     <div className="xl:h-screen flex">
@@ -69,7 +66,7 @@ const Navigation = ({ sidebar, setSidebar }) => {
             })}
           >
             <div>
-              {user && (
+              {data && (
                 <p className="bg-red-500 absolute mt-5 text-white ml-4 w-6 h-6 text-center rounded-full">
                   {getTotalCartItems()}
                 </p>
@@ -79,16 +76,17 @@ const Navigation = ({ sidebar, setSidebar }) => {
             {sidebar && <h3>ORDER</h3>}
           </NavLink>
         </div>
-        {user ? (
+        {/* {user ? ( */}
+        {data ? (
           <>
             <div className="flex flex-col gap-3">
               <div className="flex gap-10">
                 <FaUser className="h-6 size-3" />
-                {/* {sidebar && <p>{user?.displayName}</p>} */}
+                {sidebar && <p>{data?.first_name}</p>}
               </div>
               <button
                 className="flex gap-10 text-gray-400"
-                // onClick={handleSignOut}
+                onClick={handleSignOut}
               >
                 <RiLogoutCircleLine className="h-6" />
                 {sidebar && <h3>LOGOUT</h3>}

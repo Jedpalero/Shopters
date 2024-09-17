@@ -1,6 +1,6 @@
 import { Route, Routes } from "react-router-dom";
 import Navigation from "./components/Navigation";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import FooterMenu from "./mobile/FooterMenu";
 import { ToastContainer } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
@@ -12,14 +12,15 @@ import Auth from "./pages/Auth";
 import Checkout from "./pages/Checkout";
 import Setting from "./pages/Setting";
 import ErrorNotFound from "./components/ErrorNotFound";
+// import { ShopContext } from "./Context/ShopContext";
 
 function App() {
   const [sidebar, setSidebar] = useState(false);
   const [dropMenu, setDropMenu] = useState(false);
 
-  const openCloseDropDown = () => {
-    setDropMenu((prev) => !prev);
-  };
+  // const openCloseDropDown = () => {
+  //   setDropMenu((prev) => !prev);
+  // };
 
   const closeDropDown = () => {
     if (setDropMenu) {
@@ -51,14 +52,16 @@ function App() {
             />
             <Route path="/order" element={<Order />} />
             <Route path="/checkout" element={<Checkout sidebar={sidebar} />} />
+
             <Route path="/settings" element={<Setting sidebar={sidebar} />} />
+
             <Route path="*" element={<ErrorNotFound />} />
           </Routes>
         </main>
         <div className="lg:hidden block h-[50px] bg-[#0f0f0f] bg-opacity-60 w-full fixed bottom-0">
           <FooterMenu
-            openCloseDropDown={openCloseDropDown}
-            dropMenu={dropMenu}
+          // openCloseDropDown={openCloseDropDown}
+          // dropMenu={dropMenu}
           />
         </div>
       </div>

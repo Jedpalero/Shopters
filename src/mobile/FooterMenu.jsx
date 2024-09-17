@@ -1,22 +1,16 @@
-import { useContext, useState } from "react";
-import {
-  FaShoppingCart,
-  FaBars,
-  FaShoppingBag,
-  FaHome,
-  FaUser,
-} from "react-icons/fa";
+import { useContext } from "react";
+import { FaShoppingCart, FaShoppingBag, FaHome } from "react-icons/fa";
 import { NavLink } from "react-router-dom";
 // import { auth } from "../firebase-config";
 // import { useAuthState } from "react-firebase-hooks/auth";
-import { useNavigate } from "react-router-dom";
 import { ShopContext } from "../Context/ShopContext";
 import { IoMdSettings } from "react-icons/io";
+import useDataFetch from "../hooks/useDataFetch";
 
-const FooterMenu = ({ openCloseDropDown, dropMenu }) => {
-  // const [user] = useAuthState(auth);
-  const { getTotalCartItems, cartItems } = useContext(ShopContext);
-  const navigate = useNavigate();
+const FooterMenu = () => {
+  const { getTotalCartItems } = useContext(ShopContext);
+
+  const { data } = useDataFetch();
 
   return (
     <div className="text-white flex justify-between m-3">
@@ -48,7 +42,7 @@ const FooterMenu = ({ openCloseDropDown, dropMenu }) => {
         })}
       >
         <div>
-          {user && (
+          {data && (
             <p className="bg-red-500 absolute  text-white ml-4 top-0 w-6 h-6 text-center rounded-full">
               {getTotalCartItems()}
             </p>

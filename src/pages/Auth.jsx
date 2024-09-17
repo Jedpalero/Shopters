@@ -1,16 +1,7 @@
 import { useContext, useState } from "react";
 import { toast } from "react-toastify";
 import { useNavigate } from "react-router";
-// import axios from "axios";
 import { ShopContext } from "../Context/ShopContext";
-
-// const initialState = {
-//   first_name: "",
-//   last_name: "",
-//   email: "",
-//   password: "",
-//   confirm_password: "",
-// };
 
 const Auth = () => {
   const {
@@ -23,113 +14,22 @@ const Auth = () => {
     confirm_password,
     register,
   } = useContext(ShopContext);
-  // const [state, setState] = useState(initialState);
+
   const [signUp, setSignUp] = useState(false);
-  // const { first_name, last_name, email, password, confirm_password } = state;
 
   const navigate = useNavigate();
-
-  // const handleChange = (e) => {
-  //   setState({ ...state, [e.target.name]: e.target.value });
-  // };
 
   const handleAuth = async (event) => {
     event.preventDefault();
 
     if (!signUp) {
-      // if (email && password) {
-      //   const response = await fetch("http://localhost:8081/api/auth/login", {
-      //     method: "POST",
-      //     headers: { "Content-Type": "application/json" },
-      //     body: JSON.stringify({
-      //       email,
-      //       password,
-      //     }),
-      //   });
-
-      //   if (!response.ok) {
-      //     const errorData = await response.json();
-      //     throw new Error(errorData.message || "An error occurred");
-      //   }
-      //   const data = await response.json();
-      //   console.log(data);
-      //   toast.success("Login Successfully");
-      // } else {
-      //   return toast.error("All fields are mandatory to fill");
-      // }
-
-      // if (email && password) {
-      //   try {
-      //     const response = await axios.post(
-      //       "http://localhost:8081/api/auth/login",
-      //       {
-      //         email,
-      //         password,
-      //       },
-      //       {
-      //         headers: { "Content-Type": "application/json" },
-      //       }
-      //     );
-
-      //     const data = response.data;
-      //     console.log(data);
-      //     toast.success("Login Successfully");
-      //   } catch (error) {
-      //     const errorMessage =
-      //       error.response?.data?.message || "An error occurred";
-      //     throw new Error(errorMessage);
-      //   }
-      // } else {
-      //   return toast.error("All fields are mandatory to fill");
-      // }
       if (email && password) {
-        login();
-        navigate("/");
+        await login();
+        navigate("/settings");
       } else {
         return toast.error("All fields are mandatory to fill");
       }
     } else {
-      // Basic validation
-      // if (password !== confirm_password) {
-      //   return toast.error("Password didn't match");
-      // }
-
-      // try {
-      //   const response = await fetch(
-      //     "http://localhost:8081/api/auth/register",
-      //     {
-      //       method: "POST",
-      //       headers: {
-      //         "Content-Type": "application/json",
-      //       },
-      //       body: JSON.stringify({
-      //         first_name,
-      //         last_name,
-      //         email,
-      //         password,
-      //       }),
-      //     }
-      //   );
-
-      //   if (!response.ok) {
-      //     const errorData = await response.json();
-      //     console.log(errorData);
-      //     // toast.error("Registration failed. Please try again.");
-      //     toast.error("Registration failed. Please try again.", errorData.err);
-      //     return;
-      //   }
-
-      //   const data = await response.json();
-      //   console.log(data);
-      //   toast.success("Registration successful. You can now log in.");
-
-      //   // Clear the form
-      //   // setState(initialState);
-      //   navigate("/auth");
-      // } catch (error) {
-      //   console.error("Error:", error);
-      //   toast.error("Registration failed. Please try again.");
-      // }
       if (password !== confirm_password) {
         return toast.error("Password didn't match");
       }
