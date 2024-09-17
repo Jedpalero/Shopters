@@ -1,10 +1,12 @@
+/* eslint-disable no-unused-vars */
+
 import DB from "../../../config/database.js";
 import { v4 as uuidv4 } from "uuid";
 import bcrypt from "bcrypt";
 import pkg from "jsonwebtoken";
 import "dotenv/config";
 
-const { sign } = pkg; //jwt
+// const { sign } = pkg; //jwt
 const salt = bcrypt.genSaltSync(1);
 
 uuidv4();
@@ -112,66 +114,45 @@ const login = (req, res) => {
 
 const user = async (req, res) => {
   const secret_key = process.env.ACCESS_TOKEN_SECRET;
-
   const cookie = req.cookies["jwt"];
 
-  // try {
-  //   const claims = pkg.verify(cookie, secret_key);
-
-  //   if (!claims) {
-  //     return res.status(400).json({ message: "unauthenticated" });
-  //   }
-
-  //   const [rows] = DB.localDB.query("SELECT * FROM users WHERE user_id = ?", [
-  //     claims.user_id,
-  //   ]);
-  //   const user = rows[0];
-
-  //   if (!user) {
-  //     return res.status(404).send({ message: "User not found" });
-  //   }
-
-  //   res.send(user);
-  // } catch (error) {
-  //   return res.status(401).send({ message: "unauthenticated" });
-  // }
   try {
     const claims = pkg.verify(cookie, secret_key);
     if (!claims) {
       return res.status(401).send({ message: "unauthenticated" });
     }
 
-    DB.localDB.getConnection((err, connection) => {
-      if (err) {
-        return res.status(500).send({ message: "Database connection error" });
-      }
+    // DB.localDB.getConnection((err, connection) => {
+    //   if (err) {
+    //     return res.status(500).send({ message: "Database connection error" });
+    //   }
 
-      connection.query(
-        "SELECT * FROM users WHERE user_id = ?",
-        [claims.user_id],
-        (queryErr, rows) => {
-          connection.release();
+    DB.localDB.query(
+      "SELECT * FROM users WHERE user_id = ?",
+      [claims.user_id],
+      (queryErr, rows) => {
+        // connection.release();
 
-          if (queryErr) {
-            return res.status(500).send({ message: "Database query error" });
-          }
-
-          const user = rows[0];
-          const payload = {
-            user_id: user.user_id,
-            email: user.email,
-            first_name: user.first_name,
-            last_name: user.last_name,
-          };
-
-          if (!user) {
-            return res.status(404).send({ message: "User not found" });
-          }
-
-          return res.send(payload);
+        if (queryErr) {
+          return res.status(500).send({ message: "Database query error" });
         }
-      );
-    });
+
+        const user = rows[0];
+        const payload = {
+          user_id: user.user_id,
+          email: user.email,
+          first_name: user.first_name,
+          last_name: user.last_name,
+        };
+
+        if (!user) {
+          return res.status(404).send({ message: "User not found" });
+        }
+
+        return res.send(payload);
+      }
+    );
+    // });
   } catch (error) {
     return res.status(401).send({ message: "unauthenticated" });
   }

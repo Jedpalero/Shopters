@@ -92,9 +92,8 @@ const ShopContextProvider = (props) => {
   };
 
   const login = async () => {
-    // if (email && password) {
     try {
-      const response = await axios.post(
+      await axios.post(
         "http://localhost:8081/api/auth/login",
         {
           email,
@@ -102,24 +101,18 @@ const ShopContextProvider = (props) => {
         },
         {
           headers: { "Content-Type": "application/json" },
+          withCredentials: true,
         }
       );
 
-      const data = response.data;
-      console.log(data);
       toast.success("Login Successfully");
     } catch (error) {
       const errorMessage = error.response?.data?.message || "An error occurred";
       throw new Error(errorMessage);
     }
-    // }
   };
 
   const register = async () => {
-    // if (password !== confirm_password) {
-    //   return toast.error("Password didn't match");
-    // }
-
     try {
       const response = await fetch("http://localhost:8081/api/auth/register", {
         method: "POST",
@@ -137,7 +130,6 @@ const ShopContextProvider = (props) => {
       if (!response.ok) {
         const errorData = await response.json();
         console.log(errorData);
-        // toast.error("Registration failed. Please try again.");
         toast.error("Registration failed. Please try again.", errorData.err);
         return;
       }
@@ -145,13 +137,26 @@ const ShopContextProvider = (props) => {
       const data = await response.json();
       console.log(data);
       toast.success("Registration successful. You can now log in.");
-
-      // Clear the form
-      // setState(initialState);
-      // navigate("/auth");
     } catch (error) {
       console.error("Error:", error);
       toast.error("Registration failed. Please try again.");
+    }
+  };
+
+  const logout = async () => {
+    try {
+      await axios.post(
+        "http://localhost:8081/api/auth/logout",
+        {},
+        {
+          headers: { "Content-Type": "application/json" },
+          withCredentials: true,
+        }
+      );
+      toast.success("Logout Successfully");
+      window.location.reload();
+    } catch (error) {
+      toast.error("Logout Failed");
     }
   };
 
@@ -174,7 +179,7 @@ const ShopContextProvider = (props) => {
     email,
     confirm_password,
     register,
-    // resultD,
+    logout,
   };
 
   return (

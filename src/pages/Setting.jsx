@@ -1,66 +1,19 @@
-// import { useAuthState } from "react-firebase-hooks/auth";
 import { FaArrowCircleLeft, FaUserCircle } from "react-icons/fa";
 import { Link, useNavigate } from "react-router-dom";
-// import { auth, db } from "../firebase-config";
-// import { toast } from "react-toastify";
-// import { signOut } from "firebase/auth";
-// import { onSnapshot, collection, query, where } from "firebase/firestore";
-import { useContext, useState } from "react";
 import Footer from "../components/Footer";
-// import Users from "./Users";
+import useDataFetch from "../hooks/useDataFetch";
+import { useContext } from "react";
 import { ShopContext } from "../Context/ShopContext";
-import axios from "axios";
 
-const Setting = async (sidebar) => {
-  //   const [user] = useAuthState(auth);
-  // const [users, setUsers] = useState();
-  // const navigate = useNavigate();
-  //   const [order, setOrders] = useState([]);
-  // const [isAuthenticated, setIsAuthenticated] = useState(true);
-  const { first_name, last_name, email } = useContext(ShopContext);
+const Setting = ({ sidebar }) => {
+  const { logout } = useContext(ShopContext);
+  const { data } = useDataFetch();
+  const navigate = useNavigate();
 
-  // const handleSignOut = async () => {
-  //   await signOut(auth);
-  //   navigate("/auth");
-  //   toast.success("Logout Successfully");
-  // };
-  // };
-  // const handleSignOut = () => {
-  //   setIsAuthenticated(false);
-  //   navigate("/login");
-  //   toast.success("Logout Successfully");
-  // };
-
-  //   useEffect(() => {
-  //     const unsub = onSnapshot(
-  //       query(
-  //         collection(db, "userCheckout"),
-  //         where("userId", "==", user ? auth?.currentUser?.uid : null)
-  //       ),
-  //       (snapshot) => {
-  //         let list = [];
-
-  //         snapshot.docs.forEach((doc) => {
-  //           list.push({ id: doc.id, ...doc.data() });
-  //         });
-  //         setOrders(list);
-  //       },
-  //       (error) => {
-  //         console.log(error);
-  //       }
-  //     );
-
-  //     return () => {
-  //       unsub();
-  //     };
-  //   }, []);
-  // try {
-  //   const response = await axios.get("http://localhost:8081/api/user/get_user");
-  //   const result = response.data;
-  //   console.log(result);
-  // } catch (error) {
-  //   console.log(error);
-  // }
+  const handleSignOut = async () => {
+    logout();
+    navigate("/auth");
+  };
 
   return (
     <div className="bg-[#f5f5f5] h-screen overflow-y-scroll">
@@ -86,13 +39,13 @@ const Setting = async (sidebar) => {
         <div className="flex lg:gap-[100px] gap-6 items-center">
           <FaUserCircle className="lg:size-[8rem] size-[5rem] text-black" />
           <div className="space-y-2">
-            {email ? (
+            {data ? (
               <>
-                <p className="font-bold text-xl">{`Name: ${first_name} ${last_name}`}</p>
-                <p className="text-sm"> {`Email: ${email}`}</p>
+                <p className="font-bold text-xl">{`Name: ${data?.first_name}`}</p>
+                <p className="text-sm"> {`Email: ${data?.email}`}</p>
                 <button
                   className="border p-3 w-[10rem] bg-red-700 text-white text-center font-bold rounded-lg"
-                  // onClick={handleSignOut}
+                  onClick={handleSignOut}
                 >
                   Logout
                 </button>
