@@ -82,7 +82,7 @@ const Navigation = ({ sidebar, setSidebar }) => {
             <div className="flex flex-col gap-3">
               <div className="flex gap-10">
                 <FaUser className="h-6 size-3" />
-                {sidebar && <p>{data?.first_name}</p>}
+                {sidebar && <p>{data?.first_name.toUpperCase()}</p>}
               </div>
               <button
                 className="flex gap-10 text-gray-400"

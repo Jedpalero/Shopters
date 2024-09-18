@@ -160,6 +160,33 @@ const ShopContextProvider = (props) => {
     }
   };
 
+  const deleteUser = async (id) => {
+    if (window.confirm("Are you sure you want to delete this user?")) {
+      try {
+        await axios.delete("http://localhost:8081/api/user/delete_user/" + id, {
+          headers: { "Content-Type": "application/json" },
+          withCredentials: true,
+        });
+        toast.success("Delete Successfully");
+        window.location.reload();
+      } catch (error) {
+        toast.error("Delete Failed");
+      }
+    }
+  };
+
+  const updateUser = async () => {
+    try {
+      await axios.put("http://localhost:8081/api/user/update_user", {
+        headers: { "Content-Type": "application/json" },
+        withCredentials: true,
+      });
+      toast.success("Update Successfully");
+    } catch (error) {
+      toast.error("Update Failed");
+    }
+  };
+
   const contextValue = {
     data,
     cartItems,
@@ -180,6 +207,8 @@ const ShopContextProvider = (props) => {
     confirm_password,
     register,
     logout,
+    deleteUser,
+    updateUser,
   };
 
   return (

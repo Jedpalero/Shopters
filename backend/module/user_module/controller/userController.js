@@ -43,8 +43,18 @@ const createUser = (req, res) => {
   });
 };
 
+// const getAllUser = (req, res) => {
+//   const query = `SELECT * FROM users`;
+//   DB.localDB.query(query, (err, results) => {
+//     if (err) {
+//       res.status(500).json({ message: "Failed to get user" });
+//     } else {
+//       res.status(200).json(results);
+//     }
+//   });
+// };
 const getAllUser = (req, res) => {
-  const query = `SELECT * FROM users`;
+  const query = `SELECT user_id, first_name, last_name, email, role FROM users`;
   DB.localDB.query(query, (err, results) => {
     if (err) {
       res.status(500).json({ message: "Failed to get user" });
@@ -75,17 +85,23 @@ const getUser = (req, res) => {
 
 const updateUser = (req, res) => {
   const query = `UPDATE users
-                  SET status = ?, updated_at = ? 
+                  SET role = ?, first_name = ?, last_name = ?, email = ?,  updated_at = ?
                   WHERE user_id = ?`;
 
   let values = [
-    req.body.status,
+    req.body.role,
+    req.body.first_name,
+    req.body.last_name,
+    // req.body.status,
+    req.body.email,
     date_and_time.format(now, "YYYY-MM-DD HH:mm:ss"),
     req.body.user_id,
   ];
   DB.localDB.query(query, values, (err, results) => {
     if (err) {
-      res.status(500).json({ message: " Failed to update" });
+      res
+        .status(500)
+        .json({ message: " Failed to update", error: err.message });
     } else {
       // res.status(200).json({ message: "Updated" });
       res.status(200).json(results);
