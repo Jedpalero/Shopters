@@ -2,17 +2,59 @@ import { FaArrowCircleLeft, FaUserCircle } from "react-icons/fa";
 import { Link, useNavigate } from "react-router-dom";
 import Footer from "../components/Footer";
 import useDataFetch from "../hooks/useDataFetch";
-import { useContext } from "react";
+import { useContext, useState } from "react";
 import { ShopContext } from "../Context/ShopContext";
+import useFetchAll from "../hooks/useFetchAll";
 
 const Setting = ({ sidebar }) => {
-  const { logout } = useContext(ShopContext);
+  const { logout, deleteUser, updateUser } = useContext(ShopContext);
   const { data } = useDataFetch();
+  const { data: Users } = useFetchAll();
   const navigate = useNavigate();
 
   const handleSignOut = async () => {
     logout();
     navigate("/auth");
+  };
+
+  const handleDelete = (id) => {
+    deleteUser(id);
+  };
+
+  // console.log(Users);
+
+  const [editUserId, setEditUserId] = useState(null); // Track the user being edited
+  const [editedUserData, setEditedUserData] = useState({
+    // user_id: "",
+    first_name: "",
+    last_name: "",
+    email: "",
+    role: "",
+  });
+
+  const handleEditClick = (user) => {
+    setEditUserId(user.user_id); // Set the user in edit mode
+    setEditedUserData(user); // Set the current values to editable inputs
+  };
+
+  const handleInputChange = (e) => {
+    const { name, value } = e.target;
+    setEditedUserData({
+      ...editedUserData,
+      [name]: value,
+    });
+  };
+
+  const handleSaveClick = async () => {
+    // Save logic here (e.g., API call to update the user)
+    await updateUser();
+    console.log("Saving updated data for user:", editedUserData);
+
+    setEditUserId(null); // Exit edit mode after saving
+  };
+
+  const handleCancelClick = () => {
+    setEditUserId(null); // Exit edit mode without saving
   };
 
   return (
@@ -65,42 +107,154 @@ const Setting = ({ sidebar }) => {
           {/* <Users /> */}
         </div>
       </div>
-      <h1 className="font-bold text-xl mt-8 text-center">ORDER SUMMARY</h1>
-      <div className="grid grid-cols-3 justify-between text-center border p-2 mt-5 uppercase font-semibold">
-        <p>Id</p>
-        <p>Qty</p>
-        <p>Total</p>
-      </div>
-      {/* {user ? (
+      {/* admin dashboard */}
+      {data?.role === "admin" ? (
         <>
-          {order.length ? (
-            <>
-              {order?.map((item) => (
-                <div
-                  key={item.id}
-                  className="grid grid-cols-3 justify-between text-center border p-2 lg:text-lg text-sm"
-                >
-                  <p className="lg:text-lg text-xs">{item.id}</p>
-                  <p>{item.totalQty}</p>
-                  <p>${item.totalAmount}</p>
-                </div>
-              ))}
-            </>
-          ) : (
+          <h1 className="font-bold text-xl mt-8 text-center">
+            ADMIN DASHBOARD
+          </h1>
+          <div className="grid grid-cols-5 justify-between text-center border p-2 mt-5 uppercase font-semibold">
+            {/* <p>ID</p> */}
+            <p>First Name</p>
+            <p>Last Name</p>
+            <p>Email</p>
+            <p>Role</p>
+            <p>Delete</p>
+          </div>
+
+          {Users?.map((user) => (
+            <div
+              key={user.user_id}
+              className="grid grid-cols-5 justify-between text-center border p-2 lg:text-lg text-sm"
+            >
+              {editUserId === user.user_id ? (
+                <>
+                  {/* <input
+                    type="text"
+                    name="user_id"
+                    value={editedUserData.user_id}
+                    onChange={handleInputChange}
+                    className="border p-1"
+                  /> */}
+                  <input
+                    type="text"
+                    name="first_name"
+                    value={editedUserData.first_name}
+                    onChange={handleInputChange}
+                    className="border p-1"
+                  />
+                  <input
+                    type="text"
+                    name="last_name"
+                    value={editedUserData.last_name}
+                    onChange={handleInputChange}
+                    className="border p-1"
+                  />
+                  <input
+                    type="email"
+                    name="email"
+                    value={editedUserData.email}
+                    onChange={handleInputChange}
+                    className="border p-1"
+                  />
+                  <input
+                    type="text"
+                    name="role"
+                    value={editedUserData.role}
+                    onChange={handleInputChange}
+                    className="border p-1"
+                  />
+                  <div>
+                    <button
+                      onClick={() => handleSaveClick()}
+                      className="border bg-green-800 text-white rounded-md p-2 w-20"
+                    >
+                      Save
+                    </button>
+                    <button
+                      onClick={handleCancelClick}
+                      className="border bg-gray-800 text-white rounded-md p-2 w-20"
+                    >
+                      Cancel
+                    </button>
+                  </div>
+                </>
+              ) : (
+                <>
+                  {/* <p>{user.user_id}</p> */}
+                  <p>{user.first_name}</p>
+                  <p>{user.last_name}</p>
+                  <p>{user.email}</p>
+                  <p>{user.role}</p>
+                  {user.role === "user" ? (
+                    <div>
+                      <button
+                        onClick={() => handleEditClick(user)}
+                        className="border bg-blue-800 text-white rounded-md p-2 w-20"
+                      >
+                        Edit
+                      </button>
+                      <button
+                        onClick={() => handleDelete(user.user_id)}
+                        className="border bg-red-800 text-white rounded-md p-2 w-20"
+                      >
+                        Delete
+                      </button>
+                    </div>
+                  ) : (
+                    <div></div>
+                  )}
+                </>
+              )}
+            </div>
+          ))}
+        </>
+      ) : (
+        <>
+          <h1 className="font-bold text-xl mt-8 text-center">ORDER SUMMARY</h1>
+          <div className="grid grid-cols-3 justify-between text-center border p-2 mt-5 uppercase font-semibold">
+            <p>Id</p>
+            <p>Qty</p>
+            <p>Total</p>
+          </div>
+          {data ? (
+            // <>
+            //   {order.length ? (
+            //     <>
+            //       {order?.map((item) => (
+            //         <div
+            //           key={item.id}
+            //           className="grid grid-cols-3 justify-between text-center border p-2 lg:text-lg text-sm"
+            //         >
+            //           <p className="lg:text-lg text-xs">{item.id}</p>
+            //           <p>{item.totalQty}</p>
+            //           <p>${item.totalAmount}</p>
+            //         </div>
+            //       ))}
+            //     </>
+            //   ) : (
+            //     <>
+            //       <div className="flex justify-center mt-[5rem] pb-[10rem]">
+            //         <p className="">Your Order Summary is Empty</p>
+            //       </div>
+            //     </>
+            //   )}
+            // </>
             <>
               <div className="flex justify-center mt-[5rem] pb-[10rem]">
                 <p className="">Your Order Summary is Empty</p>
               </div>
             </>
+          ) : (
+            <>
+              <div className="flex justify-center mt-[5rem] pb-[10rem]">
+                <p className="">Please Login to see your orders.</p>
+              </div>
+            </>
           )}
         </>
-      ) : (
-        <>
-          <div className="flex justify-center mt-[5rem] pb-[10rem]">
-            <p className="">Please Login to see your orders.</p>
-          </div>
-        </>
-      )} */}
+      )}
+
       <Footer />
     </div>
   );
