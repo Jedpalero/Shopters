@@ -175,13 +175,16 @@ const ShopContextProvider = (props) => {
     }
   };
 
-  const updateUser = async () => {
+  const updateUser = async (userData) => {
     try {
-      await axios.put("http://localhost:8081/api/user/update_user", {
-        headers: { "Content-Type": "application/json" },
+      await axios.put("http://localhost:8081/api/user/update_user", userData, {
+        headers: {
+          "Content-Type": "application/json",
+        },
         withCredentials: true,
       });
       toast.success("Update Successfully");
+      window.location.reload();
     } catch (error) {
       toast.error("Update Failed");
     }
