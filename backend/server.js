@@ -3,6 +3,7 @@ import pkg from "jsonwebtoken";
 import cors from "cors";
 import authRoute from "./module/auth_module/route/index.js";
 import userRoute from "./module/user_module/route/index.js";
+import productRoute from "./module/product_module/route/index.js";
 import cookieParser from "cookie-parser";
 // import path from "path";
 // import { fileURLToPath } from "url";
@@ -35,6 +36,7 @@ app.use(
 //Use route
 app.use("/api/user", userRoute);
 app.use("/api/auth", authRoute);
+app.use("/api/product", productRoute);
 
 app.get("/generate_token", (req, res) => {
   //payload
