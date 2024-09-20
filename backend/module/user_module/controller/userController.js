@@ -85,11 +85,10 @@ const getUser = (req, res) => {
 
 const updateUser = (req, res) => {
   const query = `UPDATE users
-                  SET role = ?, first_name = ?, last_name = ?, email = ?,  updated_at = ?
+                  SET first_name = ?, last_name = ?, email = ?,  updated_at = ?
                   WHERE user_id = ?`;
 
   let values = [
-    req.body.role,
     req.body.first_name,
     req.body.last_name,
     // req.body.status,
