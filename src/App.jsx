@@ -12,6 +12,10 @@ import Auth from "./pages/Auth";
 import Checkout from "./pages/Checkout";
 import Setting from "./pages/Setting";
 import ErrorNotFound from "./components/ErrorNotFound";
+import AdminRoute from "./pages/Admin/AdminRoute";
+import AllProducts from "./pages/Admin/AllProducts";
+import AddProducts from "./pages/Admin/AddProducts";
+import UpdateProducts from "./pages/Admin/UpdateProducts";
 // import { ShopContext } from "./Context/ShopContext";
 
 function App() {
@@ -54,6 +58,12 @@ function App() {
             <Route path="/checkout" element={<Checkout sidebar={sidebar} />} />
 
             <Route path="/settings" element={<Setting sidebar={sidebar} />} />
+
+            <Route path="/admin" element={<AdminRoute />}>
+              <Route path="allproductlist" element={<AllProducts />} />
+              <Route path="addproduct" element={<AddProducts />} />
+              <Route path="product/update/:_id" element={<UpdateProducts />} />
+            </Route>
 
             <Route path="*" element={<ErrorNotFound />} />
           </Routes>
