@@ -40,8 +40,10 @@ const AdminPage = () => {
   };
   return (
     <>
-      <h1 className="font-bold text-xl mt-8 text-center">ADMIN DASHBOARD</h1>
-      <div className="grid grid-cols-5 justify-between text-center border p-2 mt-5 uppercase font-semibold">
+      <h2 className="font-bold lg:text-xl text-sm mt-8 lg:ml-12 ml-5">
+        ADMIN DASHBOARD
+      </h2>
+      <div className="grid grid-cols-5 justify-between text-center border p-2 mt-5 uppercase font-semibold lg:text-lg text-xs">
         {/* <p>ID</p> */}
         <p>First Name</p>
         <p>Last Name</p>
@@ -113,7 +115,7 @@ const AdminPage = () => {
               {/* <p>{user.user_id}</p> */}
               <p>{user.first_name}</p>
               <p>{user.last_name}</p>
-              <p>{user.email}</p>
+              <p className="truncate lg:w-50 w-30">{user.email}</p>
               <p>{user.role}</p>
               {user.role === "user" ? (
                 <div>

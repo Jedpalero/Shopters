@@ -39,4 +39,15 @@ const productRegister = (req, res) => {
   });
 };
 
-export default { productRegister };
+const getAllProduct = (req, res) => {
+  const query = `SELECT * FROM products`;
+  DB.localDB.query(query, (err, results) => {
+    if (err) {
+      res.status(500).json({ message: "Failed to get products" });
+    } else {
+      res.status(200).json(results);
+    }
+  });
+};
+
+export default { productRegister, getAllProduct };
