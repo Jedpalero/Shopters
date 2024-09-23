@@ -21,11 +21,43 @@ const initialState = {
   confirm_password: "",
 };
 
+const initialStates = {
+  img: "",
+  img1: "",
+  img2: "",
+  details: "",
+  title: "",
+  star: "",
+  reviews: "",
+  sold: "",
+  prevPrice: "",
+  newPrice: "",
+  company: "",
+  color: "",
+  category: "",
+};
+
 const ShopContextProvider = (props) => {
   const [cartItems, setCartItems] = useState(getDefaultCart);
   const [isMobile, setIsMobile] = useState(() => window.innerWidth < 600);
   const [state, setState] = useState(initialState);
+  const [states, setStates] = useState(initialStates);
   const { first_name, last_name, email, password, confirm_password } = state;
+  const {
+    img,
+    img1,
+    img2,
+    details,
+    title,
+    star,
+    reviews,
+    sold,
+    prevPrice,
+    newPrice,
+    company,
+    color,
+    category,
+  } = states;
 
   const addToCart = (itemId) => {
     setCartItems((prev) => ({ ...prev, [itemId]: prev[itemId] + 1 }));
@@ -89,6 +121,10 @@ const ShopContextProvider = (props) => {
 
   const handleChange = (e) => {
     setState({ ...state, [e.target.name]: e.target.value });
+  };
+
+  const handleChanges = (e) => {
+    setStates({ ...states, [e.target.name]: e.target.value });
   };
 
   const login = async () => {
@@ -190,6 +226,49 @@ const ShopContextProvider = (props) => {
     }
   };
 
+  const registerProduct = async () => {
+    try {
+      const response = await fetch(
+        "http://localhost:8081/api/product/register_product",
+        {
+          method: "POST",
+          headers: {
+            "Content-Type": "application/json",
+          },
+          body: JSON.stringify({
+            img,
+            img1,
+            img2,
+            details,
+            title,
+            star,
+            reviews,
+            sold,
+            prevPrice,
+            newPrice,
+            company,
+            color,
+            category,
+          }),
+        }
+      );
+
+      if (!response.ok) {
+        const errorData = await response.json();
+        console.log(errorData);
+        toast.error("Registration failed. Please try again.", errorData.err);
+        return;
+      }
+
+      const data = await response.json();
+      console.log(data);
+      toast.success("Registration successful. You can now log in.");
+    } catch (error) {
+      console.error("Error:", error);
+      toast.error("Registration failed. Please try again.");
+    }
+  };
+
   const contextValue = {
     data,
     cartItems,
@@ -212,6 +291,21 @@ const ShopContextProvider = (props) => {
     logout,
     deleteUser,
     updateUser,
+    handleChanges,
+    registerProduct,
+    img,
+    img1,
+    img2,
+    details,
+    title,
+    star,
+    reviews,
+    sold,
+    prevPrice,
+    newPrice,
+    company,
+    color,
+    category,
   };
 
   return (
