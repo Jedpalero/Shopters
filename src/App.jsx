@@ -1,6 +1,6 @@
-import { Route, Routes } from "react-router-dom";
+import { Route, Routes, Navigate } from "react-router-dom";
 import Navigation from "./components/Navigation";
-import { useEffect, useState } from "react";
+import { useState } from "react";
 import FooterMenu from "./mobile/FooterMenu";
 import { ToastContainer } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
@@ -16,11 +16,13 @@ import AdminRoute from "./pages/Admin/AdminRoute";
 import AllProducts from "./pages/Admin/AllProducts";
 import AddProducts from "./pages/Admin/AddProducts";
 import UpdateProducts from "./pages/Admin/UpdateProducts";
+import useDataFetch from "./hooks/useDataFetch";
 // import { ShopContext } from "./Context/ShopContext";
 
 function App() {
   const [sidebar, setSidebar] = useState(false);
   const [dropMenu, setDropMenu] = useState(false);
+  const { data } = useDataFetch();
 
   // const openCloseDropDown = () => {
   //   setDropMenu((prev) => !prev);
@@ -48,7 +50,10 @@ function App() {
         <main className="content" onClick={closeDropDown}>
           <Routes>
             <Route path="/" element={<Home sidebar={sidebar} />} />
-            <Route path="/auth" element={<Auth />} />
+            <Route
+              path="/auth"
+              element={!data ? <Auth /> : <Navigate to="/" />}
+            />
             <Route path="/shop" element={<Shop sidebar={sidebar} />} />
             <Route
               path="/detail/:id"
@@ -60,9 +65,36 @@ function App() {
             <Route path="/settings" element={<Setting sidebar={sidebar} />} />
 
             <Route path="/admin" element={<AdminRoute />}>
-              <Route path="allproductlist" element={<AllProducts />} />
-              <Route path="addproduct" element={<AddProducts />} />
-              <Route path="product/update/:_id" element={<UpdateProducts />} />
+              <Route
+                path="allproductlist"
+                element={
+                  data?.role === "admin" ? (
+                    <AllProducts />
+                  ) : (
+                    <Navigate to="/" replace />
+                  )
+                }
+              />
+              <Route
+                path="addproduct"
+                element={
+                  data?.role === "admin" ? (
+                    <AddProducts />
+                  ) : (
+                    <Navigate to="/" replace />
+                  )
+                }
+              />
+              <Route
+                path="product/update/:_id"
+                element={
+                  data?.role === "admin" ? (
+                    <UpdateProducts />
+                  ) : (
+                    <Navigate to="/" replace />
+                  )
+                }
+              />
             </Route>
 
             <Route path="*" element={<ErrorNotFound />} />
