@@ -217,7 +217,6 @@ const ShopContextProvider = (props) => {
         headers: {
           "Content-Type": "application/json",
         },
-        withCredentials: true,
       });
       toast.success("Update Successfully");
       window.location.reload();
@@ -235,6 +234,7 @@ const ShopContextProvider = (props) => {
           headers: {
             "Content-Type": "application/json",
           },
+          withCredentials: true,
           body: JSON.stringify({
             img,
             img1,
@@ -262,7 +262,7 @@ const ShopContextProvider = (props) => {
 
       const data = await response.json();
       console.log(data);
-      toast.success("Registration successful. You can now log in.");
+      toast.success("Registration successful.");
     } catch (error) {
       console.error("Error:", error);
       toast.error("Registration failed. Please try again.");

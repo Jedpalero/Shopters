@@ -21,14 +21,14 @@ const AllProducts = () => {
           ))
         )}
       </div> */}
-      <div className="container mx-[9rem]">
-        <div className="flex flex-col md:flex-row">
+      <div className="mx-[9rem]">
+        <div className="flex">
           <div className="p-3">
             <div className="ml-[2rem] text-xl font-bold h-12">
               All Products ({Product?.length})
             </div>
 
-            <div className="flex flex-wrap justify-around items-center">
+            <div className="grid grid-cols-2 gap-4">
               {Product?.map((product) => (
                 <Link
                   key={product.id}
