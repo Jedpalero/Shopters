@@ -269,6 +269,24 @@ const ShopContextProvider = (props) => {
     }
   };
 
+  const updateProduct = async (userData) => {
+    try {
+      await axios.put(
+        "http://localhost:8081/api/product/update_product",
+        userData,
+        {
+          headers: {
+            "Content-Type": "application/json",
+          },
+        }
+      );
+      toast.success("Update Successfully");
+      window.location.reload();
+    } catch (error) {
+      toast.error("Update Failed");
+    }
+  };
+
   const contextValue = {
     data,
     cartItems,
@@ -293,6 +311,7 @@ const ShopContextProvider = (props) => {
     updateUser,
     handleChanges,
     registerProduct,
+    updateProduct,
     img,
     img1,
     img2,

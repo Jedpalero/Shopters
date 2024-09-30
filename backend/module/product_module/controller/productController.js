@@ -39,6 +39,40 @@ const productRegister = (req, res) => {
   });
 };
 
+const productUpdate = (req, res) => {
+  const query = `UPDATE products 
+                  SET img = ?, img1 = ?, img2 = ?, details = ?, title = ?, star = ?, reviews = ?, sold = ?, prevPrice = ?, newPrice = ?, company = ?, color = ?, category = ? 
+                  WHERE id = ?`;
+
+  let values = [
+    req.body.img,
+    req.body.img1,
+    req.body.img2,
+    req.body.details,
+    req.body.title,
+    req.body.star,
+    req.body.reviews,
+    req.body.sold,
+    req.body.prevPrice,
+    req.body.newPrice,
+    req.body.company,
+    req.body.color,
+    req.body.category,
+    req.body.id,
+  ];
+
+  DB.localDB.query(query, values, (err, results) => {
+    if (err) {
+      res.status(500).json({
+        message: "Failed to update",
+        err: err.message,
+      });
+    } else {
+      res.status(200).json(results);
+    }
+  });
+};
+
 const getAllProduct = (req, res) => {
   const query = `SELECT * FROM products`;
   DB.localDB.query(query, (err, results) => {
@@ -50,4 +84,4 @@ const getAllProduct = (req, res) => {
   });
 };
 
-export default { productRegister, getAllProduct };
+export default { productRegister, getAllProduct, productUpdate };
