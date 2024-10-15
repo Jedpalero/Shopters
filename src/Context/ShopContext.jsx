@@ -217,6 +217,7 @@ const ShopContextProvider = (props) => {
         headers: {
           "Content-Type": "application/json",
         },
+        withCredentials: true,
       });
       toast.success("Update Successfully");
       window.location.reload();
@@ -269,11 +270,11 @@ const ShopContextProvider = (props) => {
     }
   };
 
-  const updateProduct = async (userData) => {
+  const updateProduct = async (productData) => {
     try {
       await axios.put(
         "http://localhost:8081/api/product/update_product",
-        userData,
+        productData,
         {
           headers: {
             "Content-Type": "application/json",
@@ -281,7 +282,7 @@ const ShopContextProvider = (props) => {
         }
       );
       toast.success("Update Successfully");
-      window.location.reload();
+      // window.location.reload();
     } catch (error) {
       toast.error("Update Failed");
     }

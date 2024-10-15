@@ -243,7 +243,7 @@ const AddProducts = () => {
                   value={category}
                   onChange={handleChanges}
                 >
-                  <option value="sneakers">...</option>
+                  <option value="...">...</option>
                   <option value="sneakers">sneakers</option>
                   <option value="sandals">sandals</option>
                   <option value="flats">flats</option>

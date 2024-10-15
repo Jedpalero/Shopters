@@ -38,7 +38,7 @@ const Header = (sidebar) => {
             </div>
             {dropMenu && (
               <div
-                className={`bg-neutral-800 text-white border lg:mt-7 mt-6 absolute lg:w-[224px] w-[200px] h-[250px] text-lg p-2 z-10 ${
+                className={`bg-neutral-800 text-white border lg:mt-7 mt-6 absolute lg:w-[224px] w-[200px] h-[200px] text-lg p-2 z-10 ${
                   sidebar ? "lg:mr-7" : "lg:mr-[8.6rem] ml-[10.5rem]"
                 }`}
               >
@@ -61,12 +61,12 @@ const Header = (sidebar) => {
                   >
                     Add Products
                   </Link>
-                  <Link
-                    to={"/admin/product/update/:_id"}
+                  {/* <Link
+                    to={"/admin/product/update"}
                     className="hover:bg-neutral-500 p-2 w-full"
                   >
                     Update Products
-                  </Link>
+                  </Link> */}
                   {/* <Input
                     handleChange={handleChange}
                     value="100"

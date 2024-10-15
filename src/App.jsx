@@ -86,7 +86,8 @@ function App() {
                 }
               />
               <Route
-                path="product/update/:_id"
+                path="product/update/:id"
+                // path="product/update"
                 element={
                   data?.role === "admin" ? (
                     <UpdateProducts />
