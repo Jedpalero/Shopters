@@ -4,11 +4,13 @@ import { ShopContext } from "../Context/ShopContext";
 import Products from "../components/ProductDisplay/Products";
 import Description from "../components/ProductDisplay/Description";
 import Footer from "../components/Footer";
+import useProductFetchAll from "../hooks/useProductFetchAll";
 
 const ProductDetail = ({ sidebar }) => {
-  const { data } = useContext(ShopContext);
+  // const { data } = useContext(ShopContext);
+  const { data } = useProductFetchAll();
   const { id: productId } = useParams();
-  const product = data.find((e) => e.id === Number(productId));
+  const product = data?.find((e) => e.id === Number(productId));
   const [image, setImage] = useState(product.img);
 
   return (

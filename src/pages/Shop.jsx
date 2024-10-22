@@ -2,12 +2,13 @@ import { FaSearch } from "react-icons/fa";
 import { IoMdArrowDropdown, IoMdArrowDropup } from "react-icons/io";
 import Card from "../components/Card";
 import { useContext, useRef, useState } from "react";
-import products from "../db/data";
+// import products from "../db/data";
 import Input from "../components/Input";
 import NewsLetter from "../components/NewsLetter/NewsLetter";
 import Footer from "../components/Footer";
 import { motion } from "framer-motion";
 import { ShopContext } from "../Context/ShopContext";
+import useProductFetchAll from "../hooks/useProductFetchAll";
 
 const Shop = ({ sidebar }) => {
   const [dropMenu, setDropMenu] = useState(false);
@@ -17,13 +18,14 @@ const Shop = ({ sidebar }) => {
   const [active, setActive] = useState("b1");
   const carousel = useRef(null);
   const { isMobile } = useContext(ShopContext);
+  const { data: products } = useProductFetchAll();
 
   // input filter
   const handleInputChange = (event) => {
     setQuery(event.target.value);
   };
 
-  const filteredItems = products.filter(
+  const filteredItems = products?.filter(
     (product) =>
       product.title.toLocaleLowerCase().indexOf(query.toLocaleLowerCase()) !==
       -1
@@ -53,7 +55,7 @@ const Shop = ({ sidebar }) => {
           title === selected
       );
     }
-    return filteredProducts.map(
+    return filteredProducts?.map(
       ({
         img,
         title,
@@ -82,7 +84,7 @@ const Shop = ({ sidebar }) => {
   }
 
   const result = filteredData(products, selectedCategory, query);
-  const numberOfProducts = result.length;
+  const numberOfProducts = result?.length;
 
   return (
     <div className="grid h-screen grid-rows-[70px_1fr] bg-[#f5f5f5]">
@@ -309,7 +311,8 @@ const Shop = ({ sidebar }) => {
               sidebar ? "lg:ml-8" : "lg:ml-[150px]"
             }`}
           >
-            <b>{`Showing ${numberOfProducts}`}</b> out of 31 Products
+            <b>{`Showing ${numberOfProducts}`}</b>{" "}
+            {`out of ${products?.length}`}
           </p>
 
           <div

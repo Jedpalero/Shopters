@@ -6,7 +6,7 @@ const fetchAllProduct = async () => {
     "http://localhost:8081/api/product/get_all_products",
     {
       headers: { "Content-Type": "application/json" },
-      withCredentials: true,
+      // withCredentials: true,
     }
   );
   // const result = await res.json();

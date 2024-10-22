@@ -3,9 +3,12 @@ import { FaArrowCircleLeft, FaShoppingCart } from "react-icons/fa";
 import { ShopContext } from "../../Context/ShopContext";
 import { useContext } from "react";
 import { toast } from "react-toastify";
+import { AiFillStar } from "react-icons/ai";
 
 const Products = ({ product, image, setImage, sidebar }) => {
   const { addToCart, getTotalCartItems } = useContext(ShopContext);
+  const totalStars = 5; // Maximum number of stars to display
+  const filledStars = Math.min(product.star, totalStars);
 
   return (
     <div>
@@ -49,16 +52,29 @@ const Products = ({ product, image, setImage, sidebar }) => {
           <p className={`md:text-start text-center  ${sidebar ? "" : ""}`}>
             {product.details}
           </p>
-          <div className="flex items-center md:justify-start justify-center gap-1">
+          {/* <div className="flex items-center md:justify-start justify-center gap-1">
             {product.star}
             {product.star}
             {product.star}
             {product.star}
             {product.reviews}
+          </div> */}
+          <div className="text-black flex">
+            {/* Render filled stars */}
+            {[...Array(filledStars)].map((_, index) => (
+              <AiFillStar key={index} />
+            ))}
+
+            {/* Render empty stars for the remaining */}
+            {[...Array(totalStars - filledStars)].map((_, index) => (
+              <AiFillStar key={index + filledStars} className="text-gray-300" />
+            ))}
           </div>
+
+          <p>({product.reviews} reviews)</p>
           <div className="flex gap-5 font-bold text-blue-700 text-xl md:justify-start justify-center">
             <del>{product.prevPrice}</del>
-            <h1>{`$${product.newPrice}.00`}</h1>
+            <h1>{`$${product.newPrice}`}</h1>
           </div>
           <h1 className="font-semibold md:text-start text-center">
             Select Size

@@ -1,10 +1,11 @@
 import Slider from "react-slick";
 import "slick-carousel/slick/slick.css";
 import "slick-carousel/slick/slick-theme.css";
-import products from "../db/data";
+// import products from "../db/data";
 import { NavLink } from "react-router-dom";
 import Footer from "../components/Footer";
 import PopularProducts from "../components/ProductDisplay/PopularProducts";
+import useProductFetchAll from "../hooks/useProductFetchAll";
 
 const Home = ({ sidebar }) => {
   const settings = {
@@ -17,6 +18,7 @@ const Home = ({ sidebar }) => {
     autoplay: true,
     autoplaySpeed: 3000,
   };
+  const { data: products } = useProductFetchAll();
 
   return (
     <div className=" bg-white h-screen overflow-hidden flex flex-col items-center gap-y-10 overflow-y-scroll">
@@ -30,7 +32,7 @@ const Home = ({ sidebar }) => {
               : "xl:w-[80rem] lg:w-[60rem] md:w-[40rem] w-[20rem]"
           }`}
         >
-          {products.slice(0, 15).map((product) => (
+          {products?.slice(0, 15).map((product) => (
             <img
               key={product.title}
               src={product.img}
